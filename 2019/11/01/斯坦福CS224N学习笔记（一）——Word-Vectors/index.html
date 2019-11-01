@@ -6,20 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>斯坦福CS224N学习笔记（一）——Introduction and Word Vectors | Hexo</title>
+  <title>斯坦福CS224N学习笔记（一）——Word-Vectors | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，写在前面写作原因由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。 课程资料课程的视频资料：2019版课程官方学习地址：https">
-<meta name="keywords" content="人工智能,NLP">
+  <meta name="description" content="title: 斯坦福CS224N学习笔记（一）——Introduction and Word Vectorsauthor: LackelauthorDesc: 三流程序员categories: 技术tags:  人工智能 NLPphotos: img&#x2F;2017&#x2F;demo.jpgdate: 2019-11-01 17:05:36keywords:description:&amp;lt;！–more–&amp;gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="斯坦福CS224N学习笔记（一）——Introduction and Word Vectors">
+<meta property="og:title" content="斯坦福CS224N学习笔记（一）——Word-Vectors">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Word-Vectors&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，写在前面写作原因由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。 课程资料课程的视频资料：2019版课程官方学习地址：https">
+<meta property="og:description" content="title: 斯坦福CS224N学习笔记（一）——Introduction and Word Vectorsauthor: LackelauthorDesc: 三流程序员categories: 技术tags:  人工智能 NLPphotos: img&#x2F;2017&#x2F;demo.jpgdate: 2019-11-01 17:05:36keywords:description:&amp;lt;！–more–&amp;gt;">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Word-Vectors&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-11-01T09:33:29.785Z">
+<meta property="og:updated_time" content="2019-11-01T09:39:41.424Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Word-Vectors&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -144,22 +141,25 @@
         
   
     <h1 class="article-title" itemprop="name">
-      斯坦福CS224N学习笔记（一）——Introduction and Word Vectors
+      斯坦福CS224N学习笔记（一）——Word-Vectors
     </h1>
   
 
         
         <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Word-Vectors/" class="archive-article-date">
-  	<time datetime="2019-11-01T09:05:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+  	<time datetime="2019-11-01T09:05:36.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，写在前面"><a href="#一，写在前面" class="headerlink" title="一，写在前面"></a>一，写在前面</h2><h3 id="写作原因"><a href="#写作原因" class="headerlink" title="写作原因"></a>写作原因</h3><p>由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。</p>
-<h3 id="课程资料"><a href="#课程资料" class="headerlink" title="课程资料"></a>课程资料</h3><h4 id="课程的视频资料："><a href="#课程的视频资料：" class="headerlink" title="课程的视频资料："></a>课程的视频资料：</h4><p>2019版课程官方学习地址：<a href="https://web.stanford.edu/class/cs224n/" target="_blank" rel="noopener">https://web.stanford.edu/class/cs224n/</a><br>2019版课程学习视频B站参考学习地址（有中文机翻字幕）：<a href="https://www.bilibili.com/video/av61620135/" target="_blank" rel="noopener">https://www.bilibili.com/video/av61620135/</a></p>
-<h4 id="课程的讲义及作业文件："><a href="#课程的讲义及作业文件：" class="headerlink" title="课程的讲义及作业文件："></a>课程的讲义及作业文件：</h4><p>链接：<a href="https://pan.baidu.com/s/1-WW0cETkpI3HpRaWjJJvnw" target="_blank" rel="noopener">https://pan.baidu.com/s/1-WW0cETkpI3HpRaWjJJvnw</a> 提取码：ctsf</p>
+        <p>title: 斯坦福CS224N学习笔记（一）——Introduction and Word Vectors<br>author: Lackel<br>authorDesc: 三流程序员<br>categories: 技术<br>tags:</p>
+<ul>
+<li>人工智能</li>
+<li>NLP<br>photos:</li>
+<li>img/2017/demo.jpg<br>date: 2019-11-01 17:05:36<br>keywords:<br>description:<br>&lt;！–more–&gt;<h2 id="一，写在前面"><a href="#一，写在前面" class="headerlink" title="一，写在前面"></a>一，写在前面</h2><h3 id="写作原因"><a href="#写作原因" class="headerlink" title="写作原因"></a>写作原因</h3>由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。<h3 id="课程资料"><a href="#课程资料" class="headerlink" title="课程资料"></a>课程资料</h3><h4 id="课程的视频资料："><a href="#课程的视频资料：" class="headerlink" title="课程的视频资料："></a>课程的视频资料：</h4>2019版课程官方学习地址：<a href="https://web.stanford.edu/class/cs224n/" target="_blank" rel="noopener">https://web.stanford.edu/class/cs224n/</a><br>2019版课程学习视频B站参考学习地址（有中文机翻字幕）：<a href="https://www.bilibili.com/video/av61620135/" target="_blank" rel="noopener">https://www.bilibili.com/video/av61620135/</a><h4 id="课程的讲义及作业文件："><a href="#课程的讲义及作业文件：" class="headerlink" title="课程的讲义及作业文件："></a>课程的讲义及作业文件：</h4>链接：<a href="https://pan.baidu.com/s/1-WW0cETkpI3HpRaWjJJvnw" target="_blank" rel="noopener">https://pan.baidu.com/s/1-WW0cETkpI3HpRaWjJJvnw</a> 提取码：ctsf</li>
+</ul>
 <h2 id="二，学习笔记（一）——Introduction-and-Word-Vectors"><a href="#二，学习笔记（一）——Introduction-and-Word-Vectors" class="headerlink" title="二，学习笔记（一）——Introduction and Word Vectors"></a>二，学习笔记（一）——Introduction and Word Vectors</h2><p>Word Vectors，译为词向量，顾名思义，词向量即词的向量表示，即用数学上不同的向量来表征不同的词汇，以方便我们对文字进行建模并处理，</p>
 
       
@@ -200,33 +200,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -398,14 +372,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">人工智能</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>
