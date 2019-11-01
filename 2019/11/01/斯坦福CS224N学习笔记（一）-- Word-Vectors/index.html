@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Hexo</title>
+  <title>斯坦福CS224N学习笔记（一）-- Introduction and Word Vectors | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;index.html">
+  <meta name="description" content="一，写在前面写作原因由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。">
+<meta name="keywords" content="人工智能,NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯坦福CS224N学习笔记（一）-- Introduction and Word Vectors">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一，写在前面写作原因由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;alipay.jpg">
+<meta property="og:updated_time" content="2019-11-01T12:22:45.325Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;alipay.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -131,280 +137,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-斯坦福CS224N学习笔记（四）-Backpropagation-and-Computation-Graphs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-斯坦福CS224N学习笔记（一）-- Word-Vectors" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/">斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:16:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（三）-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/">斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（二）-Word-Vectors-2-and-Word-Senses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/">斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（一）-- Word-Vectors" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/">斯坦福CS224N学习笔记（一）-- Introduction and Word Vectors</a>
+    <h1 class="article-title" itemprop="name">
+      斯坦福CS224N学习笔记（一）-- Introduction and Word Vectors
     </h1>
   
 
@@ -417,12 +157,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，写在前面"><a href="#一，写在前面" class="headerlink" title="一，写在前面"></a>一，写在前面</h2><h3 id="写作原因"><a href="#写作原因" class="headerlink" title="写作原因"></a>写作原因</h3><p>由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。
-        
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/#more">more >></a>
-        
+        <h2 id="一，写在前面"><a href="#一，写在前面" class="headerlink" title="一，写在前面"></a>一，写在前面</h2><h3 id="写作原因"><a href="#写作原因" class="headerlink" title="写作原因"></a>写作原因</h3><p>由于笔者研究生阶段需要从事NLP方面的研究，因此从现在开始学习相关知识，在博客记录以用来交流分享和日后复习。斯坦福大学的CS224N是NLP领域的经典课程，因此笔者选择一边学习，一边记录以强化学习效果并敦促自己养成定时总结的习惯。我选取学习的课程版本为最新的2019版课程。由于本人才疏学浅，不正之处望各位指正批评。<a id="more"></a> </p>
+<h3 id="课程资料"><a href="#课程资料" class="headerlink" title="课程资料"></a>课程资料</h3><h4 id="课程的视频资料："><a href="#课程的视频资料：" class="headerlink" title="课程的视频资料："></a>课程的视频资料：</h4><p>2019版课程官方学习地址：<a href="https://web.stanford.edu/class/cs224n/" target="_blank" rel="noopener">https://web.stanford.edu/class/cs224n/</a><br>2019版课程学习视频B站参考学习地址（有中文机翻字幕）：<a href="https://www.bilibili.com/video/av61620135/" target="_blank" rel="noopener">https://www.bilibili.com/video/av61620135/</a></p>
+<h4 id="课程的讲义及作业文件："><a href="#课程的讲义及作业文件：" class="headerlink" title="课程的讲义及作业文件："></a>课程的讲义及作业文件：</h4><p>链接：<a href="https://pan.baidu.com/s/1-WW0cETkpI3HpRaWjJJvnw" target="_blank" rel="noopener">https://pan.baidu.com/s/1-WW0cETkpI3HpRaWjJJvnw</a> 提取码：ctsf</p>
+<h2 id="二，学习笔记（一）——Introduction-and-Word-Vectors"><a href="#二，学习笔记（一）——Introduction-and-Word-Vectors" class="headerlink" title="二，学习笔记（一）——Introduction and Word Vectors"></a>二，学习笔记（一）——Introduction and Word Vectors</h2><p>Word Vectors，译为词向量，顾名思义，词向量即词的向量表示，即用数学上不同的向量来表征不同的词汇，以方便我们对文字进行建模并处理.one-hot（独热）编码是一种编码形式，假如我们有十万个词需要编码，那么我们就需要用一个十万维的向量来表征一个词，每个词对应的向量在某个索引上值为1，其余全为0，如cat = [1,0,0,0]. 那么我们最终会得到一个十万乘十万的庞大矩阵.很显然，这种编码方式有很大的缺陷，主要是以下两点：1，构建的向量过于庞大且很稀疏。2，任意两个词之间的距离均为1，无法衡量词与词之间的相似程度，也就无法探究他们之间的内在联系.<br>为了改善以上问题，我们提出了一种新的词表示方法，称为word embedding（词嵌入）。这种表示方法通过提取特征的方法来表示一个单词，如man = [0.99,0.8], woman = [0, 0.5], 这里，我们假设第一个特征对应于性别，第二个特征对应于力量。 假设我们要衡量的特征有一千个，那我们最终得到的十万乘一千的矩阵，有效的减少了词向量的大小。更为重要的是，该向量表示可以衡量两个词的相关程度，这将对我们以后进行自然语言处理带来极大便利，比如预测上下文等。另外，我们可以通过类比的方式寻找相似词，例如我们如果已经知道北京——中国，那么输入东京，我们将很容易得到日本。同样地，我们可以得到，v(“国王”) – v(“王后”) ≈ v(“男”) – v(“女”) 。</p>
+<!-- <img src="alipay.jpg" width="400" height="300" alt="hello" align=center> -->
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -457,16 +229,79 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,8 +321,14 @@
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -510,8 +351,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
