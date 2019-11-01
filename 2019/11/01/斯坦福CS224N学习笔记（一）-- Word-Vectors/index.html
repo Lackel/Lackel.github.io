@@ -18,8 +18,11 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;poc.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;jtheta.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;alipay.jpg">
-<meta property="og:updated_time" content="2019-11-01T14:03:48.398Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;poc2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;softmax.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;gradientdescent.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;update.jpg">
+<meta property="og:updated_time" content="2019-11-01T14:37:09.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;poc.png">
   
@@ -165,10 +168,19 @@
 <h2 id="二，学习笔记（一）——Introduction-and-Word-Vectors"><a href="#二，学习笔记（一）——Introduction-and-Word-Vectors" class="headerlink" title="二，学习笔记（一）——Introduction and Word Vectors"></a>二，学习笔记（一）——Introduction and Word Vectors</h2><h3 id="1-Word-Vectors"><a href="#1-Word-Vectors" class="headerlink" title="1, Word Vectors"></a>1, Word Vectors</h3><p>Word Vectors，译为词向量，顾名思义，词向量即词的向量表示，即用数学上不同的向量来表征不同的词汇，以方便我们对文字进行建模并处理.one-hot（独热）编码是一种编码形式，假如我们有十万个词需要编码，那么我们就需要用一个十万维的向量来表征一个词，每个词对应的向量在某个索引上值为1，其余全为0，如cat = [1,0,0,0]. 那么我们最终会得到一个十万乘十万的庞大矩阵.很显然，这种编码方式有很大的缺陷，主要是以下两点：1，构建的向量过于庞大且很稀疏。2，任意两个词之间的距离均为1，无法衡量词与词之间的相似程度，也就无法探究他们之间的内在联系.<br>为了改善以上问题，我们提出了一种新的词表示方法，称为word embedding（词嵌入）。这种表示方法通过提取特征的方法来表示一个单词，如man = [0.99,0.8], woman = [0, 0.5], 这里，我们假设第一个特征对应于性别，第二个特征对应于力量。 假设我们要衡量的特征有一千个，那我们最终得到的十万乘一千的矩阵，有效的减少了词向量的大小。更为重要的是，该向量表示可以衡量两个词的相关程度，这将对我们以后进行自然语言处理带来极大便利，比如预测上下文等。另外，我们可以通过类比的方式寻找相似词，例如我们如果已经知道北京——中国，那么输入东京，我们将很容易得到日本。同样地，我们可以得到，v(“国王”) – v(“王后”) ≈ v(“男”) – v(“女”) 。那么词向量如何获得呢？如果需要人工标注，这将是一个非常大的工作量，好在有机器帮助我们完成，假定我们从网上获得了一个corpus(语料库)，那么我们就可以让机器从中学习，并构建出我们的词向量，这也就是课程中所说的learn to encode similarity in the vectors themselves。下面的章节将会介绍机器如何学习，而我们又如何去训练机器。</p>
 <h3 id="2-Word2Vec-Prediction-function"><a href="#2-Word2Vec-Prediction-function" class="headerlink" title="2, Word2Vec:Prediction function"></a>2, Word2Vec:Prediction function</h3><p>Word2Vec(Mikolov et al. 2013)是一种可以学习词向量的框架，那么它是如何做的呢？我们做以下假设:<br>1, 我们拥有一个很大的文本语料库可供学习<br>2, 每个词都是通过一个向量表示的（该向量也是我们需要模型学习的东西）<br>3, 遍历语料库内每一个包含中心词c（center）和文本词o(outside)的位置<br>4, 通过计算向量c和向量o的相似程度来获得概率P(o|c),即通过中心词来预测周围词出现的概率  </p>
 <img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/poc.png" class title="This is an example image">  
-<p>5, 通过不断调整词向量来最大化这个概率<br>很显然，如果我们构建出了每一个中心词的P(o|c)，并将其求和，最大化，那么此时我们得到的词向量就是我们期望得到的目标词向量。上述的求和表达式也就是我们需要优化的目标函数,在机器学习中，我们一般最小化损失函数，因此在它前面加上负号作为我们的损失函数。 它的形式如下：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/jtheta.png" class title="This is an example image">
+<p>5, 通过不断调整词向量来最大化这个概率<br>很显然，如果我们构建出了每一个中心词的P(o|c)，并将其求和，最大化，那么此时我们得到的词向量就是我们期望得到的目标词向量。上述的求和表达式也就是我们需要优化的目标函数,在机器学习中，我们一般最小化损失函数，因此在它前面加上负号作为我们的目标（损失）函数。 它的形式如下：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/jtheta.png" class title="This is an example image">  
+<p>在我们获得了目标函数以后，下一步要做的就是对其进行求值，然后运用梯度下降算法进行优化。  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/poc2.png" class title="This is an example image">  
+<p>每个词对应两个特征向量，一个是其作为中心词时的w，另一个是其作为边缘词时的w。最下方给出的式子就是我们用来计算P(o|c)的式子，其中分母的作用是进行归一化，使其符合概率归一化的特征。其实也就是我们常用的softmax，视频中老师还给出了softmax的解释，如下图：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/softmax.png" class title="This is an example image"> 
+<h3 id="3-Training-a-model-by-optimizing-parameters"><a href="#3-Training-a-model-by-optimizing-parameters" class="headerlink" title="3, Training a model by optimizing parameters"></a>3, Training a model by optimizing parameters</h3><p>模型的训练过程，即模型的参数更新过程，也就是我们最小化损失函数的过程。最常用的方法使采用Gradient Descent（梯度下降），它的直观理解如下：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/gradientdescent.png" class title="This is an example image">  
+<p>我们通过计算损失函数对某个变量的梯度，来不断更新该变量，从而获得更小的误差。更新公式为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/update.jpg" class title="This is an example image">  
+<p>我们可以设置误差门限或最大迭代轮数来使参数更新停止，此时我们获得的参数即为每个词的Vec，即完成了Word2Vec的构建和学习。</p>
+<h2 id="三，结语"><a href="#三，结语" class="headerlink" title="三，结语"></a>三，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于此篇博客是本人的第一篇博客，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
 
-<!-- <img src="alipay.jpg" width="400" height="300" alt="hello" align=center> -->
       
 
       
