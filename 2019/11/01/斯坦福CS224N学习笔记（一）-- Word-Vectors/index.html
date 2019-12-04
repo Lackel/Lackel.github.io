@@ -23,7 +23,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;gradientdescent.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;update.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;gradient.png">
-<meta property="og:updated_time" content="2019-11-02T11:11:01.717Z">
+<meta property="og:updated_time" content="2019-12-04T14:45:44.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors&#x2F;poc.png">
   
@@ -181,7 +181,7 @@
 <img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/update.jpg" class title="This is an example image">  
 <p>logP(o|c)对Vc求偏导的公式为：  </p>
 <img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/gradient.png" class title="This is an example image">  
-<p>我们可以设置误差门限或最大迭代轮数来使参数更新停止，此时我们获得的参数即为每个词的Vec，即完成了Word2Vec的构建和学习。但是由于语料库很大，词汇很多，因此如果我们采用梯度下降的话，时间复杂度会很大，因此我们采用随机梯度下降算法（SGD），它通过采样的方法，一次只对一部分样本进行梯度下降，大大加快了我们算法的运行速度。</p>
+<p>我们可以设置误差门限或最大迭代轮数来使参数更新停止，此时我们获得的参数即为每个词的Vec，即完成了Word2Vec的构建和学习。但是由于语料库很大，词汇很多，因此如果我们采用梯度下降的话，时间复杂度会很大，因此我们采用随机梯度下降算法（SGD），它通过采样的方法，一次只对一部分样本进行梯度下降，大大加快了我们算法的运行速度。更为常用的一种方法使minibatch-SGD，该方法一次选取一个batch的数据进行梯度下降，主要优点是（1）可以减少由于单样本带来的噪声干扰。（2）可以利用GPU进行并行计算，加快模型训练速度。</p>
 <h3 id="4-Word2Vec-More-details"><a href="#4-Word2Vec-More-details" class="headerlink" title="4, Word2Vec:More details"></a>4, Word2Vec:More details</h3><p>针对于Word2Vec方法，有两种常见的模型，分别为Skip-grams（SG）模型和Continuous Bag of Words (CBOW)模型，二者的主要区别为：SG是通过中心词来预测周围词，而CBOW模型则是通过周围词来预测中心词，很显然，课程中我们采用的是SG模型，即计算P（o|c），而非计算P(c|o)。</p>
 <h2 id="三，结语"><a href="#三，结语" class="headerlink" title="三，结语"></a>三，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于此篇博客是本人的第一篇博客，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
 
