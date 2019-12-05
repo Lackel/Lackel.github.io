@@ -418,11 +418,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一，学习笔记（二）——Word-Vectors-2-and-Word-Senses"><a href="#一，学习笔记（二）——Word-Vectors-2-and-Word-Senses" class="headerlink" title="一，学习笔记（二）——Word Vectors 2 and Word Senses"></a>一，学习笔记（二）——Word Vectors 2 and Word Senses</h2><h3 id="1，Negative-Sampling"><a href="#1，Negative-Sampling" class="headerlink" title="1，Negative Sampling"></a>1，Negative Sampling</h3><p>第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/poc.png" class title="This is an example image">  
-<p>这种概率形式存在一个很大的问题，即分母需要计算中心词与字典中所有其他词的点积，会花费很长时间，那么如何对其进行改进呢？有两种方法可供参考：（1）Negative Sampling，（2）Hierarchical Softmax.这里我们主要介绍课程中提到的第一种方法——Negative Sampling。其基本思想是为了减少计算所有点积带来的时间消耗，一次只取一个正样本（即中心词c-文本词o对）和k个负样本（即中心词和k个随机取样的样本）进行计算，大大加快了运行速度。其数学形式为：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/negativesample.jpg" class title="This is an example image">   
-<p>我们可以看到负样本计算点积时有一个负号，当损失函数最小时，其点积也最小，而正样本点积则最大。k个负样本的选取是依照概率P（w） = U(w)^{3/4}/Z,其中U（w）为每个词出现的频率，Z是归一化系数，而3/4次方的目的是为了能让频率更低的词有更大的被采样概率。</p>
-
+        
+          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/#more">more >></a>
+        
       
 
       

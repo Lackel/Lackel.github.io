@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，学习笔记（二）——Word Vectors 2 and Word Senses1，Negative Sampling第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：      这种概率形式存在一个很大的问题，即分母需要计算中心词与字典中所有其他词的点积，会花费很长时间，那么如何对其进行改进呢？有两种方法可供参考：（1）Negative Sampling，（2">
+  <meta name="description" content="一，学习笔记（二）——Word Vectors 2 and Word Senses1，Negative Sampling第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：">
 <meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，学习笔记（二）——Word Vectors 2 and Word Senses1，Negative Sampling第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：      这种概率形式存在一个很大的问题，即分母需要计算中心词与字典中所有其他词的点积，会花费很长时间，那么如何对其进行改进呢？有两种方法可供参考：（1）Negative Sampling，（2">
+<meta property="og:description" content="一，学习笔记（二）——Word Vectors 2 and Word Senses1，Negative Sampling第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-05T01:26:48.495Z">
+<meta property="og:updated_time" content="2019-12-05T02:38:15.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -158,10 +158,35 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一，学习笔记（二）——Word-Vectors-2-and-Word-Senses"><a href="#一，学习笔记（二）——Word-Vectors-2-and-Word-Senses" class="headerlink" title="一，学习笔记（二）——Word Vectors 2 and Word Senses"></a>一，学习笔记（二）——Word Vectors 2 and Word Senses</h2><h3 id="1，Negative-Sampling"><a href="#1，Negative-Sampling" class="headerlink" title="1，Negative Sampling"></a>1，Negative Sampling</h3><p>第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：  </p>
+<a id="more"></a> 
 <img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/poc.png" class title="This is an example image">  
-<p>这种概率形式存在一个很大的问题，即分母需要计算中心词与字典中所有其他词的点积，会花费很长时间，那么如何对其进行改进呢？有两种方法可供参考：（1）Negative Sampling，（2）Hierarchical Softmax.这里我们主要介绍课程中提到的第一种方法——Negative Sampling。其基本思想是为了减少计算所有点积带来的时间消耗，一次只取一个正样本（即中心词c-文本词o对）和k个负样本（即中心词和k个随机取样的样本）进行计算，大大加快了运行速度。其数学形式为：  </p>
+<p>这种概率形式存在一个很大的问题，即分母需要计算中心词与字典中所有其他词的点积，会花费很长时间，那么如何对其进行改进呢？有两种方法可供参考：（1）Negative Sampling （2）Hierarchical Softmax.这里我们主要介绍课程中提到的第一种方法——Negative Sampling。其基本思想是为了减少计算所有点积带来的时间消耗，一次只取一个正样本（即中心词c-文本词o对）和k个负样本（即中心词和k个随机取样的样本）进行计算，大大加快了运行速度。其数学形式为：  </p>
 <img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/negativesample.jpg" class title="This is an example image">   
-<p>我们可以看到负样本计算点积时有一个负号，当损失函数最小时，其点积也最小，而正样本点积则最大。k个负样本的选取是依照概率P（w） = U(w)^{3/4}/Z,其中U（w）为每个词出现的频率，Z是归一化系数，而3/4次方的目的是为了能让频率更低的词有更大的被采样概率。</p>
+<p>我们可以看到负样本计算点积时有一个负号，当损失函数最小时，其点积也最小，而正样本点积则最大。k个负样本的选取是依照概率P（w） = U(w)^（3/4）/Z,其中U（w）为每个词出现的频率，Z是归一化系数，而3/4次方的目的是为了能让频率更低的词有更大的被采样概率。  </p>
+<h3 id="2，Co-occurrence-Matrix"><a href="#2，Co-occurrence-Matrix" class="headerlink" title="2，Co-occurrence Matrix"></a>2，Co-occurrence Matrix</h3><p>Co-occurrence Matrix,即共现矩阵，顾名思义，这是一种用来统计某两个词共同出现次数的矩阵。其有两种形式：（1）window based：即只考虑窗口大小内的词共现次数，这样统计主要是获取语法和语意上的信息 （2）document based，即相同文档内的即均算共现，这样统计主要是获取文档的topic，即整体性的信息。下面以window based形式举例，窗口大小取1，Symmetric（对称，即左右词均计算）：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/Comatrix.png" class title="This is an example image">  
+<p>通过共现矩阵我们得到的矩阵非常大且稀疏，不利于词向量的表示。为了获得低维度的向量表示，我们要采用一些方法对共现矩阵进行降维，最常用的是Singular Value Decomposition（SVD），即奇异值分解。它只保留前k个最主要的元素，可以在尽量不损失信息的情况下对矩阵进行降维。其示意图如下:  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/svd.jpg" class title="This is an example image">  
+<p>共现矩阵的另一个问题是一些常用词，如(the, he, has)出现的频率会非常高，会在共现矩阵中占很大的影响。解决方法为设置阈值，即min(X,100) .此外我们还可以采用加权的方式给距离更近的词赋予更大权重，或用Pearson correlations并忽略负值而非计数的方式来计算共现矩阵。上述方法都可以改善共现矩阵的性能。<br>与word2vec直接预测概率不同的是共现矩阵采用的是计数的方式，他们的优缺点为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/goodlack.png" class title="This is an example image">  
+<p>共现矩阵是否可以像word2vec一样来进行词类比呢？答案是可以的，如下图所示，我们可以从ice对应steam，得到solid对应gas。  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/analog.png" class title="This is an example image">  
+<p>借用课程中的一个问题，How can we capture ratios of co-occurrence probabilities as<br>linear meaning components in a word vector space?如何用线性的向量乘法运算来表示概率呢？答案很简单：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/vector.png" class title="This is an example image">  
+<p>借此，老师引出了GloVe模型，但并未深入讲解，它的形式如下：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/glove.png" class title="This is an example image">  
+<h3 id="3，How-to-evaluate-word-vectors"><a href="#3，How-to-evaluate-word-vectors" class="headerlink" title="3，How to evaluate word vectors?"></a>3，How to evaluate word vectors?</h3><p>上面我们用两种方法构建了word vector，但是我们如何衡量其好坏呢？这里主要用Intrinsic（内部表现）和Extrinsic（外部表现）来衡量，指标如下：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/evaluate.png" class title="This is an example image">   
+<p>同时老师还给出了词类比的计算方法，如man:woman :: king:?，其计算方式如下：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/analog2.jpg" class title="This is an example image">  
+<p>最后，利用控制变量法得到了词向量的大小，以及窗口大小，和选取双边单边窗口对GloVe实验结果的影响：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/result.png" class title="This is an example image">  
+<p>根据上图我们可以得到以下结论：（1）词向量的最佳维度约为300（2）单边窗口效果不如双边窗口 （3）窗口大小为8对实验结果有帮助。  </p>
+<h3 id="4，Word-senses-and-word-sense-ambiguity"><a href="#4，Word-senses-and-word-sense-ambiguity" class="headerlink" title="4，Word senses and word sense ambiguity"></a>4，Word senses and word sense ambiguity</h3><p>该篇主要介绍了语言中存在一词多义的情况以及我们如何对其进行处理。共有两种解决方案：（1）对单词进行聚类，得到同一单词的不同簇，每个簇就代表单词的一个意思，我们可以根据其附近词来推断该单词在这一簇中的具体含义  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/cluster.jpg" class title="This is an example image">  
+<p>(2)通过加权的方式将同一单词的不同含义的词向量进行整合，即：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/pike.png" class title="This is an example image">   
+<h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
 
       
 
