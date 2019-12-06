@@ -8,14 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="人工智能,NLP">
+  <meta name="description" content="一，学习笔记（三）——Word Window Classification, Neural Networks, and Matrix Calculus1，Classification review&#x2F;introduction在我们进行分类任务时，假定我们有N个标注好的数据，而我们进行学习优化的目标是最大化正确预测的概率，或是最小化我们的损失函数。">
+<meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一，学习笔记（三）——Word Window Classification, Neural Networks, and Matrix Calculus1，Classification review&#x2F;introduction在我们进行分类任务时，假定我们有N个标注好的数据，而我们进行学习优化的目标是最大化正确预测的概率，或是最小化我们的损失函数。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-11-01T12:15:30.601Z">
+<meta property="og:updated_time" content="2019-12-06T02:35:32.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -155,7 +157,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一，学习笔记（三）——Word-Window-Classification-Neural-Networks-and-Matrix-Calculus"><a href="#一，学习笔记（三）——Word-Window-Classification-Neural-Networks-and-Matrix-Calculus" class="headerlink" title="一，学习笔记（三）——Word Window Classification, Neural Networks, and Matrix Calculus"></a>一，学习笔记（三）——Word Window Classification, Neural Networks, and Matrix Calculus</h2><h3 id="1，Classification-review-introduction"><a href="#1，Classification-review-introduction" class="headerlink" title="1，Classification review/introduction"></a>1，Classification review/introduction</h3><p>在我们进行分类任务时，假定我们有N个标注好的数据，而我们进行学习优化的目标是最大化正确预测的概率，或是最小化我们的损失函数。  <a id="more"></a><br>我们最常用的损失函数是cross entropy loss（交叉损失熵函数），它的表达式为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/celoss.jpg" class title="This is an example image">  
+<p>其中p代表正确的类别概率分布，而q代表我们预测得到的类别概率分布。一般情况下p为one-hot vector，正确类别为1，其余为0，因此计算损失时只需计算1的那一类别，因此在整个数据集上的损失函数就可以表示为:  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/loss.jpg" class title="This is an example image">  
+<p>然而用softmax只能给出线性的分类边界，在一些复杂问题上就无能为力了。因此我们要用更为复杂的神经网络去进行非线性分类。在NLP的深度学习中，我们不仅要更新权重W，还要更新我们的词向量x。因此我们要更新的参数为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/parameter.png" class title="This is an example image">  
+<p>神经网络名字的由来是因为我们模仿人的神经元来设计的结构，它的计算结构为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/nn.jpg" class title="This is an example image">  
+<p>其中内层网络的激活函数f一般用ReLu函数（max（x，0）），输出层根据情况可选择softmax或者sigmoid函数，如果没有这些激活函数，那么我们得到的仍旧是对输入线性的叠加，因此激活函数是十分必要的。多层神经网络的结构如下图：</p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/mlnn.jpg" class title="This is an example image">  
+
+<h3 id="2，Named-Entity-Recognition-NER"><a href="#2，Named-Entity-Recognition-NER" class="headerlink" title="2，Named Entity Recognition (NER)"></a>2，Named Entity Recognition (NER)</h3><p>Named Entity Recognition (NER)，即命名实体识别，它的主要任务是找出并分类一段文本中的所有名称，例如：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/ner.png" class title="This is an example image">  
+<p>它主要分为人名，地点，组织，非命名实体等类别，前面三项又需要标注命名实体的起止。然而命名实体识别是一项十分复杂的任务，它的复杂性主要体现在：<br>（1）很难确定实体的起止位置，如下面这个例子：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/example1.jpg" class title="This is an example image">  
+<p>Is the first entity “First National Bank” or “National Bank”<br>（2）很难确定一个名称是不是实体，如上面那个例子中，Is there a school called “Future School” or is it a future school?<br>（3）很难确定一个未曾见过的名称属于哪一个类别。<br>（4）名称实体是很模棱两可的，在不同的语境中可能是人，也可能是某个组织。<br>那么我们如何实现NER任务呢？和我们在介绍word2vec时类似，我们可以根据某个词附近窗口内的词来进行判断。最简单的方法是我们可以平均窗口内的词向量来进行分类，但这样做会导致位置信息的丢失。更常见的做法是我们将窗口内的词按照顺序组成一个更大的词向量进行处理，如：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/window.png" class title="This is an example image">  
+<p>要注意的是，只有当中心词是实体时，我们才会判定，而窗口内其他位置是实体时，仍旧不会判定其为实体。如museums in Paris are amazing中Paris是实体，而museum不是。我们会根据score值得到分类结果，计算流程为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/score.png" class title="This is an example image">  
+<p>除了正确的类别外，类似于Negative Sampling，我们还要加入一些干扰类别，我们的目标函数是使正确类别分值尽量高，干扰类别分值尽量小：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/loss2.png" class title="This is an example image">  
+
+<h3 id="3，Matrix-Calcus"><a href="#3，Matrix-Calcus" class="headerlink" title="3，Matrix Calcus"></a>3，Matrix Calcus</h3><p>接下来要介绍的是优化部分，上节课介绍的SGD需要我们计算损失函数的梯度，那么对于多元函数组成的向量我们该如何求其梯度呢？解决办法是使用Jacobian（雅可比）矩阵，如下图：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/matrix.png" class title="This is an example image">  
+<p>假设我们的函数向量中的每个函数都是某个变量的函数，而与其他变量无关，那么我们得到的就是一个对角矩阵，如图：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/vector.png" class title="This is an example image">  
+<p>那么针对于我们上面的简单神经网络，根据链式法则，我们可以得到score对于b的偏导数为：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/process.png" class title="This is an example image">  
+<p>观察score对于W和b的偏导数我们可以发现，他们前半部分是完全相同的，因此我们可以将其记为一个量（derta），它代表着local error signal。  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/derta.jpg" class title="This is an example image">  
+<p>在本门课程中，我们确定求偏导得到矩阵维度的思路是要确保偏导矩阵和原矩阵的维度是一致的，即：  </p>
+<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/trans.png" class title="This is an example image">  
+
+<h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
+
       
 
       
