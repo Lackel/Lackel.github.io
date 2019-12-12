@@ -17,7 +17,7 @@
 <meta property="og:description" content="一，论文摘要Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GT">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-12T02:18:47.598Z">
+<meta property="og:updated_time" content="2019-12-12T07:57:49.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -172,7 +172,7 @@
 <h2 id="四，实验介绍及结果分析"><a href="#四，实验介绍及结果分析" class="headerlink" title="四，实验介绍及结果分析"></a>四，实验介绍及结果分析</h2><p>论文采用的数据集为public datasets from SemEval workshops，词嵌入采用了300-dimension GloVe vectors，不在其中的词随机初始化为U(-0.25,0.25)。最终实验结果为如图：  </p>
 <img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/result1.png" class title="This is an example image">  
 <p>其中hard代表了采用的数据均为多侧面数据。可以看到，GCAE用远小于其他模型的时间，得到了非常不错的结果。<br>最终论文给出了一张可视化结果：  </p>
-<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/result2.png" class title="This is an example image">  
+  
 <p>从图中可以明显的看出，采用门机制也可以得到类似于注意力机制一样的结果，且其速度更快。  </p>
 <h2 id="五，个人总结"><a href="#五，个人总结" class="headerlink" title="五，个人总结"></a>五，个人总结</h2><p>论文提出了一种全新的基于门机制的CNN网络用语多侧面情感分类，其中门GTRU可以根据所给侧面有效地控制信息流动，且由于不需要数据依赖，因此可以进行高效的并行运算，CNN同时也克服了LSTM不能并行计算的缺陷，因此大大增加了运行速度且准确率也得到了很大的提高。  </p>
 
