@@ -17,7 +17,7 @@
 <meta property="og:description" content="论文时间：2015.11一，论文摘要Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-12T12:20:36.304Z">
+<meta property="og:updated_time" content="2019-12-12T12:29:44.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,7 +157,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="论文时间：2015-11"><a href="#论文时间：2015-11" class="headerlink" title="论文时间：2015.11"></a>论文时间：2015.11</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来进行特征提取，而无需进行特征工程。该论文主要介绍了深度学习在情感分类领域的应用以及面临的挑战。  </p>
+        <h2 id="论文时间：2015-11"><a href="#论文时间：2015-11" class="headerlink" title="论文时间：2015.11"></a>论文时间：2015.11</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来进行特征提取，而无需进行特征工程。该论文主要介绍了深度学习在情感分类领域的应用以及面临的挑战。<a id="more"></a>  </p>
 <h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>sentiment可以用五个字母来表示：（e,a,s,h,t）.e代表entity，a代表aspect，s代表sentiment，h代表sentiment holder，t代表time。例如在句子‘The photos from my Samsung camera are not that great, but the battery life is great.’中，共有两组情感：(Samsung, photo, negative, Tom, June，4, 2015)以及     (Samsung, battery life, positive, Tom,June 4, 2015)。不同任务对这五个部分的重视程度是不同的，例如当我们对一个文档进行分类时，我们主要关心的就是s-sentiment，而不关心其他。而如何对这些特征进行表示呢？从前可能只能依靠特征工程，不过到现在由于深度学习的崛起，人们可以用非线性的神经网络进行多角度的特征提取。而我们所要做的只不过是把要分类的文本输入到网络中，那么如何进行文本输入呢？这就引出了word representation。  </p>
 <h2 id="三，word-representation"><a href="#三，word-representation" class="headerlink" title="三，word representation"></a>三，word representation</h2><p>word representation的目标是将单词的多层含义嵌入到一个向量中，传统的表示方法又one-hot vector，但它不能捕捉词与词之间的依赖且矩阵维度过大；之后出现了word cluster，使得one-hot的维度大小得以降低。再之后出现了word embedding，它是基于distributional hypothesis(分布式假设)。比较出名的有word2vec，GloVe等。但这样做对于情感分类有一个致命缺陷是，利用上述方法学得的反义词的词向量是彼此接近的。为了解决这一问题，一些学者将文本的情感信息也嵌入到了词向量中。其结构如下图所示：  </p>
 <img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/model1.png" class title="This is an example image">  
