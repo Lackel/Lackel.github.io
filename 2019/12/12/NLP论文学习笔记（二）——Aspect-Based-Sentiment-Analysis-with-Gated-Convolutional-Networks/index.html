@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>NLP论文学习笔记（二）——Aspect Based Sentiment Analysis with Gated Convolutional Networks | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，论文摘要Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GT">
+  <meta name="description" content="论文时间：2018.5一，论文摘要Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-Re">
 <meta name="keywords" content="人工智能,NLP,论文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP论文学习笔记（二）——Aspect Based Sentiment Analysis with Gated Convolutional Networks">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，论文摘要Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GT">
+<meta property="og:description" content="论文时间：2018.5一，论文摘要Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-Re">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-12T08:01:17.097Z">
+<meta property="og:updated_time" content="2019-12-12T12:21:16.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,7 +157,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GTRU）代替attention，且用CNN代替了LSTM，这样做的好处在于数据无互相依赖，可以进行并行运算，加快了运行速度且提高了准确率。<a id="more"></a></p>
+        <h2 id="论文时间：2018-5"><a href="#论文时间：2018-5" class="headerlink" title="论文时间：2018.5"></a>论文时间：2018.5</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GTRU）代替attention，且用CNN代替了LSTM，这样做的好处在于数据无互相依赖，可以进行并行运算，加快了运行速度且提高了准确率。<a id="more"></a></p>
 <h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>ACSA与ATSA的主要不同点在于：ATSA要分析的情感实体名称一般会出现在文本中，而ACSA则一般分析未在文本中出现的实体。例如下面的句子：Average to good Thai food, but terrible delivery。如果要分析情感的实体是food，则是ATSA，它对应positive；若要分析情感的实体是service，则对应ACSA，它对应negative。传统的LSTM+AM方法的主要缺点是词与词之间依赖大，单词只能处理一个token，无法并行运算，而CNN+GTRU则没有这种问题。  </p>
 <h2 id="三，Gated-Convolutional-Network-with-Aspect-Embedding（GCAE）"><a href="#三，Gated-Convolutional-Network-with-Aspect-Embedding（GCAE）" class="headerlink" title="三，Gated Convolutional Network with Aspect Embedding（GCAE）"></a>三，Gated Convolutional Network with Aspect Embedding（GCAE）</h2><p>对于ACSA任务，由于实体对象未出现在文本中，因此可以对其直接进行编码，作为Aspect Embedding，其框图如下：  </p>
 <img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/ACSA.png" class title="This is an example image">  

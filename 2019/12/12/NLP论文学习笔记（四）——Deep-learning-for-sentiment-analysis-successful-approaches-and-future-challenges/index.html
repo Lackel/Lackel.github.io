@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Archives | Hexo</title>
+  <title>NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;archives&#x2F;index.html">
+  <meta name="description" content="论文时间：2015.11一，论文摘要Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来">
+<meta name="keywords" content="人工智能,NLP,论文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="论文时间：2015.11一，论文摘要Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2019-12-12T12:20:36.304Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -131,36 +137,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-NLP论文学习笔记（四）——Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/" class="archive-article-date">
+
+        
+        <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/" class="archive-article-date">
   	<time datetime="2019-12-12T11:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/">NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="论文时间：2015-11"><a href="#论文时间：2015-11" class="headerlink" title="论文时间：2015.11"></a>论文时间：2015.11</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来进行特征提取，而无需进行特征工程。该论文主要介绍了深度学习在情感分类领域的应用以及面临的挑战。  </p>
+<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>sentiment可以用五个字母来表示：（e,a,s,h,t）.e代表entity，a代表aspect，s代表sentiment，h代表sentiment holder，t代表time。例如在句子‘The photos from my Samsung camera are not that great, but the battery life is great.’中，共有两组情感：(Samsung, photo, negative, Tom, June，4, 2015)以及     (Samsung, battery life, positive, Tom,June 4, 2015)。不同任务对这五个部分的重视程度是不同的，例如当我们对一个文档进行分类时，我们主要关心的就是s-sentiment，而不关心其他。而如何对这些特征进行表示呢？从前可能只能依靠特征工程，不过到现在由于深度学习的崛起，人们可以用非线性的神经网络进行多角度的特征提取。而我们所要做的只不过是把要分类的文本输入到网络中，那么如何进行文本输入呢？这就引出了word representation。  </p>
+<h2 id="三，word-representation"><a href="#三，word-representation" class="headerlink" title="三，word representation"></a>三，word representation</h2><p>word representation的目标是将单词的多层含义嵌入到一个向量中，传统的表示方法又one-hot vector，但它不能捕捉词与词之间的依赖且矩阵维度过大；之后出现了word cluster，使得one-hot的维度大小得以降低。再之后出现了word embedding，它是基于distributional hypothesis(分布式假设)。比较出名的有word2vec，GloVe等。但这样做对于情感分类有一个致命缺陷是，利用上述方法学得的反义词的词向量是彼此接近的。为了解决这一问题，一些学者将文本的情感信息也嵌入到了词向量中。其结构如下图所示：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/model1.png" class title="This is an example image">  
+<h2 id="四，sentiment-classification"><a href="#四，sentiment-classification" class="headerlink" title="四，sentiment classification"></a>四，sentiment classification</h2><p>情感分类是情感分析的基础和最重要的部分，它主要有两个主流分支：lexicon-based approach（基于词典）和corpus-based approach（基于语料）。基于词典的是预先构建好和情感有关的词和它们对应的情感，然后根据语句中的词通过查词典的方式进行分类。而基于语料的是对于某个文本进行情感标注，让机器自己去学习构建分类器。情感分类有两个主要步骤：（1）从语料中学习词向量，（2）将词向量输入网络进行情感分类。其流程框图为：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/model2.png" class title="This is an example image">  
+<p>现在比较常用的神经网络分类器有：RNN，CNN，LSTM等。  </p>
+<h2 id="五，opinion-extraction"><a href="#五，opinion-extraction" class="headerlink" title="五，opinion extraction"></a>五，opinion extraction</h2><p>fine-grained opinion extraction（细粒度观点提取）的目标是找到文本中所有的不同角度的情感倾向，即多个（e,a,s,h,t），例如‘the screen of apple is so amazing’中，我们需要得到‘O B-Aspect O B-Entity O B-Sentiment I-Sentiment,’这样的输出，其中O代表无关，B达标开始，I代表内部。传统的学习算法需要进行大量的人工操作，而神经网络如RNN，LSTM只需将词向量输入即可得到更快更好的结果，RNN的结构如下图所示：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/rnn.png" class title="This is an example image">  
 
-        <div class="article-info info-on-right">
-          
+<h2 id="五，BUILDING-SENTIMENT-LEXICON"><a href="#五，BUILDING-SENTIMENT-LEXICON" class="headerlink" title="五，BUILDING SENTIMENT LEXICON"></a>五，BUILDING SENTIMENT LEXICON</h2><p>SENTIMENT LEXICON是由一系列标注有情感倾向的词，短语等构成的集合，是进行情感分类的重要手段之一。其构建方式主要有三种：manually,through thesaurus-based method（类属词库，如近反义词等），corpus-based method。其中第一种太费时费力，一般不用。第二种是利用外部词库（如WordNet）,根据语意关系进行标注，如一个词是正向的，那么其反义词就是负向的。然而这种方法的重要缺陷是词汇更新不及时，因此有了第三种方法，其基于语料自动学习，因此我们只要及时更新语料就可以更新词汇信息。一种常见的结构如下：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/corpus.png" class title="This is an example image">  
+
+<h2 id="六，SOME-SUGGESTIONS-ON-IMPLEMENTATION"><a href="#六，SOME-SUGGESTIONS-ON-IMPLEMENTATION" class="headerlink" title="六，SOME SUGGESTIONS ON IMPLEMENTATION"></a>六，SOME SUGGESTIONS ON IMPLEMENTATION</h2><p>当我们利用神经网络进行情感分类时，计算梯度有两种选择：一是calculate the gradient of each parameter in terms of the loss function by hand，这显然很耗时耗力。另一种选择是layer-wise implementation，即构建计算图，让深度学习库帮我们自动地计算梯度。  </p>
+<h2 id="七，个人总结"><a href="#七，个人总结" class="headerlink" title="七，个人总结"></a>七，个人总结</h2><p>该论文是一篇综述性文章，介绍了深度学习进行文本分类的历史及现状，以及常用方法，但由于年代久远，个人感觉阅读价值不大。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -180,7 +230,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -193,453 +243,145 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/" class="archive-article-date">
-  	<time datetime="2019-12-12T02:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/">NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="NLP论文学习笔记（四）——Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges" data-title="NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges" data-url="http://github.com/Lackel/Lackel.github.io.git/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/" class="archive-article-date">
-  	<time datetime="2019-12-12T01:20:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/">NLP论文学习笔记（二）——Aspect Based Sentiment Analysis with Gated Convolutional Networks</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/" class="archive-article-date">
-  	<time datetime="2019-12-12T00:32:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/">NLP论文学习笔记（一）——Mining opinions from instructor evaluation reviews a deep learning approach</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-Linguistic-Structure-Dependency-Parsing/" class="archive-article-date">
-  	<time datetime="2019-11-01T13:26:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-Linguistic-Structure-Dependency-Parsing/">斯坦福CS224N学习笔记（五）-- Linguistic Structure Dependency Parsing</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:16:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/">斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/">斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/">斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/" class="archive-article-date">
-  	<time datetime="2019-11-01T09:05:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--%20Word-Vectors/">斯坦福CS224N学习笔记（一）-- Introduction and Word Vectors</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://github.com/Lackel/Lackel.github.io.git/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/", 
+    sourceId: "NLP论文学习笔记（四）——Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="NLP论文学习笔记（四）——Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -662,8 +404,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

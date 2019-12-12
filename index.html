@@ -133,6 +133,113 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-NLP论文学习笔记（四）——Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/">NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/" class="archive-article-date">
+  	<time datetime="2019-12-12T11:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="论文时间：2015-11"><a href="#论文时间：2015-11" class="headerlink" title="论文时间：2015.11"></a>论文时间：2015.11</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来进行特征提取，而无需进行特征工程。该论文主要介绍了深度学习在情感分类领域的应用以及面临的挑战。  </p>
+<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>sentiment可以用五个字母来表示：（e,a,s,h,t）.e代表entity，a代表aspect，s代表sentiment，h代表sentiment holder，t代表time。例如在句子‘The photos from my Samsung camera are not that great, but the battery life is great.’中，共有两组情感：(Samsung, photo, negative, Tom, June，4, 2015)以及     (Samsung, battery life, positive, Tom,June 4, 2015)。不同任务对这五个部分的重视程度是不同的，例如当我们对一个文档进行分类时，我们主要关心的就是s-sentiment，而不关心其他。而如何对这些特征进行表示呢？从前可能只能依靠特征工程，不过到现在由于深度学习的崛起，人们可以用非线性的神经网络进行多角度的特征提取。而我们所要做的只不过是把要分类的文本输入到网络中，那么如何进行文本输入呢？这就引出了word representation。  </p>
+<h2 id="三，word-representation"><a href="#三，word-representation" class="headerlink" title="三，word representation"></a>三，word representation</h2><p>word representation的目标是将单词的多层含义嵌入到一个向量中，传统的表示方法又one-hot vector，但它不能捕捉词与词之间的依赖且矩阵维度过大；之后出现了word cluster，使得one-hot的维度大小得以降低。再之后出现了word embedding，它是基于distributional hypothesis(分布式假设)。比较出名的有word2vec，GloVe等。但这样做对于情感分类有一个致命缺陷是，利用上述方法学得的反义词的词向量是彼此接近的。为了解决这一问题，一些学者将文本的情感信息也嵌入到了词向量中。其结构如下图所示：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/model1.png" class title="This is an example image">  
+<h2 id="四，sentiment-classification"><a href="#四，sentiment-classification" class="headerlink" title="四，sentiment classification"></a>四，sentiment classification</h2><p>情感分类是情感分析的基础和最重要的部分，它主要有两个主流分支：lexicon-based approach（基于词典）和corpus-based approach（基于语料）。基于词典的是预先构建好和情感有关的词和它们对应的情感，然后根据语句中的词通过查词典的方式进行分类。而基于语料的是对于某个文本进行情感标注，让机器自己去学习构建分类器。情感分类有两个主要步骤：（1）从语料中学习词向量，（2）将词向量输入网络进行情感分类。其流程框图为：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/model2.png" class title="This is an example image">  
+<p>现在比较常用的神经网络分类器有：RNN，CNN，LSTM等。  </p>
+<h2 id="五，opinion-extraction"><a href="#五，opinion-extraction" class="headerlink" title="五，opinion extraction"></a>五，opinion extraction</h2><p>fine-grained opinion extraction（细粒度观点提取）的目标是找到文本中所有的不同角度的情感倾向，即多个（e,a,s,h,t），例如‘the screen of apple is so amazing’中，我们需要得到‘O B-Aspect O B-Entity O B-Sentiment I-Sentiment,’这样的输出，其中O代表无关，B达标开始，I代表内部。传统的学习算法需要进行大量的人工操作，而神经网络如RNN，LSTM只需将词向量输入即可得到更快更好的结果，RNN的结构如下图所示：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/rnn.png" class title="This is an example image">  
+
+<h2 id="五，BUILDING-SENTIMENT-LEXICON"><a href="#五，BUILDING-SENTIMENT-LEXICON" class="headerlink" title="五，BUILDING SENTIMENT LEXICON"></a>五，BUILDING SENTIMENT LEXICON</h2><p>SENTIMENT LEXICON是由一系列标注有情感倾向的词，短语等构成的集合，是进行情感分类的重要手段之一。其构建方式主要有三种：manually,through thesaurus-based method（类属词库，如近反义词等），corpus-based method。其中第一种太费时费力，一般不用。第二种是利用外部词库（如WordNet）,根据语意关系进行标注，如一个词是正向的，那么其反义词就是负向的。然而这种方法的重要缺陷是词汇更新不及时，因此有了第三种方法，其基于语料自动学习，因此我们只要及时更新语料就可以更新词汇信息。一种常见的结构如下：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/corpus.png" class title="This is an example image">  
+
+<h2 id="六，SOME-SUGGESTIONS-ON-IMPLEMENTATION"><a href="#六，SOME-SUGGESTIONS-ON-IMPLEMENTATION" class="headerlink" title="六，SOME SUGGESTIONS ON IMPLEMENTATION"></a>六，SOME SUGGESTIONS ON IMPLEMENTATION</h2><p>当我们利用神经网络进行情感分类时，计算梯度有两种选择：一是calculate the gradient of each parameter in terms of the loss function by hand，这显然很耗时耗力。另一种选择是layer-wise implementation，即构建计算图，让深度学习库帮我们自动地计算梯度。  </p>
+<h2 id="七，个人总结"><a href="#七，个人总结" class="headerlink" title="七，个人总结"></a>七，个人总结</h2><p>该论文是一篇综述性文章，介绍了深度学习进行文本分类的历史及现状，以及常用方法，但由于年代久远，个人感觉阅读价值不大。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-NLP论文学习笔记（三）——Fine-Grained-Sentence-Functions-for-Short-Text-Conversation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -153,7 +260,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要  *"></a>一，论文摘要  *</h2><p>Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的response。生成response的模型主要包括：information retrieval-based and neural generative models.实验证明，引入句子函数可以有效改善response的质量。</p>
+        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的response。生成response的模型主要包括：information retrieval-based and neural generative models.实验证明，引入句子函数可以有效改善response的质量。</p>
         
           <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/#more">more >></a>
         
@@ -248,7 +355,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GTRU）代替attention，且用CNN代替了LSTM，这样做的好处在于数据无互相依赖，可以进行并行运算，加快了运行速度且提高了准确率。</p>
+        <h2 id="论文时间：2018-5"><a href="#论文时间：2018-5" class="headerlink" title="论文时间：2018.5"></a>论文时间：2018.5</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GTRU）代替attention，且用CNN代替了LSTM，这样做的好处在于数据无互相依赖，可以进行并行运算，加快了运行速度且提高了准确率。</p>
         
           <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/#more">more >></a>
         
@@ -343,7 +450,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Mining opinions from instructor evaluation reviews a deep learning approach，即通过深度学习的方法来挖掘评教文本中的情感。Student evaluations of teaching (SET)提供了丰富的教学及老师授课情况信息，可以用来改善授课质量或评估教师水平。文章主要对比了传统的词表示方法+传统机器学习方法，集成学习，以及词嵌入+深度学习这三种方法在评教文本分类这一任务上的性能。</p>
+        <h2 id="论文时间：2019-5"><a href="#论文时间：2019-5" class="headerlink" title="论文时间：2019.5"></a>论文时间：2019.5</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Mining opinions from instructor evaluation reviews a deep learning approach，即通过深度学习的方法来挖掘评教文本中的情感。Student evaluations of teaching (SET)提供了丰富的教学及老师授课情况信息，可以用来改善授课质量或评估教师水平。文章主要对比了传统的词表示方法+传统机器学习方法，集成学习，以及词嵌入+深度学习这三种方法在评教文本分类这一任务上的性能。</p>
         
           <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/#more">more >></a>
         
