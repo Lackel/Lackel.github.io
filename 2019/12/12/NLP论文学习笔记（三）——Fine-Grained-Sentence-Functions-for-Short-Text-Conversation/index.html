@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，论文摘要  *Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-TextConversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的respon">
+  <meta name="description" content="一，论文摘要  *Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的respo">
 <meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，论文摘要  *Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-TextConversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的respon">
+<meta property="og:description" content="一，论文摘要  *Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的respo">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-12T07:58:50.129Z">
+<meta property="og:updated_time" content="2019-12-12T08:00:29.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,8 +157,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要  *"></a>一，论文摘要  *</h2><p>Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text<br>Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的response。生成response的模型主要包括：information retrieval-based and neural generative models.实验证明，引入句子函数可以有效改善response的质量。<a id="more"></a></p>
-<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>Sentence function主要分为四类，分别是Interrogative（疑问），Declarative（陈述），Imperative（命令）和Exclamatory（感叹）。在此基础上，作者又将这四个类别分为几个小类，共得到了20个fine-grained sentence function，即第二级特征。句子函数可以有效地调整response的整体结构，改善其质量。生成respons的模型包括：<br>information retrieval-based（IR）models和neural generative models。二者的主要区别为：IR模型在已有语料中搜寻最相近的query，然后直接返回预料中的query对应的response。而neural generative models采用end-to-end的方式学习query到response的map。</p>
+        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要  *"></a>一，论文摘要  *</h2><p>Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的response。生成response的模型主要包括：information retrieval-based and neural generative models.实验证明，引入句子函数可以有效改善response的质量。<a id="more"></a></p>
+<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>Sentence function主要分为四类，分别是Interrogative（疑问），Declarative（陈述），Imperative（命令）和Exclamatory（感叹）。在此基础上，作者又将这四个类别分为几个小类，共得到了20个fine-grained sentence function，即第二级特征。句子函数可以有效地调整response的整体结构，改善其质量。生成respons的模型包括：information retrieval-based（IR）models和neural generative models。二者的主要区别为：IR模型在已有语料中搜寻最相近的query，然后直接返回预料中的query对应的response。而neural generative models采用end-to-end的方式学习query到response的map。</p>
 <h2 id="三，Sentence-function"><a href="#三，Sentence-function" class="headerlink" title="三，Sentence function"></a>三，Sentence function</h2><p>作者主要训练两类任务：</p>
 <h3 id="（1）Classification-for-Modeling。"><a href="#（1）Classification-for-Modeling。" class="headerlink" title="（1）Classification-for-Modeling。"></a>（1）Classification-for-Modeling。</h3><p>即给定一段短文本，能自动标注其句子函数。作者采用的网络结构十分简单，公式描述如下：  </p>
 <img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/func1.png" class title="This is an example image">  
