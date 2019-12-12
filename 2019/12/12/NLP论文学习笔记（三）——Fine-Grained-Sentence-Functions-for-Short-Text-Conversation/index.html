@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，论文摘要">
+  <meta name="description" content="一，论文摘要  *Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-TextConversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的respon">
 <meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，论文摘要">
+<meta property="og:description" content="一，论文摘要  *Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-TextConversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的respon">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-12T02:17:40.007Z">
+<meta property="og:updated_time" content="2019-12-12T07:47:33.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;12&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,7 +157,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2>
+        <h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要  *"></a>一，论文摘要  *</h2><p>Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text<br>Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的response。生成response的模型主要包括：information retrieval-based and neural generative models.实验证明，引入句子函数可以有效改善response的质量。</p>
+<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>Sentence function主要分为四类，分别是Interrogative（疑问），Declarative（陈述），Imperative（命令）和Exclamatory（感叹）。在此基础上，作者又将这四个类别分为几个小类，共得到了20个fine-grained sentence function，即第二级特征。句子函数可以有效地调整response的整体结构，改善其质量。生成respons的模型包括：<br>information retrieval-based（IR）models和neural generative models。二者的主要区别为：IR模型在已有语料中搜寻最相近的query，然后直接返回预料中的query对应的response。而neural generative models采用end-to-end的方式学习query到response的map。</p>
+<h2 id="三，Sentence-function"><a href="#三，Sentence-function" class="headerlink" title="三，Sentence function"></a>三，Sentence function</h2><p>作者主要训练两类任务：</p>
+<h3 id="（1）Classification-for-Modeling。"><a href="#（1）Classification-for-Modeling。" class="headerlink" title="（1）Classification-for-Modeling。"></a>（1）Classification-for-Modeling。</h3><p>即给定一段短文本，能自动标注其句子函数。作者采用的网络结构十分简单，公式描述如下：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/func1.png" class title="This is an example image">  
+<p>这样就得到了句子的第一级特征，将第一级得到的特征嵌入到一个向量中用于计算第二季特征，公式描述如下：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/func2.png" class title="This is an example image">  
+<h3 id="（2）Classification-for-Testing"><a href="#（2）Classification-for-Testing" class="headerlink" title="（2）Classification-for-Testing."></a>（2）Classification-for-Testing.</h3><p>即给定query及其句子函数，预测response的句子函数。用公式描述为：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/func3.png" class title="This is an example image">  
+<p>其结构也比较简单，作者先用Encoder来获取输入query的特征，然后再用一级Embedding layer来获取query句子函数的特征，随后将二者相加并送入FC网络，后接softmax，即可得到response对应的句子函数。  </p>
+<h2 id="四，Conversation-Models-with-Sentence-Function"><a href="#四，Conversation-Models-with-Sentence-Function" class="headerlink" title="四，Conversation Models with Sentence Function"></a>四，Conversation Models with Sentence Function</h2><p>本节作者主要用上述训练好的句子函数模型来改善输入query得到的response的质量。运用了前面介绍的两种生成模型 </p>
+<h3 id="（1）information-retrieval-based（IR）models"><a href="#（1）information-retrieval-based（IR）models" class="headerlink" title="（1）information retrieval-based（IR）models"></a>（1）information retrieval-based（IR）models</h3><p>作者针对这一模型做的改进主要为re-ranked model，即根据产生的response的句子函数与预期的是否一致来对response进行重新打分，选取最可能的response。若不一致，则该response的评分会受到惩罚，具体公式为：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/penalty.png" class title="This is an example image">  
+<p>重新评分的公式为：  </p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/score.png" class title="This is an example image">  
+<p>如果s1对应的penalty weight为1，且λ=1，则s1就会在评分中变到第k个。其中s1，s2。。是按照可能性大小排列的。</p>
+<h3 id="（1）Generative-models"><a href="#（1）Generative-models" class="headerlink" title="（1）Generative models"></a>（1）Generative models</h3><p>论文中主要采用了C-Seq2seq，KgCVAE，SeFun-CVAE这三种模型进行测试。  </p>
+<h2 id="五，Experiments-on-Sentence-Function-Classification"><a href="#五，Experiments-on-Sentence-Function-Classification" class="headerlink" title="五，Experiments on Sentence Function Classification"></a>五，Experiments on Sentence Function Classification</h2><p>作者采用了Accuracy，Macro-F1 (the F1 score that weights equally all classes)，Micro-F1 (the F1 score that weights equally all test samples)来衡量实验结果。以下为实验的具体数据，其中joint代表query和response一起进行训练。  </p>
+<h4 id="（1）Results-on-10-000-test-query-segments-on-the-Classification-for-Modeling-task"><a href="#（1）Results-on-10-000-test-query-segments-on-the-Classification-for-Modeling-task" class="headerlink" title="（1）Results on 10,000 test query segments on the Classification-for-Modeling task."></a>（1）Results on 10,000 test query segments on the Classification-for-Modeling task.</h4><img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/table1.png" class title="This is an example image">  
+<h4 id="（2）Results-on-10-000-test-respons-segments-on-the-Classification-for-Modeling-task"><a href="#（2）Results-on-10-000-test-respons-segments-on-the-Classification-for-Modeling-task" class="headerlink" title="（2）Results on 10,000 test respons segments on the Classification-for-Modeling task."></a>（2）Results on 10,000 test respons segments on the Classification-for-Modeling task.</h4><img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/table2.png" class title="This is an example image">  
+<p>从以上两幅图可以看出，RNN的效果更好，且进行联合训练可以提高模型性能。  </p>
+<h4 id="（3）Results-on-5-000-test-queries-on-the-Classification-for-Testing-task"><a href="#（3）Results-on-5-000-test-queries-on-the-Classification-for-Testing-task" class="headerlink" title="（3）Results on 5,000 test queries on the Classification-for-Testing task."></a>（3）Results on 5,000 test queries on the Classification-for-Testing task.</h4><img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/table3.png" class title="This is an example image">  
+
+<h2 id="六，Experiments-on-Conversation-Models"><a href="#六，Experiments-on-Conversation-Models" class="headerlink" title="六，Experiments on Conversation Models"></a>六，Experiments on Conversation Models</h2><p>对于生成的response的评分主要根据以下指标：Fluency，Relevance（相关），Informativeness，Accuracy。  </p>
+<h4 id="（1）Results-on-the-IR-based-models"><a href="#（1）Results-on-the-IR-based-models" class="headerlink" title="（1）Results on the IR-based models"></a>（1）Results on the IR-based models</h4><img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/table4.png" class title="This is an example image">  
+<p>从上述结果可以看出，经过重新评分后的结果要优于之前的结果，这就说明了句子函数对改善生成response的质量有很大的帮助。  </p>
+<h4 id="（2）Results-on-the-generative-models"><a href="#（2）Results-on-the-generative-models" class="headerlink" title="（2）Results on the generative models"></a>（2）Results on the generative models</h4><img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/table5.png" class title="This is an example image">  
+<p>从上表中可以看出，C-Seq2seq表现良好，但整体来看，generative models的性能要劣于IR-based models。  </p>
+<h4 id="（3）case-study"><a href="#（3）case-study" class="headerlink" title="（3）case study"></a>（3）case study</h4><p>下面是用各种模型生成的response，也可以据此验证上述实验结果。</p>
+<img src="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/table5.png" class title="This is an example image">  
+
+<h2 id="七，总结"><a href="#七，总结" class="headerlink" title="七，总结"></a>七，总结</h2><p>作者通过研究sentence function，引入了第二级特征，训练了可以自动标注的模型，并利用该模型来帮助生成质量更高的response。然而，引入了第二级特征的对话生成模型理应生成更好的response，但结果却并非如此，笔者猜测可能是由于标注模型在第二级特征上的准确率额较低引起的，使得正确的response收到了惩罚。  </p>
+
       
 
       
