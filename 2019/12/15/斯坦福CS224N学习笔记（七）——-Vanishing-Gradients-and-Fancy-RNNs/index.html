@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs1，Vanishing Gradients梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消息也同时意味着RNN">
+  <meta name="description" content="一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs1，Vanishing Gradients梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，梯度越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消失同时也意味着R">
 <meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;15&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs1，Vanishing Gradients梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消息也同时意味着RNN">
+<meta property="og:description" content="一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs1，Vanishing Gradients梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，梯度越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消失同时也意味着R">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;15&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-15T13:48:09.215Z">
+<meta property="og:updated_time" content="2019-12-15T13:54:16.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;15&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,7 +157,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，斯坦福CS224N学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs"><a href="#一，斯坦福CS224N学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs" class="headerlink" title="一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs"></a>一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs</h2><h3 id="1，Vanishing-Gradients"><a href="#1，Vanishing-Gradients" class="headerlink" title="1，Vanishing Gradients"></a>1，Vanishing Gradients</h3><p>梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消息也同时意味着RNN捕获长依赖的能力变弱，即t+n步无法捕获到t步的信息，下面用一个具体的例子来看梯度消失的危害：<a id="more"></a>  </p>
+        <h2 id="一，斯坦福CS224N学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs"><a href="#一，斯坦福CS224N学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs" class="headerlink" title="一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs"></a>一，斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs</h2><h3 id="1，Vanishing-Gradients"><a href="#1，Vanishing-Gradients" class="headerlink" title="1，Vanishing Gradients"></a>1，Vanishing Gradients</h3><p>梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，梯度越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消失同时也意味着RNN捕获长依赖的能力变弱，即t+n步无法捕获到t步的信息，下面用一个具体的例子来看梯度消失的危害：<a id="more"></a>  </p>
 <img src="/2019/12/15/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs/vanish.png" class title="This is an example image">  
 <p>而对于梯度爆炸，我们可以用简单的gradient clipping来处理，其思路是当梯度大于某个阈值，我们就将其缩小：  </p>
 <img src="/2019/12/15/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs/explore.png" class title="This is an example image">  
