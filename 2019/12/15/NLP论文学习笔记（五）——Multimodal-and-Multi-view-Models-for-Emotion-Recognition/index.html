@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Hexo</title>
+  <title>NLP论文学习笔记（五）——Multimodal and Multi-view Models for Emotion Recognition | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;index.html">
+  <meta name="description" content="论文时间：2019.8一，论文摘要有关emotion recognition（ER，情感识别）的研究表明，结合词汇和听觉可以得到更好的模型。该篇论文要解决的问题是：用词汇和声音共同训练模型，但当测试时，并不需要输入词汇信息。论文首先测试了两个注意力机制下的多模态（Multimodal）模型（文字和声音）来研究文字对改善模型的作用。接着作者采用了多观点（Multi-view）模型，即只采用声音输入去">
+<meta name="keywords" content="人工智能,NLP,论文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP论文学习笔记（五）——Multimodal and Multi-view Models for Emotion Recognition">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;15&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="论文时间：2019.8一，论文摘要有关emotion recognition（ER，情感识别）的研究表明，结合词汇和听觉可以得到更好的模型。该篇论文要解决的问题是：用词汇和声音共同训练模型，但当测试时，并不需要输入词汇信息。论文首先测试了两个注意力机制下的多模态（Multimodal）模型（文字和声音）来研究文字对改善模型的作用。接着作者采用了多观点（Multi-view）模型，即只采用声音输入去">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;15&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2019-12-15T12:09:55.713Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;15&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -131,16 +137,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-NLP论文学习笔记（五）——Multimodal-and-Multi-view-Models-for-Emotion-Recognition" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-NLP论文学习笔记（五）——Multimodal-and-Multi-view-Models-for-Emotion-Recognition" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/">NLP论文学习笔记（五）——Multimodal and Multi-view Models for Emotion Recognition</a>
+    <h1 class="article-title" itemprop="name">
+      NLP论文学习笔记（五）——Multimodal and Multi-view Models for Emotion Recognition
     </h1>
   
 
@@ -153,12 +157,73 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>有关emotion recognition（ER，情感识别）的研究表明，结合词汇和听觉可以得到更好的模型。该篇论文要解决的问题是：用词汇和声音共同训练模型，但当测试时，并不需要输入词汇信息。<br>论文首先测试了两个注意力机制下的多模态（Multimodal）模型（文字和声音）来研究文字对改善模型的作用。接着作者采用了多观点（Multi-view）模型，即只采用声音输入去研究训练中加入的文字信息对模型的帮助。</p>
-        
-          <a class="article-more-a" href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/#more">more >></a>
-        
+        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>有关emotion recognition（ER，情感识别）的研究表明，结合词汇和听觉可以得到更好的模型。该篇论文要解决的问题是：用词汇和声音共同训练模型，但当测试时，并不需要输入词汇信息。<br>论文首先测试了两个注意力机制下的多模态（Multimodal）模型（文字和声音）来研究文字对改善模型的作用。接着作者采用了多观点（Multi-view）模型，即只采用声音输入去研究训练中加入的文字信息对模型的帮助。<a id="more"></a>  </p>
+<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>在进行情感识别时，有时候声音或者语气信息会更有帮助（如yeah，of course等不含感情倾向的词），有时文字信息会更有帮助（如I am very happy）。作者主要做了以下两项工作：</p>
+<h3 id="（1）which-lexical-information-benefits-acoustic-models"><a href="#（1）which-lexical-information-benefits-acoustic-models" class="headerlink" title="（1）which lexical information benefits acoustic models."></a>（1）which lexical information benefits acoustic models.</h3><p>作者的第一个目标是测试文字信息怎样帮助声音信息进行判别的。为了能让这两种信息充分帮助模型进行识别，作者采取了第一种注意力机制————modality-based来判断在每一步时哪种信息占主导地位。第二种注意力机制为context based attentions，它用来获取全局中最关键的词向量。  </p>
+<h3 id="（2）induce-semantic-information-from-the-proposed-multimodal-model-into-an-acoustic-model"><a href="#（2）induce-semantic-information-from-the-proposed-multimodal-model-into-an-acoustic-model" class="headerlink" title="（2）induce semantic information from the proposed multimodal model into an acoustic model"></a>（2）induce semantic information from the proposed multimodal model into an acoustic model</h3><p>作者的第二个目标是将多模态模型提取到的语意信息应用到仅有声音的模型中去。即先利用声音和文字信息去训练模型，然后在测试时只输入声音信息，这样做的原因是考虑到在使用中若要运行多模态模型，会导致复杂性和隐私性的问题。  </p>
+<h2 id="三，相关工作"><a href="#三，相关工作" class="headerlink" title="三，相关工作"></a>三，相关工作</h2><p>之前所有的融合文字和声音信息的工作都是基于utterance（语调）level的，而作者采用的则是基于word level的模型，借用的方法是acoustic word representations。而且作者将文字输入到声音模型中去进行情感识别，这是前所未有的。  </p>
+<h2 id="四，模型"><a href="#四，模型" class="headerlink" title="四，模型"></a>四，模型</h2><h3 id="（1）Data-representation"><a href="#（1）Data-representation" class="headerlink" title="（1）Data representation"></a>（1）Data representation</h3><p>作者通过OpenSMILE来提取声音中frame-level的特征，用ELMo来进行文字单词的嵌入。  </p>
+<h3 id="（2）Acoustic-Words"><a href="#（2）Acoustic-Words" class="headerlink" title="（2）Acoustic Words"></a>（2）Acoustic Words</h3><p>作者认为就像人理解情感一样，将声音信息与文字信息进行对齐会有助于模型性能的提高。因此作者采用了如下框图去进行听觉文字的嵌入，其中需要用到对齐信息：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/model1.jpg" class title="This is an example image">  
+<p>其中黑框中代表提取到的Acoustic Words，它与相对应的文字一起输入到GMU中，GMU将在下面提到。  </p>
+<h3 id="（3）Hierarchical-Multimodal-Model"><a href="#（3）Hierarchical-Multimodal-Model" class="headerlink" title="（3）Hierarchical Multimodal Model"></a>（3）Hierarchical Multimodal Model</h3><p>作者采取的modality-based注意力机制是在word level的，它是别人提出的一种叫做GMU的模块，其计算公式为：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/GMU.png" class title="This is an example image">  
+<p>其中Xa和Xl分别代表听觉和文字信息所转化成的向量。<br>context based 注意力机制的意图是捕捉序列中最能反映情感的一系列单词，其计算公式为：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/equal.png" class title="This is an example image">  
+<h3 id="（4）Multi-view-Learning"><a href="#（4）Multi-view-Learning" class="headerlink" title="（4）Multi-view Learning"></a>（4）Multi-view Learning</h3><p>作者考虑到测试时可能无法获取到文字信息，因此作者在此部分的目标是构建一个声音模型，让其尽可能地能从训练时的多模态模型中学习到一些知识，用来改善其性能。其模型框图为：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/model2.jpg" class title="This is an example image">  
+<p>其中左边是声音模型，右边是多模态模型，ha和hm分别是二者的输出，由于这两个向量来自同一信息源，只是表达形式不同，因此作者假定他们所蕴含的情感信息是相似的，因此作者采用了以下损失函数，希望二者能尽可能的相同：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/loss1.png" class title="This is an example image">  
+<p>其中+，-分别代表positive(i.e., close) and negative (i.e., far) vectors，dis(v;w) = 1 - cos(v;w)。除此之外，为了能让模型更加鲁棒，作者在选取负样本时，选取的都是声音上是相似的，但是其情感类别不一致的样本。同时，作者还计算了声音和文字各自的损失，计算公式为：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/loss2.png" class title="This is an example image">  
+<p>整个算法的流程框图如下：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/algorithm.png" class title="This is an example image">  
+<h3 id="（4）Teacher-student-learning"><a href="#（4）Teacher-student-learning" class="headerlink" title="（4）Teacher-student learning"></a>（4）Teacher-student learning</h3><p>由于多模态模型的性能比声音模型更加强悍，因此训练过程中可能更倾向于训练多模态模型，而且采用独热编码来计算损失是一种非常严格的目标函数。为了解决上述两个问题，作者采用了Teacher-student learning。我们将一个已经优化好的多模态模型Vm作为老师，声音模型Va作为学生，让其尽可能输出与老师一致的预测，衡量方法Kullback-Leibler (KL) divergence。公式如下：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/loss3.png" class title="This is an example image">  
+<h2 id="五，实验"><a href="#五，实验" class="headerlink" title="五，实验"></a>五，实验</h2><h3 id="（1）Dataset"><a href="#（1）Dataset" class="headerlink" title="（1）Dataset"></a>（1）Dataset</h3><p>作者采用的数据集为USC-EIMOCAP，其包含五个session，每个部分由不同的一男一女进行说话，共十个说话者。类别共有五类：anger, happiness, neutral, and sadness。采取的办法是one-speaker-out，每次只取四组训练，剩下的一男一女作为验证和测试集。  </p>
+<h3 id="（2）Multimodal-Experiments"><a href="#（2）Multimodal-Experiments" class="headerlink" title="（2）Multimodal Experiments"></a>（2）Multimodal Experiments</h3><p>作者得到的最终结果如下图所示：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/result1.png" class title="This is an example image">  
+<p>从上表中可以看出，当忽略安静部分时，多模态模型的性能会有小幅度的提高。另外第二位说话者的声音也会影响到当前说话者的衡量效果。可以看出，加入了GMU之后模型性能提高了，因此表明一个模态可能会比另一个模态提供更多的信息，且加入modality-based注意力机制是十分必要的。如果将注意力机制的效果进行可视化，我们将可以得到下图：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/attention.jpg" class title="This is an example image">  
+<p>其中蓝色是声音信息，红色是文字信息。  </p>
+<h3 id="（3）Multi-view-experiments"><a href="#（3）Multi-view-experiments" class="headerlink" title="（3）Multi-view experiments"></a>（3）Multi-view experiments</h3><p>Multi-view experiments的结果如下图所示：  </p>
+<img src="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/result2.png" class title="This is an example image">  
+<p>其中作者采用了B-ACO-1作为first view，而上述训练好的多模态模型作为second model，后面的十字表示多模态模型的参数是冻结的。从结果中可以看出，采用Teacher-student learning和attention机制可以提高模型的性能。  </p>
+<h2 id="六，总结"><a href="#六，总结" class="headerlink" title="六，总结"></a>六，总结</h2><p>作者提出的第一种hierarchical multimodal model达到了目前最好的效果，这要归功于作者采用了声音文字进行对齐以及两种注意力机制。作者提出的第二种multi-view model表明声音模型可以从多模态模型中学习到知识。<br>总体来说，这篇论文分析了多模态中不同模态的主导问题，以及当一种模态在测试时不可获取的情况下，我们的单模态模型仍可以从多模态模型中获取帮助信息。  </p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -197,16 +262,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/13/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">斯坦福CS224N学习笔记（六）——The probability of a sentence Recurrent Neural Networks and Language Models</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -226,847 +350,55 @@
 
 
 
-
   
-    <article id="post-斯坦福CS224N学习笔记（六）——The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models/">斯坦福CS224N学习笔记（六）——The probability of a sentence Recurrent Neural Networks and Language Models</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/13/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models/" class="archive-article-date">
-  	<time datetime="2019-12-13T02:25:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（六）——The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models"><a href="#一，学习笔记（六）——The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models" class="headerlink" title="一，学习笔记（六）——The probability of a sentence Recurrent Neural Networks and Language Models"></a>一，学习笔记（六）——The probability of a sentence Recurrent Neural Networks and Language Models</h2><h3 id="1，Language-Modeling"><a href="#1，Language-Modeling" class="headerlink" title="1，Language Modeling"></a>1，Language Modeling</h3><p>language model,是指预测下一个单词的任务，即计算概率：</p>
-        
-          <a class="article-more-a" href="/2019/12/13/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/13/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94The-probability-of-a-sentence-Recurrent-Neural-Networks-and-Language-Models/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（四）——Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/">NLP论文学习笔记（四）——Deep learning for sentiment analysis: successful approaches and future challenges</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/" class="archive-article-date">
-  	<time datetime="2019-12-12T11:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2015-11"><a href="#论文时间：2015-11" class="headerlink" title="论文时间：2015.11"></a>论文时间：2015.11</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentiment analysis，亦叫做opinion mining，其目的在于identifying, extracting and organizing sentiments from user generated texts。传统的机器学习算法运用在这方面时，要进行大量的人工特征提取，也叫做特征工程。随着近几年深度学习的崛起，人们可以利用深度神经网络来进行特征提取，而无需进行特征工程。该论文主要介绍了深度学习在情感分类领域的应用以及面临的挑战。</p>
-        
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Deep-learning-for-sentiment-analysis-successful-approaches-and-future-challenges/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（三）——Fine-Grained-Sentence-Functions-for-Short-Text-Conversation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/">NLP论文学习笔记（三）——Fine-Grained Sentence Functions for Short-Text Conversation</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/" class="archive-article-date">
-  	<time datetime="2019-12-12T02:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Sentence function是问答系统中一个重要的特征，然而已标注的数据却特别少，作者收集并标注了Short-Text Conversation dataset with manually annotated SEntence FUNctions (STC-Sefun).本文的目标有两个：（1）能识别短文本的句子函数。（2）能根据输入query和句子函数给出正确的response。生成response的模型主要包括：information retrieval-based and neural generative models.实验证明，引入句子函数可以有效改善response的质量。</p>
-        
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Fine-Grained-Sentence-Functions-for-Short-Text-Conversation/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（二）——Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/">NLP论文学习笔记（二）——Aspect Based Sentiment Analysis with Gated Convolutional Networks</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/" class="archive-article-date">
-  	<time datetime="2019-12-12T01:20:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2018-5"><a href="#论文时间：2018-5" class="headerlink" title="论文时间：2018.5"></a>论文时间：2018.5</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Aspect based sentiment analysis (ABSA)能捕捉比普通情感分类更丰富的信息，因为其分类更具体，细粒度更大。其分为两个下游任务：aspect-category sentiment analysis (ACSA) and aspect-term sentiment analysis (ATSA)。论文中提出了Gated Tanh-ReLU Units（GTRU）代替attention，且用CNN代替了LSTM，这样做的好处在于数据无互相依赖，可以进行并行运算，加快了运行速度且提高了准确率。</p>
-        
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Aspect-Based-Sentiment-Analysis-with-Gated-Convolutional-Networks/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（一）——Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/">NLP论文学习笔记（一）——Mining opinions from instructor evaluation reviews a deep learning approach</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/" class="archive-article-date">
-  	<time datetime="2019-12-12T00:32:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2019-5"><a href="#论文时间：2019-5" class="headerlink" title="论文时间：2019.5"></a>论文时间：2019.5</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>Mining opinions from instructor evaluation reviews a deep learning approach，即通过深度学习的方法来挖掘评教文本中的情感。Student evaluations of teaching (SET)提供了丰富的教学及老师授课情况信息，可以用来改善授课质量或评估教师水平。文章主要对比了传统的词表示方法+传统机器学习方法，集成学习，以及词嵌入+深度学习这三种方法在评教文本分类这一任务上的性能。</p>
-        
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/12/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining-opinions-from-instructor-evaluation-reviews-a-deep-learning-approach/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（五）-Linguistic-Structure-Dependency-Parsing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-Linguistic-Structure-Dependency-Parsing/">斯坦福CS224N学习笔记（五）-- Linguistic Structure Dependency Parsing</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-Linguistic-Structure-Dependency-Parsing/" class="archive-article-date">
-  	<time datetime="2019-11-01T13:26:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（五）——Linguistic-Structure-Dependency-Parsing"><a href="#一，学习笔记（五）——Linguistic-Structure-Dependency-Parsing" class="headerlink" title="一，学习笔记（五）——Linguistic Structure Dependency Parsing"></a>一，学习笔记（五）——Linguistic Structure Dependency Parsing</h2><p>由于本章内容和笔者研究内容关联很小，且偏向于英语语言学，因此不再编写笔记，对此内容感兴趣者可以参考其他此方面的笔记。</p>
-        
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-Linguistic-Structure-Dependency-Parsing/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-Linguistic-Structure-Dependency-Parsing/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（四）-Backpropagation-and-Computation-Graphs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/">斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:16:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（四）——Backpropagation-and-Computation-Graphs"><a href="#一，学习笔记（四）——Backpropagation-and-Computation-Graphs" class="headerlink" title="一，学习笔记（四）——Backpropagation and Computation Graphs"></a>一，学习笔记（四）——Backpropagation and Computation Graphs</h2><h3 id="1，Matrix-gradients-for-our-simple-neural-net-and-some-tips"><a href="#1，Matrix-gradients-for-our-simple-neural-net-and-some-tips" class="headerlink" title="1，Matrix gradients for our simple neural net and some tips"></a>1，Matrix gradients for our simple neural net and some tips</h3><p>由于本节内容同上一笔记有较大重合，因此笔者只选取了一小部分额外内容作为补充。更为详细的反向传播求导过程以及矩阵微分运算可以查看课程提供的补充材料，在此不再赘述。</p>
-        
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89-Backpropagation-and-Computation-Graphs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（三）-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/">斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（三）——Word-Window-Classification-Neural-Networks-and-Matrix-Calculus"><a href="#一，学习笔记（三）——Word-Window-Classification-Neural-Networks-and-Matrix-Calculus" class="headerlink" title="一，学习笔记（三）——Word Window Classification, Neural Networks, and Matrix Calculus"></a>一，学习笔记（三）——Word Window Classification, Neural Networks, and Matrix Calculus</h2><h3 id="1，Classification-review-introduction"><a href="#1，Classification-review-introduction" class="headerlink" title="1，Classification review/introduction"></a>1，Classification review/introduction</h3><p>在我们进行分类任务时，假定我们有N个标注好的数据，而我们进行学习优化的目标是最大化正确预测的概率，或是最小化我们的损失函数。</p>
-        
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89-Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（二）-Word-Vectors-2-and-Word-Senses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/">斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（二）——Word-Vectors-2-and-Word-Senses"><a href="#一，学习笔记（二）——Word-Vectors-2-and-Word-Senses" class="headerlink" title="一，学习笔记（二）——Word Vectors 2 and Word Senses"></a>一，学习笔记（二）——Word Vectors 2 and Word Senses</h2><h3 id="1，Negative-Sampling"><a href="#1，Negative-Sampling" class="headerlink" title="1，Negative Sampling"></a>1，Negative Sampling</h3><p>第一章中我们介绍了word2vec的两种形式，而其中最关键的就是条件概率的表示形式：  </p>
-        
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89-Word-Vectors-2-and-Word-Senses/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="NLP论文学习笔记（五）——Multimodal-and-Multi-view-Models-for-Emotion-Recognition" data-title="NLP论文学习笔记（五）——Multimodal and Multi-view Models for Emotion Recognition" data-url="http://github.com/Lackel/Lackel.github.io.git/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://github.com/Lackel/Lackel.github.io.git/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/", 
+    sourceId: "NLP论文学习笔记（五）——Multimodal-and-Multi-view-Models-for-Emotion-Recognition",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+  
+  <div id="SOHUCS" sid="NLP论文学习笔记（五）——Multimodal-and-Multi-view-Models-for-Emotion-Recognition" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -1089,8 +421,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
