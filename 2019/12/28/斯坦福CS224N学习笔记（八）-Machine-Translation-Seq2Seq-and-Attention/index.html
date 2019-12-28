@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>斯坦福CS224N学习笔记（八）--Machine Translation, Seq2Seq and Attention  | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention1，Machine Translation">
+  <meta name="description" content="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention1，Machine TranslationMachine Translation(MT)是指让机器自动地将一种语言翻译成另一种语言，可以分为两大类方法：基于统计的机器翻译（Statistical Machine Translation）和基于神经网络的机器翻译（Neural Machine T">
 <meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斯坦福CS224N学习笔记（八）--Machine Translation, Seq2Seq and Attention ">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;28&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89-Machine-Translation-Seq2Seq-and-Attention&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention1，Machine Translation">
+<meta property="og:description" content="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention1，Machine TranslationMachine Translation(MT)是指让机器自动地将一种语言翻译成另一种语言，可以分为两大类方法：基于统计的机器翻译（Statistical Machine Translation）和基于神经网络的机器翻译（Neural Machine T">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;28&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89-Machine-Translation-Seq2Seq-and-Attention&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-28T09:01:24.836Z">
+<meta property="og:updated_time" content="2019-12-28T13:32:52.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;28&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89-Machine-Translation-Seq2Seq-and-Attention&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,7 +157,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention"><a href="#一，学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention" class="headerlink" title="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention"></a>一，学习笔记（八）——Machine Translation, Seq2Seq and Attention</h2><h3 id="1，Machine-Translation"><a href="#1，Machine-Translation" class="headerlink" title="1，Machine Translation"></a>1，Machine Translation</h3>
+        <h2 id="一，学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention"><a href="#一，学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention" class="headerlink" title="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention"></a>一，学习笔记（八）——Machine Translation, Seq2Seq and Attention</h2><h3 id="1，Machine-Translation"><a href="#1，Machine-Translation" class="headerlink" title="1，Machine Translation"></a>1，Machine Translation</h3><p>Machine Translation(MT)是指让机器自动地将一种语言翻译成另一种语言，可以分为两大类方法：基于统计的机器翻译（Statistical Machine Translation）和基于神经网络的机器翻译（Neural Machine Translation）。下面分别介绍这两种方法。<a id="more"></a>  </p>
+<h4 id="1-1-Statistical-Machine-Translation（SMT）"><a href="#1-1-Statistical-Machine-Translation（SMT）" class="headerlink" title="1.1 Statistical Machine Translation（SMT）"></a>1.1 Statistical Machine Translation（SMT）</h4><p>基于统计的机器翻译的目标是最大化条件概率P（y|x）,其中x为给定的语言，y为目标语言，而根据贝叶斯公式，我们又可以将其组合为两个概率的乘积，分别代表翻译模型以及语言模型，如下图所示：  </p>
+   
+<p>那么我们如何学得翻译模型P（x|y）呢？答案是我们通过一个并行的双语语料的统计信息来表示它。而且两种语言的对齐问题很难解决，因为有可能出现一个单词对应多个单词的情形。 </p>
+  
+<p>回到我们的原始问题上，我们如何求解两个概率相乘的最大值呢？答案是我们通过某种搜索算法去搜索最可能的取值，并且丢弃掉概率很低的值。然而由于需要大量的特征工程以及额外的资源，因此SMT是很复杂的一项工程。为了能让翻译更加智能化人性化，NMT应运而生。  </p>
+<h4 id="1-2-Neural-Machine-Translation（NMT），Seq2Seq"><a href="#1-2-Neural-Machine-Translation（NMT），Seq2Seq" class="headerlink" title="1.2 Neural Machine Translation（NMT），Seq2Seq"></a>1.2 Neural Machine Translation（NMT），Seq2Seq</h4><p>NMT的框架sequence2sequence（seq2seq）包含两个RNN，一个是处理输入语言的encoder，另一个是生成目标语言的decoder。其结构如下图所示：  </p>
+  
+<p>当然，seq2seq除了用于翻译之外，还广泛地应用于文本总结，对话生成等领域。我们训练seq2seq模型的方法是根据给定的巨大语料去训练模型，根据每一步的输出与真实标签的差异计算损失并求和。<br>在解码过程中存在不同的搜索可能的输出的方案，首先是greedy search，其在每一步都输出概率最大的单词，但这种方法的局限性在于一旦某一步翻译出错，则后续输出都会错上加错，为了避免这个问题，我们一般采用beam search，其在每一步都保留使得输出概率最大的k个词，这样就能降低错误不断叠加的可能性。  </p>
+  
+<p>当某一步的某个输出产生结束标志时，我们将这个输出放到一边，对剩余输出再进行beam search。直到我们得到了最大句长或者n个不同的假设。<br>为了惩罚模型对于短翻译的偏爱，我们在其概率前边乘以翻译句长分之一。<br>NMT的主要优缺点总结如下：  </p>
+  
+  
+<p>那么我们如何衡量得到翻译结果的好坏呢？一个常用的指标是BLEU（BiLingual Evaluation Understudy ），它是用来衡量机器翻译结果和人工翻译结果差异的指标，可以分为1，2，3，4grams匹配，再加上对于短文本的惩罚项。  </p>
+<h3 id="2，Attention"><a href="#2，Attention" class="headerlink" title="2，Attention"></a>2，Attention</h3><p>机器翻译中注意力机制的核心思想是将输出与encoder直接相连，然后让decoder应该更关注哪部分，这样做不仅可以提高翻译的准确性，还可以变相地完成了输入与输出的对齐，其示意图如下：  </p>
+  
+<p>注意力机制的计算公式为：  </p>
+  
+<p>attention机制有很多的优点，具体如下图所示：  </p>
+  
+<h3 id="3，summary"><a href="#3，summary" class="headerlink" title="3，summary"></a>3，summary</h3>  
+<h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
+
       
 
       
