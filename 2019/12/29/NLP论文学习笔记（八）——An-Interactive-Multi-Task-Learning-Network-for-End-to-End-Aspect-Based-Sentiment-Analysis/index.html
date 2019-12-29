@@ -8,14 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>NLP论文学习笔记（八）--An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="人工智能,NLP">
+  <meta name="description" content="论文时间：2019.8一，论文摘要之前的工作进行情感分类都是将情感侧面提取和分类两个子任务分开进行，可能会损失一些整体信息。同时之前的工作未充分利用所有的训练资源，如document-level labeled sentiment corpus。论文作者提出了interactive multi-task learning network (IMN)来学习一些相关任务，从而达到提升分类模型性能的目标">
+<meta name="keywords" content="人工智能,NLP,论文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP论文学习笔记（八）--An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;29&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="论文时间：2019.8一，论文摘要之前的工作进行情感分类都是将情感侧面提取和分类两个子任务分开进行，可能会损失一些整体信息。同时之前的工作未充分利用所有的训练资源，如document-level labeled sentiment corpus。论文作者提出了interactive multi-task learning network (IMN)来学习一些相关任务，从而达到提升分类模型性能的目标">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;29&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-29T11:22:36.154Z">
+<meta property="og:updated_time" content="2019-12-29T13:48:11.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;12&#x2F;29&#x2F;NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -155,7 +157,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>之前的工作进行情感分类都是将情感侧面提取和分类两个子任务分开进行，可能会损失一些整体信息。同时之前的工作未充分利用所有的训练资源，如document-level labeled sentiment corpus。论文作者提出了interactive multi-task learning network (IMN)来学习一些相关任务，从而达到提升分类模型性能的目标。同时IMN还提出了一种多任务间信息流通的结构，使得共享信息可以迭代地送入到每个任务，以此来提升各个任务的性能。<a id="more"></a>  </p>
+<h2 id="二，论文简介"><a href="#二，论文简介" class="headerlink" title="二，论文简介"></a>二，论文简介</h2><p>之前的工作都是基于pipeline方法将提取侧面和分类任务分开，它具有以下缺点：<br>1，第一步的误差会传播到第二步，造成误差的积累。2，这种方法会损失掉两个任务之间的关系信息。<br>而有关研究表明，使用集成的多任务学习也可以达到很好的效果。作者在论文中除了侧面提取和情感分类之外，还加入了两个document-level分类任务用来提升模型的性能，分别是：sentiment classification (DS)和domain classification(DD)。  </p>
+<h2 id="三，模型"><a href="#三，模型" class="headerlink" title="三，模型"></a>三，模型</h2><p>论文提出的模型结构图如下:  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/model.png" class title="This is an example image">  
+<p>其中最底层是进行embedding和用CNN进行提取信息，提取到的信息将送入到四个不同的任务中进行训练，而后四个任务输出的结果又返送回来作用于提取到的信息，这样反复迭代，最终使得模型性能不断提高。下面将分别介绍这几个任务。  </p>
+<h3 id="3-1-Aspect-Level-Tasks"><a href="#3-1-Aspect-Level-Tasks" class="headerlink" title="3.1 Aspect-Level Tasks"></a>3.1 Aspect-Level Tasks</h3><p>该任务包含AE和AS两个任务，这两个人物分别用于提取要分类的侧面和进行分类，其中提取分类侧面可以概括为：{BA; IA;BP; IP;O}，分别表示beginning of aspect，inside of aspect，beginning of opinion，inside of opinion和outside，分别用来提取侧面和其对应的情感。而分类任务可以归结为：{pos; neg; neu}。举例如下：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/example.png" class title="This is an example image">  
+<p>其中不是情感侧面的词不涉及分类问题，因此没有进行标注。其中AS任务经过CNN提取信息后要进行自注意力机制，其计算公式为：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/gongshi1.png" class title="This is an example image">  
+<p>其中P代表了第j个token可能是opinion一部分的概率，它是由AE任务中标注的BP和IP计算得到的，这也就是为什么AE会作用于AS，计算得到A后，再将其加权到h（as）上，最后AE和AS都要经过一个全连接层softmax解码器作为输出。  </p>
+<h3 id="3-2-Document-Level-Tasks"><a href="#3-2-Document-Level-Tasks" class="headerlink" title="3.2 Document-Level Tasks"></a>3.2 Document-Level Tasks</h3><p>Document-Level任务包括DS和DD，其中DS表示文档情感分类，DD表示预测输入文档的domain（领域）标签。两个任务都是通过CNN提取信息，再经过自注意力机制和全连接层softmax解码器，最终得到输出结果。其中自注意力机制表示如下：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/attention.png" class title="This is an example image">  
+<h3 id="3-3-Message-Passing-Mechanism"><a href="#3-3-Message-Passing-Mechanism" class="headerlink" title="3.3 Message Passing Mechanism"></a>3.3 Message Passing Mechanism</h3><p>消息传递机制将四个任务得到的输出结果送回到输入中去，从而更新输入，改善模型效果，新的输入的计算公式未：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/gongshi2.png" class title="This is an example image">  
+<p>其中并未直接引用DD任务的输出结果，因为它与情感分类任务并没有直接的关系。其中f函数是全连接层加sofemax函数，a（ds）和a（dd）是DS和DD的自注意力机制输出，因为A token that is more sentiment-relevant or domain-relevant is more likely to be an opinion word or aspect word.  </p>
+<h3 id="3-4-Learning"><a href="#3-4-Learning" class="headerlink" title="3.4 Learning"></a>3.4 Learning</h3><p>作者采取的针对aspect-level损失函数为：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/gongshi3.png" class title="This is an example image">  
+<p>作者采取的针对document-level损失函数为：  </p>
+  
+<p>其中l为针对每个token的cross-entropy-loss。而在最后计算分类损失时，我们只计算BA（beginning aspect）和IA（inside aspect）上的AS分类损失，因为其他部分并未进行标注，且不是我们关心的部分。即令：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/gongshi5.png" class title="This is an example image">  
+<p>对于模型训练，作者首先在前几轮只在DS和DD任务上预训练模型，即只计算Ld损失，之后再计算Ld和La的共同损失，在这步的时候DS和DD的参数是固定的，因为我们只想训练AS和AE。整个算法的流程图如下：  </p>
+<img src="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/suanfa.png" class title="This is an example image">  
+<h2 id="四，总结"><a href="#四，总结" class="headerlink" title="四，总结"></a>四，总结</h2><p>IMN共同学习aspect和opinion的提取以及情感分类，同时提出了一种新的信息传递机制，使得不同模型间的信息可以相互流通，增强了模型效果。其在进行多任务时信息传递机制以及训练时的一些技巧都值得学习。  </p>
+
       
 
       
@@ -204,6 +230,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
         		</li>
       		
 		</ul>
@@ -283,15 +313,6 @@
 
   
 <nav id="article-nav">
-  
-    <a href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89-An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          NLP论文学习笔记（八）--An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis
-        
-      </div>
-    </a>
   
   
     <a href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/" id="article-nav-older" class="article-nav-link-wrap">
