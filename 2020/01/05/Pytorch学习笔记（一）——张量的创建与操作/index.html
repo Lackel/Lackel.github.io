@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>Pytorch学习笔记（一）——张量的创建与操作 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，张量（tensor）的创建张量是pytorch中的最基本的数据结构，其本质上是多维数组。本节介绍张量的创建方法，大体上可以分为三类： 依据数组创建，依据值创建以及依据概率分布创建。   1.1 依据数组创建">
+  <meta name="description" content="一，张量（tensor）的创建张量是pytorch中的最基本的数据结构，其本质上是多维数组。">
 <meta name="keywords" content="人工智能,Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch学习笔记（一）——张量的创建与操作">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;05&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，张量（tensor）的创建张量是pytorch中的最基本的数据结构，其本质上是多维数组。本节介绍张量的创建方法，大体上可以分为三类： 依据数组创建，依据值创建以及依据概率分布创建。   1.1 依据数组创建">
+<meta property="og:description" content="一，张量（tensor）的创建张量是pytorch中的最基本的数据结构，其本质上是多维数组。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;05&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-01-05T11:31:04.760Z">
+<meta property="og:updated_time" content="2020-01-07T04:13:53.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;05&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,8 +157,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，张量（tensor）的创建"><a href="#一，张量（tensor）的创建" class="headerlink" title="一，张量（tensor）的创建"></a>一，张量（tensor）的创建</h2><p>张量是pytorch中的最基本的数据结构，其本质上是多维数组。本节介绍张量的创建方法，大体上可以分为三类： 依据数组创建，依据值创建以及依据概率分布创建。  </p>
-<h3 id="1-1-依据数组创建"><a href="#1-1-依据数组创建" class="headerlink" title="1.1 依据数组创建"></a>1.1 依据数组创建</h3>
+        <h2 id="一，张量（tensor）的创建"><a href="#一，张量（tensor）的创建" class="headerlink" title="一，张量（tensor）的创建"></a>一，张量（tensor）的创建</h2><p>张量是pytorch中的最基本的数据结构，其本质上是多维数组。<a id="more"></a><br>pytorch中的张量拥有以下属性：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/var.png" class title="This is an example image">  
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/tensor.png" class title="This is an example image">  
+<p>其中数据类型有三大类九种，分别是整形，浮点型以及布尔型。<br>本节介绍张量的创建方法，大体上可以分为三类： 直接创建，依据数值创建以及依据概率分布创建。  </p>
+<h3 id="1-1-直接创建"><a href="#1-1-直接创建" class="headerlink" title="1.1 直接创建"></a>1.1 直接创建</h3><img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/direct.png" class title="This is an example image">  
+<p>除了上述方法，我们还可以使用torch.from_numpy(ndarray)进行创建，要注意的是，这样使得ndarray和tensor一个改变另一个也随之改变，但其内存地址一般不同。  </p>
+<h3 id="1-2-依据数值创建"><a href="#1-2-依据数值创建" class="headerlink" title="1.2 依据数值创建"></a>1.2 依据数值创建</h3><img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/zeros.png" class title="This is an example image">  
+<p>其中out输出的张量和语句赋值的张量共享内存地址。另外我们还可以根据指定形状创建全0张量。  </p>
+  
+<p>把zeros改成ones可以创建全1张量。如果我们想要创建全n张量，可以使用full函数：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/full.png" class title="This is an example image">  
+<p>我们还可以创建等差张量，其区间是左闭右开：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/dengcha.png" class title="This is an example image">
+<p>以及均分数列，其中steps不是步长，而是数列的长度，区间是全闭的：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/junfen.png" class title="This is an example image">  
+<p>我们还可以通过torch.eye(n)创建单位对角矩阵，其默认是方阵。  </p>
+<h3 id="1-3-依据概率分布创建"><a href="#1-3-依据概率分布创建" class="headerlink" title="1.3 依据概率分布创建"></a>1.3 依据概率分布创建</h3><img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/norm.png" class title="This is an example image">  
+<p>而根据均值和标准差是张量还是标量，共有四种不同的模式，其中均值和标准差都是标量的情况必须指定维度参数size。<br>我们还可以创建标准正态分布采样得来的张量：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/randn.png" class title="This is an example image">  
+<p>除了正态分布，还可以进行均匀分布采样：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/junyun.png" class title="This is an example image">  
+<p>最后还有两个依据概率的方法：随机排列以及伯努利分布，其中随机排列一般用于生成随机索引。  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/suiji.png" class title="This is an example image">  
+
+
+<h2 id="二，张量的基本操作"><a href="#二，张量的基本操作" class="headerlink" title="二，张量的基本操作"></a>二，张量的基本操作</h2><h3 id="2-1-张量的拼接与切分"><a href="#2-1-张量的拼接与切分" class="headerlink" title="2.1 张量的拼接与切分"></a>2.1 张量的拼接与切分</h3><img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/pinjie.png" class title="This is an example image">  
+<p>其中输入的tensor形式为多个张量的列表形式，二者区别在于cat不会扩张张量的维度，而stack则会创建新的维度。  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/qiefen.png" class title="This is an example image">  
+<p>若不能整除，则最后一个张量的份数最小。还有一种功能更加强大的切分方法split：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/split.png" class title="This is an example image">  
+<p>注意的是若要使用列表形式，则列表元素的和必须等于张量指定维度的大小。  </p>
+<h3 id="2-2-张量的索引"><a href="#2-2-张量的索引" class="headerlink" title="2.2 张量的索引"></a>2.2 张量的索引</h3><img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/index.png" class title="This is an example image">  
+<p>其中index类型必须是torch.long。我们还可以根据mask进行张量的选择，注意其返回的是一维张量。  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/mask.png" class title="This is an example image">  
+<h3 id="2-3-张量变换"><a href="#2-3-张量变换" class="headerlink" title="2.3 张量变换"></a>2.3 张量变换</h3><p>我们还可以改变张量的形状，要注意的是改变前后两个张量共享内存，改变一个另一个会随之改变：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/shape.png" class title="This is an example image">  
+<p>维度计算中-1表示该维度根据其他维度大小计算得到。我们还可以交换张量的两个维度：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/transpose.png" class title="This is an example image">  
+<p>我们还可以压缩或扩张张量的维度：</p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/yasuo.png" class title="This is an example image">  
+<h3 id="2-4-张量的数学操作"><a href="#2-4-张量的数学操作" class="headerlink" title="2.4 张量的数学操作"></a>2.4 张量的数学操作</h3><img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/math.png" class title="This is an example image">  
+<p>其中add操作不仅仅可以加，还可以附带更多功能：  </p>
+  
+
+
+<h2 id="三，线性回归"><a href="#三，线性回归" class="headerlink" title="三，线性回归"></a>三，线性回归</h2><p>线性模型是指输入与输出之间的映射是线性的，而线性回归就是根据给定的输入，通过线性计算求解输出，其求解步骤为：  </p>
+<img src="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/step.png" class title="This is an example image">  
+
       
 
       
