@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs | Hexo</title>
+  <title>斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，学习笔记（四）——Backpropagation and Computation Graphs1，Matrix gradients for our simple neural net and some tips由于本节内容同上一笔记有较大重合，因此笔者只选取了一小部分额外内容作为补充。更为详细的反向传播求导过程以及矩阵微分运算可以查看课程提供的补充材料，在此不再赘述。">
-<meta name="keywords" content="人工智能,NLP,CS224N">
+  <meta name="description" content="一，学习笔记（十四）——Transformers and Self-Attention For Generative Models本节内容主要介绍了transformer的自注意力机制以及其在文本，音乐生成方面的应用，并无新的知识点，后期会专门出针对于transformer的论文学习笔记，因此此处不再赘述。">
+<meta name="keywords" content="人工智能,NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs&#x2F;index.html">
+<meta property="og:title" content="斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;07&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，学习笔记（四）——Backpropagation and Computation Graphs1，Matrix gradients for our simple neural net and some tips由于本节内容同上一笔记有较大重合，因此笔者只选取了一小部分额外内容作为补充。更为详细的反向传播求导过程以及矩阵微分运算可以查看课程提供的补充材料，在此不再赘述。">
+<meta property="og:description" content="一，学习笔记（十四）——Transformers and Self-Attention For Generative Models本节内容主要介绍了transformer的自注意力机制以及其在文本，音乐生成方面的应用，并无新的知识点，后期会专门出针对于transformer的论文学习笔记，因此此处不再赘述。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2019-12-29T11:29:42.328Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;07&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2020-01-07T12:28:03.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2019&#x2F;11&#x2F;01&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;07&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -137,58 +137,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-斯坦福CS224N学习笔记（四）——Backpropagation-and-Computation-Graphs" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-斯坦福CS224N学习笔记（十四）——Transformers-and-Self-Attention-For-Generative-Models" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs
+      斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models
     </h1>
   
 
         
-        <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:16:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+        <a href="/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/" class="archive-article-date">
+  	<time datetime="2020-01-07T12:25:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，学习笔记（四）——Backpropagation-and-Computation-Graphs"><a href="#一，学习笔记（四）——Backpropagation-and-Computation-Graphs" class="headerlink" title="一，学习笔记（四）——Backpropagation and Computation Graphs"></a>一，学习笔记（四）——Backpropagation and Computation Graphs</h2><h3 id="1，Matrix-gradients-for-our-simple-neural-net-and-some-tips"><a href="#1，Matrix-gradients-for-our-simple-neural-net-and-some-tips" class="headerlink" title="1，Matrix gradients for our simple neural net and some tips"></a>1，Matrix gradients for our simple neural net and some tips</h3><p>由于本节内容同上一笔记有较大重合，因此笔者只选取了一小部分额外内容作为补充。更为详细的反向传播求导过程以及矩阵微分运算可以查看课程提供的补充材料，在此不再赘述。<a id="more"></a><br>至此，我们已经完整地学完了词向量的构建，在平时的应用中，我们大多时候选取别人在大型语料上训练好的词向量进行我们的具体任务，但是我们能否运用我们的数据对词向量进行调整呢？请看下面这两幅图，第一幅图是原始训练好的词向量，第二幅图是经过我们调整后的词向量。其中TV和telly为训练集中的词，television是测试集中的词。  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/tune1.png" class title="This is an example image">  
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/tune2.png" class title="This is an example image">  
-<p>从以上两幅图可以看出，由于我们的修改，使得原来可以正确分类的词变得错误了，这是十分糟糕的。出现这种情况是因为预训练的词向量是在很大的语料上训练得到的，其泛化性能要优于我们的数据集上得到的词向量。因此我们可以得出结论：如果你的数据集很大的话，可以用自己的数据集对词向量进行调整，否则最好使用别人训练好的词向量进行后续工作。<br>至于反向传播部分，这里只给出几张简单的示意图，不再深入讲解。  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/bp1.png" class title="This is an example image">  
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/bp2.png" class title="This is an example image">  
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/bp3.jpg" class title="This is an example image">  
-<p>最后一点关于bp算法的细节是，我们可以通过以下公式对我们所求得的梯度进行检验，但由于要进行大量运算，因此并不常用。  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/gradient.png" class title="This is an example image">  
-
-
-<h3 id="2，Stuff-you-should-know"><a href="#2，Stuff-you-should-know" class="headerlink" title="2，Stuff you should know"></a>2，Stuff you should know</h3><p>本节主要介绍了深度学习中一些常用的技巧，可以帮助我们更好的训练模型，达到更快更好的训练效果。<br>1，Regularization<br>正则化的主要目的在于减少模型的过拟合，增强其泛化能力，过拟合主要表现为在训练集上表现良好，但在测试集上表现较差，这主要是因为模型过度学习了训练数据，如下图所示：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/regular.jpg" class title="This is an example image">  
-<p>常用的方法是进行L1，L2或者L1，L2加权混合正则化，其中L1正则化更容易得到稀疏的参数解，L2正则化的形式如下：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/l2.png" class title="This is an example image">  
-
-<p>2，Vectorization<br>向量化的主要目的是加快运算，运用python进行矩阵运算的速度是要远远快于普通运算的，二者对比如下：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/vec.png" class title="This is an example image">  
-
-
-<p>3,Non-linearities<br>本小节主要介绍了几种常用的非线性函数：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/func1.png" class title="This is an example image">  
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/func2.png" class title="This is an example image">  
-
-
-<p>4，Parameter Initialization<br>进行良好的权重初始化可以帮助我们更好地进行训练，避免训练过程中参数的方差逐渐变为0或者爆炸。一般将weight（W）初始为较小的随机值，将bias（b）初始为0.较为常用的Xavier初始化将W的方差初始化为：  </p>
-<img src="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/xavier.jpg" class title="This is an example image">  
-
-
-<p>5，Optimizers<br>一般情况下可以用SGD进行优化，如果要更好的性能，可以采取动态调整学习参数的优化算法，如Adam，RMSprop等。  </p>
-<p>6，Learning Rates<br>学习率的设置是一个很重要的环节，如果设置的太大，模型可能会反复震荡无法收敛，如果太小，又会导致训练过程时间较长。一般来说，随着训练轮次的增大，学习率应逐渐减小，避免错过收敛点，可以采用动态学习率调整策略，使学习率随着训练轮次逐渐减小，这一般在5中的优化部分已经帮我们实现。  </p>
-<h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
+        <h2 id="一，学习笔记（十四）——Transformers-and-Self-Attention-For-Generative-Models"><a href="#一，学习笔记（十四）——Transformers-and-Self-Attention-For-Generative-Models" class="headerlink" title="一，学习笔记（十四）——Transformers and Self-Attention For Generative Models"></a>一，学习笔记（十四）——Transformers and Self-Attention For Generative Models</h2><p>本节内容主要介绍了transformer的自注意力机制以及其在文本，音乐生成方面的应用，并无新的知识点，后期会专门出针对于transformer的论文学习笔记，因此此处不再赘述。<a id="more"></a></p>
 
       
 
@@ -238,10 +207,6 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
         		</li>
       		
 		</ul>
@@ -308,7 +273,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -322,18 +287,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Linguistic-Structure-Dependency-Parsing/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          斯坦福CS224N学习笔记（五）-- Linguistic Structure Dependency Parsing
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus</div>
+    <a href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">斯坦福CS224N学习笔记（十三）——Contextual Word Representations and Pretraining</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -361,7 +317,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="斯坦福CS224N学习笔记（四）——Backpropagation-and-Computation-Graphs" data-title="斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs" data-url="http://github.com/Lackel/Lackel.github.io.git/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/"></div>
+	<div class="ds-thread" data-thread-key="斯坦福CS224N学习笔记（十四）——Transformers-and-Self-Attention-For-Generative-Models" data-title="斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -384,8 +340,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://github.com/Lackel/Lackel.github.io.git/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/", 
-    sourceId: "斯坦福CS224N学习笔记（四）——Backpropagation-and-Computation-Graphs",
+    url: "http://github.com/Lackel/Lackel.github.io.git/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/", 
+    sourceId: "斯坦福CS224N学习笔记（十四）——Transformers-and-Self-Attention-For-Generative-Models",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -394,7 +350,7 @@
   
 
   
-  <div id="SOHUCS" sid="斯坦福CS224N学习笔记（四）——Backpropagation-and-Computation-Graphs" ></div> 
+  <div id="SOHUCS" sid="斯坦福CS224N学习笔记（十四）——Transformers-and-Self-Attention-For-Generative-Models" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
