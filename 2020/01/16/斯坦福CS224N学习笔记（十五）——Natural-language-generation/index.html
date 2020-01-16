@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>斯坦福CS224N学习笔记（十三）——Contextual Word Representations and Pretraining | Hexo</title>
+  <title>斯坦福CS224N学习笔记（十五）——Natural language generation | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，学习笔记（十三）——Contextual Word Representations and Pretraining1，Representations for a word到目前为止，我们学习过的词向量表示方法有Word2vec, GloVe和fastText，我们可以使用初始的随机向量对每个词进行表示并在我们的任务上训练它们，但事实证明，使用在大型语料上预训练的词向量可以提高我们的模型性能。">
-<meta name="keywords" content="人工智能,NLP">
+  <meta name="description" content="一，学习笔记（十五）——Natural language generation1，Recap: LMs and decoding algorithmsLanguage modeling是指给定之前的单词，预测下一个单词出现概率的模型。">
+<meta name="keywords" content="人工智能,NLP,CS224N">
 <meta property="og:type" content="article">
-<meta property="og:title" content="斯坦福CS224N学习笔记（十三）——Contextual Word Representations and Pretraining">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;05&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining&#x2F;index.html">
+<meta property="og:title" content="斯坦福CS224N学习笔记（十五）——Natural language generation">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;16&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，学习笔记（十三）——Contextual Word Representations and Pretraining1，Representations for a word到目前为止，我们学习过的词向量表示方法有Word2vec, GloVe和fastText，我们可以使用初始的随机向量对每个词进行表示并在我们的任务上训练它们，但事实证明，使用在大型语料上预训练的词向量可以提高我们的模型性能。">
+<meta property="og:description" content="一，学习笔记（十五）——Natural language generation1，Recap: LMs and decoding algorithmsLanguage modeling是指给定之前的单词，预测下一个单词出现概率的模型。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;05&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-01-07T02:56:08.157Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;16&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2020-01-16T13:50:38.231Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;05&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;16&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -137,65 +137,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-斯坦福CS224N学习笔记（十三）——Contextual-Word-Representations-and-Pretraining" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-斯坦福CS224N学习笔记（十五）——Natural-language-generation" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      斯坦福CS224N学习笔记（十三）——Contextual Word Representations and Pretraining
+      斯坦福CS224N学习笔记（十五）——Natural language generation
     </h1>
   
 
         
-        <a href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/" class="archive-article-date">
-  	<time datetime="2020-01-05T13:30:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
+        <a href="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/" class="archive-article-date">
+  	<time datetime="2020-01-16T12:33:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，学习笔记（十三）——Contextual-Word-Representations-and-Pretraining"><a href="#一，学习笔记（十三）——Contextual-Word-Representations-and-Pretraining" class="headerlink" title="一，学习笔记（十三）——Contextual Word Representations and Pretraining"></a>一，学习笔记（十三）——Contextual Word Representations and Pretraining</h2><h3 id="1，Representations-for-a-word"><a href="#1，Representations-for-a-word" class="headerlink" title="1，Representations for a word"></a>1，Representations for a word</h3><p>到目前为止，我们学习过的词向量表示方法有Word2vec, GloVe和fastText，我们可以使用初始的随机向量对每个词进行表示并在我们的任务上训练它们，但事实证明，使用在大型语料上预训练的词向量可以提高我们的模型性能。<a id="more"></a>现有的词向量表示方法有两个很大的问题：1，我们对于单词的不同word type都采用同一种表示而忽略了单词所处的上下文信息。2，我们对于一个单词只有一个词向量，但一个单词可能有很多语意或内涵。如何解决上述问题呢？让我们把目光放回到前几节课的Neural language model中，其任务是预测下一个单词，而且其预测是基于特定的上下文信息的，可见其输出包含了文本的上下文信息，那么我们为什么不用NLM的输出作为我们词向量的一部分来弥补我们词向量中缺失的上下文信息呢？这就是ELMo的核心思想。  </p>
-<h3 id="2，ELMo"><a href="#2，ELMo" class="headerlink" title="2，ELMo"></a>2，ELMo</h3><p>首先提出的是TagLM，它被称作是“Pre-ELMo”，其核心思想就是用NLM的输出作为我们词向量的输入的一部分来弥补缺失的上下文信息，其建模思路以及模型结构图如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/mind.png" class title="This is an example image">  
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/model1.png" class title="This is an example image">  
-<p>首先我们用我们的文本预训练LM，然后将其参数冻结，再接着在我们的具体任务上训练，并引入LM的输出结果。紧接着ELMo就出现了，其全称是Embeddings from Language Models，它使用了character-level的向量表示，同时通过LM引入了上下文信息，另外一个值得注意的点是它不仅使用了LM的最终输出，还使用了LM的中间层的输出，然后将其加权平均作为最终的上下文词向量，公式为：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/equal1.png" class title="This is an example image">  
-<p>其中的γ需要根据不同的任务来决定，s是softmax的输出，代表不同层输出的权值。值得一提的是，虽然论文是以命名实体识别作为研究任务，但ELMo在其他NLP任务上也可以提高其性能。而对于上述LM不同层的输出，其主要提取的信息也是不同的，如底层会提取比较底层的语义信息，如Part-of-speech tagging, syntactic dependencies, NER等，而高层则会提取比较高级的语义信息，如Sentiment, Semantic role labeling, question answering, SNLI等。  </p>
-<h3 id="3，transfer-learning"><a href="#3，transfer-learning" class="headerlink" title="3，transfer learning"></a>3，transfer learning</h3><p>在ULMfit（Universal Language Model Fine-tuning for Text Classification）中提出了既然LM可以提供上下文信息，那么我们为什么不干脆使用LM的网络作为我们的网络，而只是对其顶层输出做一些修改呢？其示意图如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/transfer.png" class title="This is an example image">  
-<p>可见上述网络结构只是对顶层部分做了修改，其步骤是先在大型语料上运行LM作为预训练，再在我们要处理的文本上运行LM作为LM微调，最后在我们的具体任务上做task微调。这个想法也被很多公司所借鉴，如果我们在更大的语料上进行预训练或使用更大的模型架构，是不是会得到更好的结果呢？答案是肯定的，因此GPT，BERT等便问世了。  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/scale.png" class title="This is an example image">  
-<p>后三种模型都是基于transformer架构的，因此我们下面先介绍transformer。  </p>
-<h3 id="4，transformer"><a href="#4，transformer" class="headerlink" title="4，transformer"></a>4，transformer</h3><p>在我们使用RNN时遇到的最大问题就是我们希望利用GPU进行并行加速运算，但RNN却是序列型的，而除了使用RNN外，我们还大量使用了注意力机制来获取长依赖信息，那么为什么我们不尝试单纯地使用注意力机制而放弃RNN呢？这就是transformer研究的动机，而transformer的论文名字Attention is all you need也印证了这一点，其模型结构为encoder-decoder型，用于机器翻译任务，模型结构如下图所示：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/transformer.png" class title="This is an example image">  
-<p>在transformer中使用了Dot-Product Attention，其输入时q（query），k（key）和v（value），计算公式为：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/dot.jpg" class title="This is an example image">  
-<p>为了防止梯度消失，要对其稍加改进，就变成了Scaled Dot-Product Attention，其公式如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/sdot.jpg" class title="This is an example image">  
-<p>而在transformer中使用的结构如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/qkv.jpg" class title="This is an example image">  
-<p>以上注意力机制的输入时q，k，v，而q，k，v就是我们的全部的词向量，因此是词向量自动地选择去关注哪个词，即the word vectors themselves select each other。因此encoder中的该注意力机制也叫Self-attention机制。而另外一个重要的点就是上述注意力机制一个词只能关注一个词，如果我们希望能把视野放得更大，我们就必须采用多个注意力，也就是Multi-head attention，其示意图及公式如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/mulatt.jpg" class title="This is an example image">  
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/mulattequal.jpg" class title="This is an example image">  
-<p>因此transformer的整体结构如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/all.jpg" class title="This is an example image">  
-<p>其使用了残差连接，采用的归一化方法是layer norm，即第一层的输出为LayerNorm(x + Sublayer(x))，而第二层是一个两层的前馈神经网络，也使用了残差连接和layer norm。同时为了区别不同位置的词向量，transformer中还引入了positional encoding，其公式为：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/pe.jpg" class title="This is an example image">  
-<p>因此整个的transformer encoder的结构如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/eall.jpg" class title="This is an example image">  
-<p>而在decoder中，基本与encoder类似，不同的是decoder采用了Masked decoder self-attention和Encoder-Decoder Attention。前者是由于接下来的词对于目前是未知的，因此要进行mask，后者指q来自decoder而k，v来自encoder。两者的示意图分别如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/mask.jpg" class title="This is an example image">  
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/ed.jpg" class title="This is an example image">  
-<p>其他一些tips和tricks如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/tt.png" class title="This is an example image">  
-<h3 id="5，BERT"><a href="#5，BERT" class="headerlink" title="5，BERT"></a>5，BERT</h3><p>BERT (Bidirectional Encoder Representations from Transformers)，其灵感是LM只采用了来自左边或者右边的上下文信息，而我们需要的是双向的信息，但是如果是双向的话，意味着Words can “see themselves” in a bidirectional encoder.因此BERT采取的措施是采用mask的方法遮挡住一些词然后对遮挡词进行预测，这样就可以充分的获取遮挡词两侧的上下文信息，bert与ELMo和GPT的对比如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/bert.png" class title="This is an example image">  
-<p>bert的第二种训练方式是采用了Next sentence prediction，即给定一个句子对，预测其是否构成上下句关系。因此为了区分两个句子，还要加入分隔编码，示意如下：  </p>
-<img src="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/sep.png" class title="This is an example image">  
-<p>bert可以分为BERT-Base: 12-layer, 768-hidden, 12-head和BERT-Large: 24-layer, 1024-hidden, 16-head两类，均已在大型语料上经过了预训练，我们要做的就是将训练好的模型拿过来，改变顶层结构，然后在我们具体的任务上进行微调。  </p>
+        <h2 id="一，学习笔记（十五）——Natural-language-generation"><a href="#一，学习笔记（十五）——Natural-language-generation" class="headerlink" title="一，学习笔记（十五）——Natural language generation"></a>一，学习笔记（十五）——Natural language generation</h2><h3 id="1，Recap-LMs-and-decoding-algorithms"><a href="#1，Recap-LMs-and-decoding-algorithms" class="headerlink" title="1，Recap: LMs and decoding algorithms"></a>1，Recap: LMs and decoding algorithms</h3><p>Language modeling是指给定之前的单词，预测下一个单词出现概率的模型。<a id="more"></a>当我们训练好LM后，就可以用它来生成一些文本，具体做法是用一些解码的方法来生成，比如Greedy decoding和Beam search。而Greedy decoding由于其无法回溯，因此输出一旦出错，将无法挽回，因此效果很差，而Beam search中k的选择会影响到模型的效果，如果k选择太小，则会出现Greedy decoding一样的问题，而k若选择太大，则会增加计算量，在机器翻译中会降低BLEU值，在对话模型中会生成更通用的对话。下面介绍一种新的解码算法，其效果一般更好：Sampling-based decoding，这是一种基于采样的解码算法，可以分为Pure sampling，即每一步均完全随机采样以及Top-n sampling，在每一步中概率最高的n个样本中随机采样。这两种方法都没有引入新的假设，因此计算效率都比Beam search高，而Top-n sampling中n值的选择过小会导致通用安全的输出，而n值选择过大会导致更加多样危险的输出。还有一种调节解码的方法是Softmax temperature，其思想是在进行softmax时进行系数调控，从而起到调控输出的效果，要注意的是这并不是一种解码算法。其形式如下：   </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/soft.png" class title="This is an example image">  
+<p>最后对已经学过的解码算法以及辅助方法进行总结：  </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/summary.png" class title="This is an example image">  
+
+<h3 id="2，NLG-tasks-and-neural-approaches-to-them"><a href="#2，NLG-tasks-and-neural-approaches-to-them" class="headerlink" title="2，NLG tasks and neural approaches to them"></a>2，NLG tasks and neural approaches to them</h3><h4 id="2-1-Summarization"><a href="#2-1-Summarization" class="headerlink" title="2.1 Summarization"></a>2.1 Summarization</h4><p>Summarization是指给定输入文本x，输出更短且包含x中主要意思的总结文本y。其可以是单个文档的总结，也可以是多个文档的总结。而Sentence simplification是一个比较相近但却不同的任务，其任务是简化文本，但输出不一定更短，而Summarization的输出一定短于源文本。Summarization大致可以分为两类，一类是Extractive summarization，它从输入中提取句子作为概括输出，类似于荧光笔；而另一类Abstractive summarization则完全是生成新的总结作为输出，类似于钢笔，显然后者是更难的。在神经网络之前的方法大都是提取式总结，其步骤可以分为Content selection-Information ordering-Sentence realization。summarization的衡量指标是ROUGE (Recall-Oriented Understudy for Gisting Evaluation)，它类似于机器翻译中的BLEU，区别在于它没有长度惩罚项，而且是基于recall,而BLEU是基于precision。除此之外，BLEU是结合了所有n-gram结果的一个单一数字，而ROUGE则是对于不同的n分开衡量的，且包含了ROUGE-L：最长的匹配长度。我们一般采用Seq2seq+attention的结构来进行总结，而这种结构只擅长产生流畅的输出，而不擅长复制原文中的细节（比如稀有词），因此我们需要采用Copy mechanisms来使模型更容易复制原文中的细节。下面是一个包含Copy mechanisms的模型结构：  </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/copy.png" class title="This is an example image">  
+<p>而这种结构也存在着很多问题，比如：  </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/question.png" class title="This is an example image">  
+<p>为了解决这些问题，我们需要借用pre-neural的一些想法，从而形成了Bottom-up summarization。其分为两个步骤：1，Content selection stage 2，Bottom-up attention stage。这种层次式的做法可以使我们提取到更多的全局内容的信息。它先使用neural sequence-tagging的方法从原文中标记出重要信息，接着再从选出的信息中进行复制，这样可以提供更多的全局信息，但也会损失掉复制长句子的机会。除了神经网络的方法外，我们还可以采用强化学习的方法直接对ROUGE分数进行提高，但是实际的总结效果很一般，即时最终分数提高了。  </p>
+<h4 id="2-2-Dialogue"><a href="#2-2-Dialogue" class="headerlink" title="2.2 Dialogue"></a>2.2 Dialogue</h4><p>Dialogue可以分为Task-oriented dialogue以及Social dialogue。前者用于特殊用途，比如电脑客服等，而后者则是用于和人聊天。神经网络的对话方法一般是用seq2seq+attention方法，其最大的问题是经常生成一些无关的回答或通用的回答，一个解决办法是：  </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/solution.png" class title="This is an example image">  
+<p>另一个问题是重复问题，最简单的解决方法是遮盖去掉重复的内容，也可以训练一个以去除重复为目标的复杂模型。另外Dialogue还有Negotiation（谈判）dialogue，Conversational question answering，Storytelling等。  </p>
+<h3 id="3，-NLG-evaluation"><a href="#3，-NLG-evaluation" class="headerlink" title="3， NLG evaluation"></a>3， NLG evaluation</h3><p>我们已经学习了很多NLG任务的衡量方法，比如BLEU, ROUGE, METEOR, F1等，然而这些指标对于机器翻译，总结，对话来说都很差，而人工衡量工作量又很大。下面介绍一些可能的思路：  </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/possible.png" class title="This is an example image">  
+
+<h3 id="4，-Thoughts-on-NLG-research-current-trends-and-the-future"><a href="#4，-Thoughts-on-NLG-research-current-trends-and-the-future" class="headerlink" title="4， Thoughts on NLG research,current trends, and the future"></a>4， Thoughts on NLG research,current trends, and the future</h3><p>这里介绍助教老师对于NLG任务的几点看法：  </p>
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/thought1.png" class title="This is an example image">  
+<img src="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/thought2.png" class title="This is an example image">  
+
+
 <h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
 
       
@@ -246,6 +228,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
         		</li>
       		
 		</ul>
@@ -312,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -326,18 +312,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/05/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pytorch学习笔记（一）——张量的创建与操作</div>
+    <a href="/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -365,7 +342,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="斯坦福CS224N学习笔记（十三）——Contextual-Word-Representations-and-Pretraining" data-title="斯坦福CS224N学习笔记（十三）——Contextual Word Representations and Pretraining" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/"></div>
+	<div class="ds-thread" data-thread-key="斯坦福CS224N学习笔记（十五）——Natural-language-generation" data-title="斯坦福CS224N学习笔记（十五）——Natural language generation" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -388,8 +365,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://github.com/Lackel/Lackel.github.io.git/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/", 
-    sourceId: "斯坦福CS224N学习笔记（十三）——Contextual-Word-Representations-and-Pretraining",
+    url: "http://github.com/Lackel/Lackel.github.io.git/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/", 
+    sourceId: "斯坦福CS224N学习笔记（十五）——Natural-language-generation",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -398,7 +375,7 @@
   
 
   
-  <div id="SOHUCS" sid="斯坦福CS224N学习笔记（十三）——Contextual-Word-Representations-and-Pretraining" ></div> 
+  <div id="SOHUCS" sid="斯坦福CS224N学习笔记（十五）——Natural-language-generation" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
