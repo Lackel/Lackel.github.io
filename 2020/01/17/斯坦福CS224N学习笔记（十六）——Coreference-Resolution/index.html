@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Tag: NLP | Hexo</title>
+  <title>斯坦福CS224N学习笔记（十六）——Coreference Resolution | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;tags&#x2F;NLP&#x2F;index.html">
+  <meta name="description" content="一，学习笔记（十六）——Coreference Resolution1, What is Coreference Resolution?Coreference Resolution(共指解析)是指找出文本中指代同一实体的所有词。即Identify all mentions that refer to the same real world entity。">
+<meta name="keywords" content="人工智能,NLP,CS224N">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯坦福CS224N学习笔记（十六）——Coreference Resolution">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;17&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一，学习笔记（十六）——Coreference Resolution1, What is Coreference Resolution?Coreference Resolution(共指解析)是指找出文本中指代同一实体的所有词。即Identify all mentions that refer to the same real world entity。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;17&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2020-01-17T14:30:17.354Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;17&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -131,559 +137,102 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-斯坦福CS224N学习笔记（十六）——Coreference-Resolution" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      斯坦福CS224N学习笔记（十六）——Coreference Resolution
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/" class="archive-article-date">
+
+        
+        <a href="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/" class="archive-article-date">
   	<time datetime="2020-01-17T13:34:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/">斯坦福CS224N学习笔记（十六）——Coreference Resolution</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/" class="archive-article-date">
-  	<time datetime="2020-01-16T12:33:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/16/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Natural-language-generation/">斯坦福CS224N学习笔记（十五）——Natural language generation</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/" class="archive-article-date">
-  	<time datetime="2020-01-07T12:25:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/07/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Transformers-and-Self-Attention-For-Generative-Models/">斯坦福CS224N学习笔记（十四）——Transformers and Self-Attention For Generative Models</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/" class="archive-article-date">
-  	<time datetime="2020-01-05T13:30:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Contextual-Word-Representations-and-Pretraining/">斯坦福CS224N学习笔记（十三）——Contextual Word Representations and Pretraining</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Information-from-parts-of-words-Subword-Models/" class="archive-article-date">
-  	<time datetime="2020-01-05T07:43:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Information-from-parts-of-words-Subword-Models/">斯坦福CS224N学习笔记（十二）——Information from parts of words:Subword Models</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94ConvNets-for-NLP/" class="archive-article-date">
-  	<time datetime="2020-01-03T12:51:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94ConvNets-for-NLP/">斯坦福CS224N学习笔记（十一）——ConvNets for NLP</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Textual-Question-Answering/" class="archive-article-date">
-  	<time datetime="2020-01-03T08:50:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Textual-Question-Answering/">斯坦福CS224N学习笔记（十）——(Textual) Question Answering</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <h2 id="一，学习笔记（十六）——Coreference-Resolution"><a href="#一，学习笔记（十六）——Coreference-Resolution" class="headerlink" title="一，学习笔记（十六）——Coreference Resolution"></a>一，学习笔记（十六）——Coreference Resolution</h2><h3 id="1-What-is-Coreference-Resolution"><a href="#1-What-is-Coreference-Resolution" class="headerlink" title="1, What is Coreference Resolution?"></a>1, What is Coreference Resolution?</h3><p>Coreference Resolution(共指解析)是指找出文本中指代同一实体的所有词。即Identify all mentions that refer to the same real world entity。<a id="more"></a>比如下面这个例子：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/obama.png" class title="This is an example image">  
+<p>共指解析有很多用处，比如在QA问题中，“He was born in 1961”，我们必须知道He指代谁，才能回答对问题。以及在一些机器翻译中，有的语言代词并不区分性别，我们只有知道这个代词指代谁，才能翻译对He或She。<br>要完成共指解析可以分为两个步骤：1，Detect the mentions (easy) 2，Cluster the mentions (hard)。即先找出所有要解析的词，再分别将他们进行聚类。  </p>
+<h4 id="1-1-Detect-the-mentions"><a href="#1-1-Detect-the-mentions" class="headerlink" title="1.1 Detect the mentions"></a>1.1 Detect the mentions</h4><p>要区分的mention主要分为以下三种：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/mention.png" class title="This is an example image">  
+<p>我们可以用一些NLP模型来对这三种mention进行区分，具体方法如下：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/method.png" class title="This is an example image">  
+<p>然而还有一些特例使得这个任务并不那么容易，比如It is sunny，Every student等，这些代词都会影响机器进行鉴别，那么我们如何解决这个问题呢？我们可以训练一个分类器来过滤掉上述那些词，或者更常见的我们可以在完成共指解析之后将单个词的类别进行删除。</p>
+<h4 id="1-2-Anaphora（回指）-vs-Coreference"><a href="#1-2-Anaphora（回指）-vs-Coreference" class="headerlink" title="1.2 Anaphora（回指） vs Coreference"></a>1.2 Anaphora（回指） vs Coreference</h4><p>二者的区别是：Coreference is when two mentions refer to the same entity in the world，即共指指的是指代同一个实体的两个mentions。而anaphora is when a term (anaphor) refers to another term (antecedent)，二者不一定是同一实体。比如下面这句话：<br>We went to see a concert last night. The tickets were really expensive.<br>concert和tickets虽然并非同一实体，但是concert却可以指示出tickets的含义，因此二者构成Anaphora关系。  </p>
+<h3 id="2，Four-Kinds-of-Coreference-Models"><a href="#2，Four-Kinds-of-Coreference-Models" class="headerlink" title="2，Four Kinds of Coreference Models"></a>2，Four Kinds of Coreference Models</h3><h4 id="2-1-Rule-based-pronominal-anaphora-resolution"><a href="#2-1-Rule-based-pronominal-anaphora-resolution" class="headerlink" title="2.1 Rule-based (pronominal anaphora resolution)"></a>2.1 Rule-based (pronominal anaphora resolution)</h4><p>第一种方法是很早之前有人手工设计的判断算法，叫做Hobbs’ naive algorithm。由于其十分复杂，而且对于某些问题效果一般，因此已经不再使用。比如下面这个例子：<br>She poured water from the pitcher into the cup until it was full<br>She poured water from the pitcher into the cup until it was empty<br>虽然两个句子几乎完全相同，但是由于最后形容词的区别，it指代的东西却截然相反。这是上面这种算法的一个漏洞，它无法区别这两个句子。上述反例被叫做Winograd Schema。  </p>
+<h4 id="2-2-Mention-Pair"><a href="#2-2-Mention-Pair" class="headerlink" title="2.2 Mention Pair"></a>2.2 Mention Pair</h4><p>第二种方法的核心思想是训练一个二分类器来计算每一个mention pair指代同一实体的概率。最后的目标函数使得指代同一实体的Mention Pair概率最大，反之概率最小，损失函数的形式如下：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/loss.png" class title="This is an example image">  
+<p>在测试时，我们设定某个阈值（如0.5）来对文本进行解析。而这种做法的缺陷是针对于长文本，解析器可以很轻松地判断对距离相近的mention，而对于远距离的mention pair，则很难判断对。  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/question.png" class title="This is an example image">  
+<h4 id="2-3-Mention-Ranking"><a href="#2-3-Mention-Ranking" class="headerlink" title="2.3 Mention Ranking"></a>2.3 Mention Ranking</h4><p>与上述阈值判断不同的是， Mention Ranking采用的是打分制，通过softmax函数，We assign each mention its highest scoring candidate antecedentaccording to the model。该模型使用想要最大化的目标函数为：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/target.png" class title="This is an example image">  
+<p>与之对应的要最小化的损失函数为：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/loss2.png" class title="This is an example image">  
+<p>在测试过程中采取的方法与Mention Pair方法类似。接下来的问题就是我们如何计算上述公式中的概率呢？共有三种方法：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/method2.png" class title="This is an example image">  
+<p>现在最常用的是第三种端到端的方法，一种常用的模型为：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/model.png" class title="This is an example image">  
+<p>再经过特征提取后，通过注意力机制，我们可以得到最终表示：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/final.png" class title="This is an example image">  
+<p>而最终概率的计算方法如下：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/prob.png" class title="This is an example image">  
+<p>然而该方法的时间复杂度和空间复杂度都太过于庞大，因此只能是用于一些简单的任务。  </p>
+<h4 id="2-4-Clustering-Based"><a href="#2-4-Clustering-Based" class="headerlink" title="2.4  Clustering-Based"></a>2.4  Clustering-Based</h4><p>最后一种方法是基于聚类的模型，由于共指解析本身就是一个聚类任务，因此用这种方法是十分合适的。开始时我们先把每一个mention单独作为一个类，然后在每一步进行合并，直到不能再进行合并为止。我们可以通过以下模型来判断是否合并：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/pair.png" class title="This is an example image">  
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/model2.png" class title="This is an example image">  
+
+<h3 id="3，Coreference-Evaluation"><a href="#3，Coreference-Evaluation" class="headerlink" title="3，Coreference Evaluation"></a>3，Coreference Evaluation</h3><p>最后介绍以下共指解析的衡量方法，包括了MUC, CEAF, LEA, B-CUBED, BLANC等等，以B-cubed为例，对于每一个最终的类，其分别计算precision and recall，再将其进行平均得到最终结果，如下图所示：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/result.png" class title="This is an example image">  
+<p>最后是本次课的一些结论：  </p>
+<img src="/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/conclu.png" class title="This is an example image">  
+
+<h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/" class="archive-article-date">
-  	<time datetime="2019-12-29T11:22:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/">NLP论文学习笔记（八）--An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/" class="archive-article-date">
-  	<time datetime="2019-12-29T09:55:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/">NLP论文学习笔记（七）--Transformation Networks for Target-Oriented Sentiment Classification</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Practical-Tips-for-Final-Projects/" class="archive-article-date">
-  	<time datetime="2019-12-28T09:03:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Practical-Tips-for-Final-Projects/">斯坦福CS224N学习笔记（九）——Practical Tips for Final Projects</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -703,7 +252,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -716,20 +265,144 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/01/16/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E5%9B%BE%E4%B8%8E%E5%8A%A8%E6%80%81%E5%9B%BE%E6%9C%BA%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Pytorch学习笔记（二）——计算图与动态图机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="斯坦福CS224N学习笔记（十六）——Coreference-Resolution" data-title="斯坦福CS224N学习笔记（十六）——Coreference Resolution" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://github.com/Lackel/Lackel.github.io.git/2020/01/17/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Coreference-Resolution/", 
+    sourceId: "斯坦福CS224N学习笔记（十六）——Coreference-Resolution",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/NLP/page/2/">2</a><a class="page-number" href="/tags/NLP/page/3/">3</a><a class="extend next" rel="next" href="/tags/NLP/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="斯坦福CS224N学习笔记（十六）——Coreference-Resolution" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -753,9 +426,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
