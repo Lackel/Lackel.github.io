@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Hexo</title>
+  <title>斯坦福CS224N学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;page&#x2F;2&#x2F;index.html">
+  <meta name="description" content="一，学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence本节内容主要介绍了NLP以及AI中的误差以及偏见，观看视频简单了解即可，此处不再赘述。">
+<meta name="keywords" content="人工智能,NLP,CS224N">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯坦福CS224N学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;19&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一，学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence本节内容主要介绍了NLP以及AI中的误差以及偏见，观看视频简单了解即可，此处不再赘述。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;19&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2020-01-19T14:49:36.407Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;19&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -131,34 +137,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-斯坦福CS224N学习笔记（十二）——Information-from-parts-of-words-Subword-Models" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-斯坦福CS224N学习笔记（十九）——Bias-in-the-Vision-and-Language-of-Artificial-Intelligence" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Information-from-parts-of-words-Subword-Models/">斯坦福CS224N学习笔记（十二）——Information from parts of words:Subword Models</a>
+    <h1 class="article-title" itemprop="name">
+      斯坦福CS224N学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence
     </h1>
   
 
         
-        <a href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Information-from-parts-of-words-Subword-Models/" class="archive-article-date">
-  	<time datetime="2020-01-05T07:43:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
+        <a href="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence/" class="archive-article-date">
+  	<time datetime="2020-01-19T14:46:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，学习笔记（十二）——Information-from-parts-of-words-Subword-Models"><a href="#一，学习笔记（十二）——Information-from-parts-of-words-Subword-Models" class="headerlink" title="一，学习笔记（十二）——Information from parts of words:Subword Models"></a>一，学习笔记（十二）——Information from parts of words:Subword Models</h2><h3 id="1，Character-Level-Models"><a href="#1，Character-Level-Models" class="headerlink" title="1，Character-Level Models"></a>1，Character-Level Models</h3><p>之前我们使用的模型的输入都是基于word（单词）的，但是它存在很多的问题，如无法处理不在字典中的词汇，无法处理如gooooood一样的网络词汇等，为了解决上述问题，我们可以采用Character-Level模型，这类模型是基于字符级别的，也就是我们说的字母。</p>
-        
-          <a class="article-more-a" href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Information-from-parts-of-words-Subword-Models/#more">more >></a>
-        
+        <h2 id="一，学习笔记（十九）——Bias-in-the-Vision-and-Language-of-Artificial-Intelligence"><a href="#一，学习笔记（十九）——Bias-in-the-Vision-and-Language-of-Artificial-Intelligence" class="headerlink" title="一，学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence"></a>一，学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence</h2><p>本节内容主要介绍了NLP以及AI中的误差以及偏见，观看视频简单了解即可，此处不再赘述。<a id="more"></a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -197,16 +230,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/05/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Information-from-parts-of-words-Subword-Models/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">斯坦福CS224N学习笔记（十八）——Tree Recursive Neural Networks,Constituency Parsing, and Sentiment</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -226,867 +318,55 @@
 
 
 
-
   
-    <article id="post-斯坦福CS224N学习笔记（十一）——ConvNets-for-NLP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94ConvNets-for-NLP/">斯坦福CS224N学习笔记（十一）——ConvNets for NLP</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94ConvNets-for-NLP/" class="archive-article-date">
-  	<time datetime="2020-01-03T12:51:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（十一）——ConvNets-for-NLP"><a href="#一，学习笔记（十一）——ConvNets-for-NLP" class="headerlink" title="一，学习笔记（十一）——ConvNets for NLP"></a>一，学习笔记（十一）——ConvNets for NLP</h2><h3 id="1，convolution"><a href="#1，convolution" class="headerlink" title="1，convolution"></a>1，convolution</h3><p>本节主要介绍了在自然语言处理领域卷积神经网络的一些基本操作，如1D convolution，padding，多个channel，average pooling，max pooling，stride，k-max pooling，dilation convolution（空洞卷积）以及没什么用的local max pooling等。下面通过几幅图介绍这几种操作：</p>
-        
-          <a class="article-more-a" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94ConvNets-for-NLP/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94ConvNets-for-NLP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（十）——Textual-Question-Answering" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Textual-Question-Answering/">斯坦福CS224N学习笔记（十）——(Textual) Question Answering</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Textual-Question-Answering/" class="archive-article-date">
-  	<time datetime="2020-01-03T08:50:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（十）——-Textual-Question-Answering"><a href="#一，学习笔记（十）——-Textual-Question-Answering" class="headerlink" title="一，学习笔记（十）——(Textual) Question Answering"></a>一，学习笔记（十）——(Textual) Question Answering</h2><h3 id="1，Final-Project"><a href="#1，Final-Project" class="headerlink" title="1，Final Project"></a>1，Final Project</h3><p>作者给出了一幅图介绍论文中应该涉及到哪些方面，值得大家借鉴。</p>
-        
-          <a class="article-more-a" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Textual-Question-Answering/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/03/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Textual-Question-Answering/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（八）——An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/">NLP论文学习笔记（八）--An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/" class="archive-article-date">
-  	<time datetime="2019-12-29T11:22:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>之前的工作进行情感分类都是将情感侧面提取和分类两个子任务分开进行，可能会损失一些整体信息。同时之前的工作未充分利用所有的训练资源，如document-level labeled sentiment corpus。论文作者提出了interactive multi-task learning network (IMN)来学习一些相关任务，从而达到提升分类模型性能的目标。同时IMN还提出了一种多任务间信息流通的结构，使得共享信息可以迭代地送入到每个任务，以此来提升各个任务的性能。</p>
-        
-          <a class="article-more-a" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94An-Interactive-Multi-Task-Learning-Network-for-End-to-End-Aspect-Based-Sentiment-Analysis/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（七）——Transformation-Networks-for-Target-Oriented-Sentiment-Classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/">NLP论文学习笔记（七）--Transformation Networks for Target-Oriented Sentiment Classification</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/" class="archive-article-date">
-  	<time datetime="2019-12-29T09:55:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>本文作者提出了一种用CNN来提取情感侧面的方法，其主要创新点在于提出了一种组件，不仅可以生成target-specific representations，还可以将文本中原始的，从RNN中提取到的original contextual information保留下来，最后将这两种表示结合起来，起到了提高情感侧面分类的模型性能的作用。</p>
-        
-          <a class="article-more-a" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/29/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Transformation-Networks-for-Target-Oriented-Sentiment-Classification/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（九）——Practical-Tips-for-Final-Projects" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Practical-Tips-for-Final-Projects/">斯坦福CS224N学习笔记（九）——Practical Tips for Final Projects</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Practical-Tips-for-Final-Projects/" class="archive-article-date">
-  	<time datetime="2019-12-28T09:03:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（九）——Practical-Tips-for-Final-Projects"><a href="#一，学习笔记（九）——Practical-Tips-for-Final-Projects" class="headerlink" title="一，学习笔记（九）——Practical Tips for Final Projects"></a>一，学习笔记（九）——Practical Tips for Final Projects</h2><p>由于本节内容均为介绍final project以及复习前几节课的内容，无新的知识点，因此不再补充笔记。</p>
-        
-          <a class="article-more-a" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Practical-Tips-for-Final-Projects/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Practical-Tips-for-Final-Projects/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Machine-Translation-Seq2Seq-and-Attention/">斯坦福CS224N学习笔记（八）--Machine Translation, Seq2Seq and Attention </a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Machine-Translation-Seq2Seq-and-Attention/" class="archive-article-date">
-  	<time datetime="2019-12-28T08:59:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention"><a href="#一，学习笔记（八）——Machine-Translation-Seq2Seq-and-Attention" class="headerlink" title="一，学习笔记（八）——Machine Translation, Seq2Seq and Attention"></a>一，学习笔记（八）——Machine Translation, Seq2Seq and Attention</h2><h3 id="1，Machine-Translation"><a href="#1，Machine-Translation" class="headerlink" title="1，Machine Translation"></a>1，Machine Translation</h3><p>Machine Translation(MT)是指让机器自动地将一种语言翻译成另一种语言，可以分为两大类方法：基于统计的机器翻译（Statistical Machine Translation）和基于神经网络的机器翻译（Neural Machine Translation）。下面分别介绍这两种方法。</p>
-        
-          <a class="article-more-a" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Machine-Translation-Seq2Seq-and-Attention/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/28/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Machine-Translation-Seq2Seq-and-Attention/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（六）——Multi-grained-Attention-Network-for-Aspect-Level-Sentiment-Classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/28/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Multi-grained-Attention-Network-for-Aspect-Level-Sentiment-Classification/">NLP论文学习笔记（六）--Multi-grained Attention Network for Aspect-Level Sentiment Classification</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/28/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Multi-grained-Attention-Network-for-Aspect-Level-Sentiment-Classification/" class="archive-article-date">
-  	<time datetime="2019-12-28T07:58:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>现有的基于侧面的情感分类所使用的注意力机制都是coarse-grained attention，很有可能会带来信息的损失，作者提出了一种fine-grained attention，可以捕捉内容与所要分析侧面之间的关系。作者将上述两种注意力机制一起输入到multi-grained attention network (MGAN)模型中。同时作者还提出了aspect alignment loss来捕捉相同内容不同侧面之间的关系。</p>
-        
-          <a class="article-more-a" href="/2019/12/28/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Multi-grained-Attention-Network-for-Aspect-Level-Sentiment-Classification/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/28/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Multi-grained-Attention-Network-for-Aspect-Level-Sentiment-Classification/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-斯坦福CS224N学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs/">斯坦福CS224N学习笔记（七）—— Vanishing Gradients and Fancy RNNs</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/15/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs/" class="archive-article-date">
-  	<time datetime="2019-12-15T12:13:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs"><a href="#一，学习笔记（七）——-Vanishing-Gradients-and-Fancy-RNNs" class="headerlink" title="一，学习笔记（七）—— Vanishing Gradients and Fancy RNNs"></a>一，学习笔记（七）—— Vanishing Gradients and Fancy RNNs</h2><h3 id="1，Vanishing-Gradients"><a href="#1，Vanishing-Gradients" class="headerlink" title="1，Vanishing Gradients"></a>1，Vanishing Gradients</h3><p>梯度消失是指随着梯度反向传播，由于链式法则的叠加，使得梯度越来越小，导致最开始的参数更新的很慢。而梯度爆炸是指随着梯度反向传播，梯度越来越大，甚至出现Inf和NAN的问题。这两种情况都会导致我们的网络难以训练下去，且无法很深。梯度消失同时也意味着RNN捕获长依赖的能力变弱，即t+n步无法捕获到t步的信息，下面用一个具体的例子来看梯度消失的危害：</p>
-        
-          <a class="article-more-a" href="/2019/12/15/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/15/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94-Vanishing-Gradients-and-Fancy-RNNs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP论文学习笔记（五）——Multimodal-and-Multi-view-Models-for-Emotion-Recognition" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/">NLP论文学习笔记（五）——Multimodal and Multi-view Models for Emotion Recognition</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/" class="archive-article-date">
-  	<time datetime="2019-12-15T10:36:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文时间：2019-8"><a href="#论文时间：2019-8" class="headerlink" title="论文时间：2019.8"></a>论文时间：2019.8</h2><h2 id="一，论文摘要"><a href="#一，论文摘要" class="headerlink" title="一，论文摘要"></a>一，论文摘要</h2><p>有关emotion recognition（ER，情感识别）的研究表明，结合词汇和听觉可以得到更好的模型。该篇论文要解决的问题是：用词汇和声音共同训练模型，但当测试时，并不需要输入词汇信息。<br>论文首先测试了两个注意力机制下的多模态（Multimodal）模型（文字和声音）来研究文字对改善模型的作用。接着作者采用了多观点（Multi-view）模型，即只采用声音输入去研究训练中加入的文字信息对模型的帮助。</p>
-        
-          <a class="article-more-a" href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/15/NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Multimodal-and-Multi-view-Models-for-Emotion-Recognition/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="斯坦福CS224N学习笔记（十九）——Bias-in-the-Vision-and-Language-of-Artificial-Intelligence" data-title="斯坦福CS224N学习笔记（十九）——Bias in the Vision and Language of Artificial Intelligence" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
-    </nav>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://github.com/Lackel/Lackel.github.io.git/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence/", 
+    sourceId: "斯坦福CS224N学习笔记（十九）——Bias-in-the-Vision-and-Language-of-Artificial-Intelligence",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+  
+  <div id="SOHUCS" sid="斯坦福CS224N学习笔记（十九）——Bias-in-the-Vision-and-Language-of-Artificial-Intelligence" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -1109,8 +389,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
