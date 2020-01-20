@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>斯坦福CS224N学习笔记（二十）——The Future of Deep Learning + NLP | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一，学习笔记（二十）——The Future of Deep Learning + NLP">
+  <meta name="description" content="一，学习笔记（二十）——The Future of Deep Learning + NLP1,Using Unlabeled Data for Translation已标注数据的缺乏限制了我们模型的能力，而未标注数据的获取是十分方便的，因此使用未标注数据来提升我们模型的性能是未来的一个趋势。以机器翻译为例，使用未标注数据方法主要有Pre-Training，Self-Training，Back-Tr">
 <meta name="keywords" content="人工智能,NLP,CS224N">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斯坦福CS224N学习笔记（二十）——The Future of Deep Learning + NLP">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;19&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一，学习笔记（二十）——The Future of Deep Learning + NLP">
+<meta property="og:description" content="一，学习笔记（二十）——The Future of Deep Learning + NLP1,Using Unlabeled Data for Translation已标注数据的缺乏限制了我们模型的能力，而未标注数据的获取是十分方便的，因此使用未标注数据来提升我们模型的性能是未来的一个趋势。以机器翻译为例，使用未标注数据方法主要有Pre-Training，Self-Training，Back-Tr">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;19&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-01-19T14:59:50.387Z">
+<meta property="og:updated_time" content="2020-01-20T15:19:12.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;19&#x2F;%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -157,7 +157,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一，学习笔记（二十）——The-Future-of-Deep-Learning-NLP"><a href="#一，学习笔记（二十）——The-Future-of-Deep-Learning-NLP" class="headerlink" title="一，学习笔记（二十）——The Future of Deep Learning + NLP"></a>一，学习笔记（二十）——The Future of Deep Learning + NLP</h2>
+        <h2 id="一，学习笔记（二十）——The-Future-of-Deep-Learning-NLP"><a href="#一，学习笔记（二十）——The-Future-of-Deep-Learning-NLP" class="headerlink" title="一，学习笔记（二十）——The Future of Deep Learning + NLP"></a>一，学习笔记（二十）——The Future of Deep Learning + NLP</h2><h3 id="1-Using-Unlabeled-Data-for-Translation"><a href="#1-Using-Unlabeled-Data-for-Translation" class="headerlink" title="1,Using Unlabeled Data for Translation"></a>1,Using Unlabeled Data for Translation</h3><p>已标注数据的缺乏限制了我们模型的能力，而未标注数据的获取是十分方便的，因此使用未标注数据来提升我们模型的性能是未来的一个趋势。以机器翻译为例，使用未标注数据方法主要有Pre-Training，Self-Training，Back-Translation。<a id="more"></a>其结构分别如下：  </p>
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model1.png" class title="This is an example image">  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model2.png" class title="This is an example image">  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model3.png" class title="This is an example image">  
+<p>其中Back-Translation不会形成闭环。<br>如果我们没有双语数据，我们首先要使用Unsupervised Word Translation，即翻译单词。我们先将两种语言的语料通过word2vector得到初始词向量，再通过一个正交的变换使得两个词向量重合，得到单词翻译。  </p>
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model4.png" class title="This is an example image">  
+
+<h3 id="2，Unsupervised-Machine-Translation"><a href="#2，Unsupervised-Machine-Translation" class="headerlink" title="2，Unsupervised Machine Translation"></a>2，Unsupervised Machine Translation</h3><p>通过上面的学习，我们可以构建一个无监督的机器翻译模型：  </p>
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model5.png" class title="This is an example image">  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model6.png" class title="This is an example image">  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model7.png" class title="This is an example image">  
+<p>那么为什么该模型会起作用呢？因为通过训练其encoder相同，其输入是近似相等的：  </p>
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/model8.png" class title="This is an example image">  
+
+
+<h3 id="3，what-do-we-work-on-next"><a href="#3，what-do-we-work-on-next" class="headerlink" title="3，what do we work on next?"></a>3，what do we work on next?</h3><p>未来有前景的方向主要包括：Multi-Task Learning，QA，Interpreting/Understanding Models，Diagnostic（诊断）/Probing（探测） Classifiers，在工业界，主要是Dialogue和Healthcare，比如Understanding health records等。  </p>
+<h3 id="4，summary"><a href="#4，summary" class="headerlink" title="4，summary"></a>4，summary</h3><img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94The-Future-of-Deep-Learning-NLP/summary.png" class title="This is an example image">  
+
+<h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
+
       
 
       
@@ -289,6 +308,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Pytorch学习笔记（四）——Dataloader与Dataset
+        
+      </div>
+    </a>
   
   
     <a href="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94Bias-in-the-Vision-and-Language-of-Artificial-Intelligence/" id="article-nav-older" class="article-nav-link-wrap">
