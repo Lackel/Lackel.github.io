@@ -8,14 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>Pytorch学习笔记（四）——Dataloader与Dataset | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="人工智能,Pytorch">
+  <meta name="description" content="首先回忆以下机器学习的五大步骤：">
+<meta name="keywords" content="人工智能,Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch学习笔记（四）——Dataloader与Dataset">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;20&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="首先回忆以下机器学习的五大步骤：">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;20&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-01-20T14:49:20.366Z">
+<meta property="og:updated_time" content="2020-01-20T15:40:16.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;20&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -155,7 +157,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>首先回忆以下机器学习的五大步骤：<a id="more"></a>  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/five.png" class title="This is an example image">  
+<p>今天要介绍的是第一个模块，数据模块。其主要分为以下几个部分：</p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/data.png" class title="This is an example image">  
+<p>其中dataloder和dataset是读取数据的核心。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/dataloder.png" class title="This is an example image">  
+<p>其中epoch和iteration的关系如下：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/batch.png" class title="This is an example image">  
+<p>dataset是决定我们从哪里读取数据。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/dataset.png" class title="This is an example image">  
+<p>接下来主要是按照代码单步调试，观察Pytorch读取数据的函数及流程，流程框图如下：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Dataloader%E4%B8%8EDataset/liucheng.png" class title="This is an example image">  
+
       
 
       
