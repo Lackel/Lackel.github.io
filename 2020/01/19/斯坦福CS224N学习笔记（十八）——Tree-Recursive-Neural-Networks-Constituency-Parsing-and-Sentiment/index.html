@@ -158,36 +158,36 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一，学习笔记（十八）——Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment"><a href="#一，学习笔记（十八）——Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment" class="headerlink" title="一，学习笔记（十八）——Tree Recursive Neural Networks,Constituency Parsing, and Sentiment"></a>一，学习笔记（十八）——Tree Recursive Neural Networks,Constituency Parsing, and Sentiment</h2><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1, Motivation"></a>1, Motivation</h3><p>首先声明，本节课中的方法近些年已经不怎么常用了。 <a id="more"></a><br>我们人类是如何理解长句子的呢？我想大部分人应该都是将其拆解成一个一个小的部分再进行组合理解，这就是semantic composition。比如一幅图片，我们可以将它拆解成不同部分去识别，而对于一段文本，我们也可以按照其语法结构进行拆解，便于我们理解。比如下面这个例子：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/example.png" class title="This is an example image">  
 <p>既然利用这种树状结构可以帮助我们更好地理解句子含义，那么我们如何用向量的形式表示它呢？我们已经得到了每个单词的词向量，如何对其进行组合构建树结构呢？下面将对其进行介绍：  </p>
 <h3 id="2，Structure-and-Representation"><a href="#2，Structure-and-Representation" class="headerlink" title="2，Structure and Representation"></a>2，Structure and Representation</h3><p>针对于上面的问题，我们可以采用greedy decoding，让相邻输入词向量两两组合通过神经网络，输出为一个向量和一个分数，我们每次选取分数最大的一对进行组合，最终得到我们的树状结构。示例如下：  </p>
-  
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/tree1.png" class title="This is an example image">  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/tree2.png" class title="This is an example image">  
 <p>我们得到的树状结构被叫做Recursive neural networks，它与RNN的不同在于他能捕捉到更多语法语意信息，二者结构如下：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/structure.png" class title="This is an example image">  
 <p>我们上面介绍的构建树结构的方法，其衡量指标是我们进行组合的节点的分数和，分数和越高，表示这棵树越好，我们使用max-margin-loss作为损失函数，其公式如下：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/loss.png" class title="This is an example image">  
 <p>该方法也可以用于图像中，使用图像的不同部分进行组合得到完整图像，可以帮助我们更好地理解图像结构，提取图像中的关键信息，示例如下：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/image.png" class title="This is an example image">  
 <p>对于树状结构，已经有了损失函数，我们如何进行反向传播呢？其实过程和RNN类似，只不过需要注意以下三点：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/back.png" class title="This is an example image">  
 
 <h3 id="3，TreeRNN"><a href="#3，TreeRNN" class="headerlink" title="3，TreeRNN"></a>3，TreeRNN</h3><p>本节介绍多种TreeRNN版本，其都是在上一版的基础上改进得到的。  </p>
 <h4 id="3-1-Version-1-Simple-TreeRNN"><a href="#3-1-Version-1-Simple-TreeRNN" class="headerlink" title="3.1 Version 1: Simple TreeRNN"></a>3.1 Version 1: Simple TreeRNN</h4><p>最简单的RNN就是上面我们介绍的那种，其权重矩阵都相同，且输入单词间没有真实的联系，因此效果一般：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/trnn1.png" class title="This is an example image">  
 
 <h4 id="3-2-Version-2-Syntactically-Untied-RNN"><a href="#3-2-Version-2-Syntactically-Untied-RNN" class="headerlink" title="3.2 Version 2: Syntactically-Untied RNN"></a>3.2 Version 2: Syntactically-Untied RNN</h4><p>在第一版的基础上进行简单的改进就是我们不再使用完全相同的权重矩阵W，而是根据输入词之间的关系设计不同的权重矩阵：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/trnn2.png" class title="This is an example image">  
 
 <h4 id="3-3-Version-3：Compositionality-Through-Recursive-Matrix-Vector-Spaces"><a href="#3-3-Version-3：Compositionality-Through-Recursive-Matrix-Vector-Spaces" class="headerlink" title="3.3 Version 3：Compositionality Through Recursive Matrix-Vector Spaces"></a>3.3 Version 3：Compositionality Through Recursive Matrix-Vector Spaces</h4><p>对于very good这种情况，very仅仅是一个修饰词，而我们将其和真正的关键词good并列来计算分数，这并不合理，另外对于包含not修饰的词，我们很可能忽略了not，导致判断错误。因此我们需要改善我们的计算公式，对于每个词，我们有一个向量和一个矩阵，分别代表着词的不同信息，通过对其进行组合计算分数可以改善模型效果：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/trnn3.png" class title="This is an example image">  
 
 <h4 id="3-4-Version-4：Recursive-Neural-Tensor-Network"><a href="#3-4-Version-4：Recursive-Neural-Tensor-Network" class="headerlink" title="3.4 Version 4：Recursive Neural Tensor Network"></a>3.4 Version 4：Recursive Neural Tensor Network</h4><p>在这版本的模型中，我们引入了词的情感倾向来增强模型的性能：  </p>
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/trnn4.png" class title="This is an example image">  
 <p>从图中可以看到，good是+，加上very变成了++，加上not变为了-。  </p>
 <h4 id="3-5-Version-5：Improving-Deep-Learning-Semantic-Representations-using-a-TreeLSTM"><a href="#3-5-Version-5：Improving-Deep-Learning-Semantic-Representations-using-a-TreeLSTM" class="headerlink" title="3.5 Version 5：Improving Deep Learning Semantic Representations using a TreeLSTM"></a>3.5 Version 5：Improving Deep Learning Semantic Representations using a TreeLSTM</h4><p>这一版本采用了RNN中的LSTM来构造树结构，不像上述方法需要额外引入矩阵或张量，该方法试图用最基本的词向量+LSTM来构建树结构。  </p>
-  
-  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/trnn5.png" class title="This is an example image">  
+<img src="/2020/01/19/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Tree-Recursive-Neural-Networks-Constituency-Parsing-and-Sentiment/trnn6.png" class title="This is an example image">  
 
 <h4 id="3-6-others"><a href="#3-6-others" class="headerlink" title="3.6 others"></a>3.6 others</h4><p>最后，作者还介绍了TreeRNN在物理以及程序翻译上的一些应用，因为只是简单介绍，在此就不展开了。  </p>
 <h2 id="二，结语"><a href="#二，结语" class="headerlink" title="二，结语"></a>二，结语</h2><p>该篇博客中所用插图均来自课程的PPT,在此感谢老师的辛勤付出和斯坦福大学为我们提供的学习材料。<br>由于本人才疏学浅，难免有很多错误，不足之处，希望能和大家在这里共同学习，共同进步。</p>
