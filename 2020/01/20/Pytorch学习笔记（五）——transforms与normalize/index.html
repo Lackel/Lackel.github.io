@@ -8,14 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>Pytorch学习笔记（五）——transforms与normalize | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="人工智能,Pytorch">
+  <meta name="description" content="1,TorchvisionTorchvision是Pytorch下的一个视觉库，提供了视觉模型所需的数据，预处理方法以及常用模型。">
+<meta name="keywords" content="人工智能,Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch学习笔记（五）——transforms与normalize">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;20&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1,TorchvisionTorchvision是Pytorch下的一个视觉库，提供了视觉模型所需的数据，预处理方法以及常用模型。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;20&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-01-20T14:49:03.110Z">
+<meta property="og:updated_time" content="2020-02-01T15:41:22.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;01&#x2F;20&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -155,7 +157,60 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="1-Torchvision"><a href="#1-Torchvision" class="headerlink" title="1,Torchvision"></a>1,Torchvision</h2><p>Torchvision是Pytorch下的一个视觉库，提供了视觉模型所需的数据，预处理方法以及常用模型。<a id="more"></a>  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/torchvision.png" class title="This is an example image">  
+<p>这里要介绍的是其中的transform，其作用是对图像数据进行各种变换，增强。数据增强的目的是扩充训练集大小，使得训练集与测试集更接近，常用的方法有：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/method.png" class title="This is an example image">  
+<p>下节内容将对这些方法分别进行介绍，其中一种比较重要的方法是Normalize，其将数据逐通道标准化为均值为0，方差为1的标准正态分布。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/norm.png" class title="This is an example image">  
+
+<h2 id="2，usual-method"><a href="#2，usual-method" class="headerlink" title="2，usual method"></a>2，usual method</h2><h3 id="2-1-裁剪"><a href="#2-1-裁剪" class="headerlink" title="2.1 裁剪"></a>2.1 裁剪</h3><p>首先是中心裁剪，其根据指定输入的大小对图片进行中心裁剪，若输入大于图片大小，则会填充黑色像素点。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/crop1.png" class title="This is an example image">  
+<p>第二个是随机裁剪，它根据输入的size对图片随机位置进行裁剪。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/crop2.png" class title="This is an example image">  
+<p>第三个是随机大小，长宽比裁剪，上述两个方法裁剪出来都是方形的，而该方法则是随机长宽比。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/crop3.png" class title="This is an example image">  
+<p>最后两种方法是在图片的上下左右中裁剪出size大小的五张图片，以及对其镜像得到十张图片。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/crop4.png" class title="This is an example image">  
+
+<h3 id="2-2-翻转，旋转"><a href="#2-2-翻转，旋转" class="headerlink" title="2.2 翻转，旋转"></a>2.2 翻转，旋转</h3><p>翻转分为水平和垂直翻转两类，输入是翻转概率p。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/flip1.png" class title="This is an example image">  
+<p>除了进行简单翻转，我们还可以进行指定角度的旋转，并指定是否扩大图片。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/flip2.png" class title="This is an example image">  
+<p>最后我们还可以对图片进行随机的翻转，即随机旋转一定的角度。center参数可以指定按哪个点进行旋转，要注意的是其始终按照图片中心来计算如何扩充图片，因此用别的点做中心点可能会出现损失部分图片的情况。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/flip3.png" class title="This is an example image">  
+
+<h3 id="2-3-transforms"><a href="#2-3-transforms" class="headerlink" title="2.3 transforms"></a>2.3 transforms</h3><p>第一个方法是pad，它用来扩充图像的大小。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/pad.png" class title="This is an example image">  
+<p>第二个方法是用来调整图像的亮度，对比度，饱和度以及色相。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/iter.png" class title="This is an example image">  
+<p>第三个方法是将图像转化为灰度图，输出通道为1或3，要根据Normalize指定的均值和方差维度进行取值。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/grey.png" class title="This is an example image">  
+<p>第四个方法是对图像进行二维仿射变换，即旋转平移缩放错切等，其中degrees参数必须设置，不用可以设置为0。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/affine.png" class title="This is an example image">  
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/affine2.png" class title="This is an example image">  
+<p>其中错切的效果如下：  </p>
+  
+<p>第五个方法是对图像进行随机遮挡。它是对张量进行操作，因此要先将image转化为tensor，转化后张量大小范围是0到1。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/eraser.png" class title="This is an example image">  
+<p>遮挡效果如下：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/eraser2.png" class title="This is an example image">  
+<p>第六个方法是lambda方法，用户可以自定义操作。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/lambda.png" class title="This is an example image">  
+
+<h2 id="3，Transform的选择操作"><a href="#3，Transform的选择操作" class="headerlink" title="3，Transform的选择操作"></a>3，Transform的选择操作</h2><p>学习了上述操作后，为了使transform操作更加灵活多变，我们可以选用不同的方法来随机使用上述操作：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/operate.png" class title="This is an example image">  
+
+<h2 id="4，自定义transform"><a href="#4，自定义transform" class="headerlink" title="4，自定义transform"></a>4，自定义transform</h2><p>通过前几节课我们知道，transform方法是在call函数中被调用，我们自定义transform方法需要实现init函数进行参数输入，再实现call函数对图像进行变换。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/define.png" class title="This is an example image">  
+<p>下面以对图像加入椒盐噪声为例，其输入为信噪比，输出为更改后的图像。  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/salt.png" class title="This is an example image">  
+<p>其中call函数实现如下：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/call.png" class title="This is an example image">  
+<p>定义完成完整的类后，我们就可以将其放入compose函数对图像进行处理了。  </p>
+<h2 id="5，summary"><a href="#5，summary" class="headerlink" title="5，summary"></a>5，summary</h2><p>本节介绍的transform方法总结如下：  </p>
+<img src="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/summary.png" class title="This is an example image">  
+
       
 
       
