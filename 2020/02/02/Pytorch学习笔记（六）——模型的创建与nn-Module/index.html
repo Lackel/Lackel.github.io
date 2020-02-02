@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Category: 技术 | Hexo</title>
+  <title>Pytorch学习笔记（六）——模型的创建与nn.Module | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;categories&#x2F;%E6%8A%80%E6%9C%AF&#x2F;page&#x2F;4&#x2F;index.html">
+  <meta name="description" content="1, 网络模型的创建模型是机器学习训练过程中继数据之后的第二个步骤。模型又包括模型的创建与权值初始化两个部分。">
+<meta name="keywords" content="人工智能,Pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch学习笔记（六）——模型的创建与nn.Module">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;02&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1, 网络模型的创建模型是机器学习训练过程中继数据之后的第二个步骤。模型又包括模型的创建与权值初始化两个部分。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;02&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2020-02-02T02:35:26.755Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;02&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -131,36 +137,124 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Pytorch学习笔记（六）——模型的创建与nn-Module" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Pytorch学习笔记（六）——模型的创建与nn.Module
+    </h1>
+  
+
+        
+        <a href="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/" class="archive-article-date">
+  	<time datetime="2020-02-02T00:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-02</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-网络模型的创建"><a href="#1-网络模型的创建" class="headerlink" title="1, 网络模型的创建"></a>1, 网络模型的创建</h2><p>模型是机器学习训练过程中继数据之后的第二个步骤。模型又包括模型的创建与权值初始化两个部分。<a id="more"></a>  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/module.png" class title="This is an example image">  
+<p>模型创建可以分为构建模型子模块以及拼接模型子模块两部分，前者构造卷积层，全连接层等子模块，后者实现前向传播，将子模块拼接构成完整的模型。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/two.png" class title="This is an example image">  
+
+<h2 id="2，nn-Module"><a href="#2，nn-Module" class="headerlink" title="2，nn.Module"></a>2，nn.Module</h2><p>由于Pytorch中所有的模型均继承于Module类，因此深入了解它是十分必要的。Pytorch中nn类其主要包含四个子模块，而Module就是其中之一：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/nn.png" class title="This is an example image">  
+<p>nn.Module包含八个有序字典参数，分别用来存储不同的模型信息，其大致可以分为以下四类：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/four.png" class title="This is an example image">  
+<p>要注意的是在进行网络赋值即self.conv2 = nn.Conv2d(6, 16, 5)时，Pytorch不会直接将模型进行赋值，而是先进行判断，看右边的变量是参数还是模型，然后再将其赋值到正确的参数字典中。<br>nn.Module的总结如下：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/summary.png" class title="This is an example image">  
+
+<h2 id="3，网络层容器Container"><a href="#3，网络层容器Container" class="headerlink" title="3，网络层容器Container"></a>3，网络层容器Container</h2><p>Pytorch中的模型容器是用来封装多个网络层的，主要有以下三种封装方式：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/fengzhuang.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/seq.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/list.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/dict.png" class title="This is an example image">  
+<p>Pytorch中容器方法总结如下：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/summary2.png" class title="This is an example image">  
+
+<h2 id="4，卷积层"><a href="#4，卷积层" class="headerlink" title="4，卷积层"></a>4，卷积层</h2><p>卷积层是图像处理中的常用模块，它可以用来提取图像的特征信息。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/conv.png" class title="This is an example image">  
+<p>根据卷积核移动维度数量的不同，卷积可以分为1d，2d，3d卷积，最常用的是2d卷积。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/nd.png" class title="This is an example image">  
+<p>conv2d函数的主要参数及其含义如下：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/2d.png" class title="This is an example image">  
+<p>其中空洞卷积是为了提高卷积核的感受视野，即看到更大的部分。输出图片大小的计算公式如下：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/out.png" class title="This is an example image">  
+<p>另一种常用的卷积方法是转置卷积，它用来对图像进行上采样。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans1.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans2.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans3.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans4.png" class title="This is an example image">  
+
+<h2 id="5-池化，线性，激活函数层"><a href="#5-池化，线性，激活函数层" class="headerlink" title="5,池化，线性，激活函数层"></a>5,池化，线性，激活函数层</h2><p>首先是池化层，可以分为最大池化以及平均池化，它起到收集与总结的作用。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/pool.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/max.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/avg.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/up.png" class title="This is an example image">  
+<p>线性层又称为全连接层，其实现对上一层的线性变换。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/line1.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/line2.png" class title="This is an example image">  
+<p>激活函数层将网络层的输出进行非线性变换，是神经网络区别于线性结构的关键。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/act1.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/act2.png" class title="This is an example image">  
+<p>其中比较常用的非线性激活函数有sigmoid，relu，tanh等。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/sigmoid.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/tanh.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/relu.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/leaky.png" class title="This is an example image">  
+
+<h2 id="6，权值初始化"><a href="#6，权值初始化" class="headerlink" title="6，权值初始化"></a>6，权值初始化</h2><p>构建完成网络结构后，我们需要对网络的参数进行初始化，如果随意设置初始值，会引起梯度消失或梯度爆炸，因此合理初始化网络参数是十分必要的，下面先来看一下梯度消失与梯度爆炸是如何造成的。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/xiaoshi1.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/xiaoshi2.png" class title="This is an example image">  
+<p>比较常用的初始化方法有kaiming初始化以及Xavier初始化。  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/xavier.png" class title="This is an example image">  
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/kaiming.png" class title="This is an example image">  
+<p>其他的初始化方法共十种如下：  </p>
+<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/other.png" class title="This is an example image">  
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/image/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:16:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Backpropagation-and-Computation-Graphs/">斯坦福CS224N学习笔记（四） -- Backpropagation and Computation Graphs</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -170,17 +264,13 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Pytorch</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -193,191 +283,144 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Pytorch学习笔记（五）——transforms与normalize</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Word-Window-Classification-Neural-Networks-and-Matrix-Calculus/">斯坦福CS224N学习笔记（三） -- Word Window Classification, Neural Networks, and Matrix Calculus</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Pytorch学习笔记（六）——模型的创建与nn-Module" data-title="Pytorch学习笔记（六）——模型的创建与nn.Module" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Word-Vectors-2-and-Word-Senses/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Word-Vectors-2-and-Word-Senses/">斯坦福CS224N学习笔记（二） -- Word Vectors 2 and Word Senses</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%20Word-Vectors/" class="archive-article-date">
-  	<time datetime="2019-11-01T09:05:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/%E6%96%AF%E5%9D%A6%E7%A6%8FCS224N%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%20Word-Vectors/">斯坦福CS224N学习笔记（一）-- Introduction and Word Vectors</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CS224N</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://github.com/Lackel/Lackel.github.io.git/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/", 
+    sourceId: "Pytorch学习笔记（六）——模型的创建与nn-Module",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/categories/%E6%8A%80%E6%9C%AF/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/categories/%E6%8A%80%E6%9C%AF/">1</a><a class="page-number" href="/categories/%E6%8A%80%E6%9C%AF/page/2/">2</a><a class="page-number" href="/categories/%E6%8A%80%E6%9C%AF/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
+  
+  <div id="SOHUCS" sid="Pytorch学习笔记（六）——模型的创建与nn-Module" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -401,10 +444,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
