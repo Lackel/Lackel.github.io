@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
-  <title>Pytorch学习笔记（六）——模型的创建与nn.Module | Hexo</title>
+  <title>Pytorch学习笔记（七）——损失函数 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1, 网络模型的创建模型是机器学习训练过程中继数据之后的第二个步骤。模型又包括模型的创建与权值初始化两个部分。">
+  <meta name="description" content="1,损失函数损失函数衡量的是模型的预测输出与真实值之间差异的函数。">
 <meta name="keywords" content="人工智能,Pytorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pytorch学习笔记（六）——模型的创建与nn.Module">
-<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;02&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module&#x2F;index.html">
+<meta property="og:title" content="Pytorch学习笔记（七）——损失函数">
+<meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;03&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1, 网络模型的创建模型是机器学习训练过程中继数据之后的第二个步骤。模型又包括模型的创建与权值初始化两个部分。">
+<meta property="og:description" content="1,损失函数损失函数衡量的是模型的预测输出与真实值之间差异的函数。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;02&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-02-02T02:35:26.755Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;03&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta property="og:updated_time" content="2020-02-05T09:49:14.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;02&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module&#x2F;img&#x2F;2017&#x2F;demo.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;03&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -137,85 +137,67 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Pytorch学习笔记（六）——模型的创建与nn-Module" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Pytorch学习笔记（七）——损失函数" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Pytorch学习笔记（六）——模型的创建与nn.Module
+      Pytorch学习笔记（七）——损失函数
     </h1>
   
 
         
-        <a href="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/" class="archive-article-date">
-  	<time datetime="2020-02-02T00:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-02</time>
+        <a href="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-02-03T02:00:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-网络模型的创建"><a href="#1-网络模型的创建" class="headerlink" title="1, 网络模型的创建"></a>1, 网络模型的创建</h2><p>模型是机器学习训练过程中继数据之后的第二个步骤。模型又包括模型的创建与权值初始化两个部分。<a id="more"></a>  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/module.png" class title="This is an example image">  
-<p>模型创建可以分为构建模型子模块以及拼接模型子模块两部分，前者构造卷积层，全连接层等子模块，后者实现前向传播，将子模块拼接构成完整的模型。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/two.png" class title="This is an example image">  
+        <h2 id="1-损失函数"><a href="#1-损失函数" class="headerlink" title="1,损失函数"></a>1,损失函数</h2><p>损失函数衡量的是模型的预测输出与真实值之间差异的函数。<a id="more"></a>损失函数（loss）是求一个样本与真实值的差异，而代价函数（cost）则是所有样本损失的求和，而目标函数则通常包括代价函数+正则化项。  </p>
+<h2 id="2，常用损失函数"><a href="#2，常用损失函数" class="headerlink" title="2，常用损失函数"></a>2，常用损失函数</h2><h3 id="2-1-CrossEntropyLoss"><a href="#2-1-CrossEntropyLoss" class="headerlink" title="2.1 CrossEntropyLoss"></a>2.1 CrossEntropyLoss</h3><p>其中损失函数比较常用的是交叉损失熵，它用来衡量分类任务中预测及真实的概率分布的差异，其公式及调用函数如下：  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/cross.png" class title="This is an example image">  
+<p>参数中size_average和reduce无用，该损失函数用到交叉熵的概念，交叉熵的定义如下：  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/shang.png" class title="This is an example image">  
+<p>注意类别要从0开始，且类型必须是long。</p>
+<h3 id="2-2-NLLLoss"><a href="#2-2-NLLLoss" class="headerlink" title="2.2 NLLLoss"></a>2.2 NLLLoss</h3><p>该损失函数实现了负对数似然函数中的负号功能，即只是对输出值取了负号。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/nll.png" class title="This is an example image">  
+<h3 id="2-3-BCELoss"><a href="#2-3-BCELoss" class="headerlink" title="2.3 BCELoss"></a>2.3 BCELoss</h3><p>该函数是二分类下的交叉损失熵函数，是第一种损失函数的一个特例，要注意其输入必须是概率值，即在0和1之间。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/binary.png" class title="This is an example image">  
+<h3 id="2-4-BCEWithLogitsLoss"><a href="#2-4-BCEWithLogitsLoss" class="headerlink" title="2.4 BCEWithLogitsLoss"></a>2.4 BCEWithLogitsLoss</h3><p>该函数结合了二分类交叉损失熵与sigmoid函数。注意该函数内部已经实现了sigmoid，因此网络层最后不要加sigmoid函数了。其中pos_weight可以用来解决正负样本不均衡的问题。</p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/weight.png" class title="This is an example image">  
+<h3 id="2-5-amp-2-6-L1Loss，MSELoss"><a href="#2-5-amp-2-6-L1Loss，MSELoss" class="headerlink" title="2.5&amp;2.6  L1Loss，MSELoss"></a>2.5&amp;2.6  L1Loss，MSELoss</h3><p>分别对应预测值与真实值差的绝对值以及差的平方。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/l1.png" class title="This is an example image">  
+<h3 id="2-7-SmoothL1Loss"><a href="#2-7-SmoothL1Loss" class="headerlink" title="2.7 SmoothL1Loss"></a>2.7 SmoothL1Loss</h3><p>该损失函数是L1Loss的平滑版本，它使得L1Loss在-1到1之间变得平滑可导。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/smooth.png" class title="This is an example image">  
+<h3 id="2-8-PoissonNLLLoss"><a href="#2-8-PoissonNLLLoss" class="headerlink" title="2.8 PoissonNLLLoss"></a>2.8 PoissonNLLLoss</h3><p>泊松分布的负对数损失函数  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/bosong.png" class title="This is an example image">  
+<h3 id="2-9-KLDivLoss"><a href="#2-9-KLDivLoss" class="headerlink" title="2.9 KLDivLoss"></a>2.9 KLDivLoss</h3><p>计算KL散度，需要提前将输入取log概率使得上下两个公式相等。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/kl.png" class title="This is an example image">  
+<h3 id="2-10-MarginRankingLoss"><a href="#2-10-MarginRankingLoss" class="headerlink" title="2.10 MarginRankingLoss"></a>2.10 MarginRankingLoss</h3><p>该方法主要用于排序任务，用于计算两个向量之间的相似度。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/margine.png" class title="This is an example image">  
+<h3 id="2-11-MultiLabelMargineLoss"><a href="#2-11-MultiLabelMargineLoss" class="headerlink" title="2.11 MultiLabelMargineLoss"></a>2.11 MultiLabelMargineLoss</h3><p>用于多标签分类任务损失。计算公式是,标签所在神经元的输出减去非标签所在神经元的输出求和。即输出为【0.3,0.1,0.1,0.5】,标签为【0，3，-1，-1】，即属于第0类和第3类，则需要计算【max（0，1-（0.3-0.1）+max（0，1-（0.3-0.1）+ max（0，1-（0.8-0.1）+max（0，1-（0.8-0.1）】/4.</p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/label.png" class title="This is an example image">  
+<h3 id="2-12-SoftMarginLoss"><a href="#2-12-SoftMarginLoss" class="headerlink" title="2.12 SoftMarginLoss"></a>2.12 SoftMarginLoss</h3><p>用于计算二分类的logistics损失。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/soft.png" class title="This is an example image">  
+<h3 id="2-13-MultiLabelSoftMarginLoss"><a href="#2-13-MultiLabelSoftMarginLoss" class="headerlink" title="2.13 MultiLabelSoftMarginLoss"></a>2.13 MultiLabelSoftMarginLoss</h3><p>SoftMarginLoss的多标签分类版本。</p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/softlabel.png" class title="This is an example image">  
+<h3 id="2-14-MultiMarginLoss"><a href="#2-14-MultiMarginLoss" class="headerlink" title="2.14 MultiMarginLoss"></a>2.14 MultiMarginLoss</h3><p>计算多分类的折页损失。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/zheye.png" class title="This is an example image">  
+<h3 id="2-15-TripletMarginLoss"><a href="#2-15-TripletMarginLoss" class="headerlink" title="2.15 TripletMarginLoss"></a>2.15 TripletMarginLoss</h3><p>计算三元组损失，常用于人脸验证。该函数希望Anchor与Positive之间的距离小于Anchor与Negative之间的距离。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/three.png" class title="This is an example image">  
+<h3 id="2-16-HingeEmbeddingLoss"><a href="#2-16-HingeEmbeddingLoss" class="headerlink" title="2.16 HingeEmbeddingLoss"></a>2.16 HingeEmbeddingLoss</h3><p>计算两个输入的相似性，常用于非线性Embedding或半监督学习。其输入为两个输入之差的绝对值。<br>  <img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/hinge.png" class title="This is an example image">  </p>
+<h3 id="2-17-CosineEmbeddingLoss"><a href="#2-17-CosineEmbeddingLoss" class="headerlink" title="2.17 CosineEmbeddingLoss"></a>2.17 CosineEmbeddingLoss</h3><p>采用余弦距离计算俩个输入之间的距离。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/cosine.png" class title="This is an example image">  
+<h3 id="2-18-CTCLoss"><a href="#2-18-CTCLoss" class="headerlink" title="2.18 CTCLoss"></a>2.18 CTCLoss</h3><p>解决时序类数据的分类。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/ctc.png" class title="This is an example image">  
 
-<h2 id="2，nn-Module"><a href="#2，nn-Module" class="headerlink" title="2，nn.Module"></a>2，nn.Module</h2><p>由于Pytorch中所有的模型均继承于Module类，因此深入了解它是十分必要的。Pytorch中nn类其主要包含四个子模块，而Module就是其中之一：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/nn.png" class title="This is an example image">  
-<p>nn.Module包含八个有序字典参数，分别用来存储不同的模型信息，其大致可以分为以下四类：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/four.png" class title="This is an example image">  
-<p>要注意的是在进行网络赋值即self.conv2 = nn.Conv2d(6, 16, 5)时，Pytorch不会直接将模型进行赋值，而是先进行判断，看右边的变量是参数还是模型，然后再将其赋值到正确的参数字典中。<br>nn.Module的总结如下：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/summary.png" class title="This is an example image">  
+<h2 id="3，损失函数总结"><a href="#3，损失函数总结" class="headerlink" title="3，损失函数总结"></a>3，损失函数总结</h2><p>Pytorch中共提供了18种损失函数，其适用范围各不相同，需要深入理解并掌握。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/summary.png" class title="This is an example image">  
 
-<h2 id="3，网络层容器Container"><a href="#3，网络层容器Container" class="headerlink" title="3，网络层容器Container"></a>3，网络层容器Container</h2><p>Pytorch中的模型容器是用来封装多个网络层的，主要有以下三种封装方式：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/fengzhuang.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/seq.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/list.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/dict.png" class title="This is an example image">  
-<p>Pytorch中容器方法总结如下：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/summary2.png" class title="This is an example image">  
-
-<h2 id="4，卷积层"><a href="#4，卷积层" class="headerlink" title="4，卷积层"></a>4，卷积层</h2><p>卷积层是图像处理中的常用模块，它可以用来提取图像的特征信息。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/conv.png" class title="This is an example image">  
-<p>根据卷积核移动维度数量的不同，卷积可以分为1d，2d，3d卷积，最常用的是2d卷积。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/nd.png" class title="This is an example image">  
-<p>conv2d函数的主要参数及其含义如下：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/2d.png" class title="This is an example image">  
-<p>其中空洞卷积是为了提高卷积核的感受视野，即看到更大的部分。输出图片大小的计算公式如下：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/out.png" class title="This is an example image">  
-<p>另一种常用的卷积方法是转置卷积，它用来对图像进行上采样。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans1.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans2.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans3.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/trans4.png" class title="This is an example image">  
-
-<h2 id="5-池化，线性，激活函数层"><a href="#5-池化，线性，激活函数层" class="headerlink" title="5,池化，线性，激活函数层"></a>5,池化，线性，激活函数层</h2><p>首先是池化层，可以分为最大池化以及平均池化，它起到收集与总结的作用。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/pool.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/max.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/avg.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/up.png" class title="This is an example image">  
-<p>线性层又称为全连接层，其实现对上一层的线性变换。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/line1.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/line2.png" class title="This is an example image">  
-<p>激活函数层将网络层的输出进行非线性变换，是神经网络区别于线性结构的关键。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/act1.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/act2.png" class title="This is an example image">  
-<p>其中比较常用的非线性激活函数有sigmoid，relu，tanh等。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/sigmoid.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/tanh.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/relu.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/leaky.png" class title="This is an example image">  
-
-<h2 id="6，权值初始化"><a href="#6，权值初始化" class="headerlink" title="6，权值初始化"></a>6，权值初始化</h2><p>构建完成网络结构后，我们需要对网络的参数进行初始化，如果随意设置初始值，会引起梯度消失或梯度爆炸，因此合理初始化网络参数是十分必要的，下面先来看一下梯度消失与梯度爆炸是如何造成的。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/xiaoshi1.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/xiaoshi2.png" class title="This is an example image">  
-<p>比较常用的初始化方法有kaiming初始化以及Xavier初始化。  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/xavier.png" class title="This is an example image">  
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/kaiming.png" class title="This is an example image">  
-<p>其他的初始化方法共十种如下：  </p>
-<img src="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/other.png" class title="This is an example image">  
 
       
 
@@ -331,7 +313,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://github.com/Lackel/Lackel.github.io.git/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -345,18 +327,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Pytorch学习笔记（七）——损失函数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/20/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94transforms%E4%B8%8Enormalize/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pytorch学习笔记（五）——transforms与normalize</div>
+    <a href="/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Pytorch学习笔记（六）——模型的创建与nn.Module</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -384,7 +357,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Pytorch学习笔记（六）——模型的创建与nn-Module" data-title="Pytorch学习笔记（六）——模型的创建与nn.Module" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/"></div>
+	<div class="ds-thread" data-thread-key="Pytorch学习笔记（七）——损失函数" data-title="Pytorch学习笔记（七）——损失函数" data-url="http://github.com/Lackel/Lackel.github.io.git/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -407,8 +380,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://github.com/Lackel/Lackel.github.io.git/2020/02/02/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8Enn-Module/", 
-    sourceId: "Pytorch学习笔记（六）——模型的创建与nn-Module",
+    url: "http://github.com/Lackel/Lackel.github.io.git/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/", 
+    sourceId: "Pytorch学习笔记（七）——损失函数",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -417,7 +390,7 @@
   
 
   
-  <div id="SOHUCS" sid="Pytorch学习笔记（六）——模型的创建与nn-Module" ></div> 
+  <div id="SOHUCS" sid="Pytorch学习笔记（七）——损失函数" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
