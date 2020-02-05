@@ -17,7 +17,7 @@
 <meta property="og:description" content="1,损失函数损失函数衡量的是模型的预测输出与真实值之间差异的函数。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;03&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-02-05T09:49:14.342Z">
+<meta property="og:updated_time" content="2020-02-05T09:54:54.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;03&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -189,7 +189,8 @@
 <img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/zheye.png" class title="This is an example image">  
 <h3 id="2-15-TripletMarginLoss"><a href="#2-15-TripletMarginLoss" class="headerlink" title="2.15 TripletMarginLoss"></a>2.15 TripletMarginLoss</h3><p>计算三元组损失，常用于人脸验证。该函数希望Anchor与Positive之间的距离小于Anchor与Negative之间的距离。  </p>
 <img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/three.png" class title="This is an example image">  
-<h3 id="2-16-HingeEmbeddingLoss"><a href="#2-16-HingeEmbeddingLoss" class="headerlink" title="2.16 HingeEmbeddingLoss"></a>2.16 HingeEmbeddingLoss</h3><p>计算两个输入的相似性，常用于非线性Embedding或半监督学习。其输入为两个输入之差的绝对值。<br>  <img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/hinge.png" class title="This is an example image">  </p>
+<h3 id="2-16-HingeEmbeddingLoss"><a href="#2-16-HingeEmbeddingLoss" class="headerlink" title="2.16 HingeEmbeddingLoss"></a>2.16 HingeEmbeddingLoss</h3><p>计算两个输入的相似性，常用于非线性Embedding或半监督学习。其输入为两个输入之差的绝对值。  </p>
+<img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/hinge.png" class title="This is an example image">  
 <h3 id="2-17-CosineEmbeddingLoss"><a href="#2-17-CosineEmbeddingLoss" class="headerlink" title="2.17 CosineEmbeddingLoss"></a>2.17 CosineEmbeddingLoss</h3><p>采用余弦距离计算俩个输入之间的距离。  </p>
 <img src="/2020/02/03/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/cosine.png" class title="This is an example image">  
 <h3 id="2-18-CTCLoss"><a href="#2-18-CTCLoss" class="headerlink" title="2.18 CTCLoss"></a>2.18 CTCLoss</h3><p>解决时序类数据的分类。  </p>
