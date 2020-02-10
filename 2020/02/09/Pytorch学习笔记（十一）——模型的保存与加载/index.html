@@ -8,14 +8,16 @@
   <link rel="dns-prefetch" href="http://github.com/Lackel/Lackel.github.io.git">
   <title>Pytorch学习笔记（十一）——模型的保存与加载 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="人工智能,NLP">
+  <meta name="description" content="1,模型的保存与加载当我们想要把训练好的模型以及参数保留下来，就需要把这些参数从内存保存到硬盘中，这就是序列化。反之我们从内存中取出我们的模型就是反序列化。">
+<meta name="keywords" content="人工智能,Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch学习笔记（十一）——模型的保存与加载">
 <meta property="og:url" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;09&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1,模型的保存与加载当我们想要把训练好的模型以及参数保留下来，就需要把这些参数从内存保存到硬盘中，这就是序列化。反之我们从内存中取出我们的模型就是反序列化。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;09&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-02-09T04:53:44.957Z">
+<meta property="og:updated_time" content="2020-02-10T07:29:31.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;02&#x2F;09&#x2F;Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -155,7 +157,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="1-模型的保存与加载"><a href="#1-模型的保存与加载" class="headerlink" title="1,模型的保存与加载"></a>1,模型的保存与加载</h2><p>当我们想要把训练好的模型以及参数保留下来，就需要把这些参数从内存保存到硬盘中，这就是序列化。反之我们从内存中取出我们的模型就是反序列化。<a id="more"></a>  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/xulie.png" class title="This is an example image">  
+<p>在Pytorch中，我们可以通过torch.save和torch.load来保存以及加载我们的模型。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/save.png" class title="This is an example image">  
+<p>在我们保存模型的时候有两种方式，一种是保存全部模型，另一种是只保存模型的参数值。要注意的是即使保存了全部模型，我们也需要模型定义的类文件，否则会报错，因此推荐使用第二种方式，更加节省内存。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/two.png" class title="This is an example image">  
+<p>除了保存训练好的模型之外，我们还可以利用这项功能进行断点续训练，以防止训练过程中突发意外情况，这时我们需要保存的参数有模型参数，优化器参数以及epoch数。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/epoch.png" class title="This is an example image">  
+
+<h2 id="2，fine-tune"><a href="#2，fine-tune" class="headerlink" title="2，fine-tune"></a>2，fine-tune</h2><p>迁移学习是目前的一个热门研究领域，其研究内容是将源域学习到的知识应用到目标域中。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/transfer.png" class title="This is an example image">  
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/transfer2.png" class title="This is an example image">  
+<p>分类模型包含特征提取以及输出两个部分，其中特征提取对于不同的分类任务是基本相同的，因此我们可以利用在大规模数据上训练的模型，固定其特征提取部分（将requires_grad设置为false或将lr设置为0），仅修改其输出层（在我们的数据上训练微调）以提升在我们任务上的模型性能。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/fine.png" class title="This is an example image">  
+
+<h2 id="GPU的使用"><a href="#GPU的使用" class="headerlink" title="GPU的使用"></a>GPU的使用</h2><p>在Pytorch中GPU的使用有两点需要注意：第一是我们对对象执行to操作时，模型会inplace，而张量不会，因此需要用a=a.to()的形式。第二点是当我们使用Dataparallel后，模型中每层名字前会加上module.。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/1.png" class title="This is an example image">  
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/2.png" class title="This is an example image">  
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/3.png" class title="This is an example image">  
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/4.png" class title="This is an example image">  
+<p>当我们在GPU上保存模型而在CPU上加载时会报错，解决方法如下：  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/5.png" class title="This is an example image">  
+<p>而当我们加载DataParallel后的模型时也会报错，因为保存的模型中网络层名字与我们现有的网络层不一致，解决方法是去掉前面的module.。  </p>
+<img src="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD/6.png" class title="This is an example image">  
       
 
       
@@ -203,7 +228,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Pytorch</a>
         		</li>
       		
 		</ul>
@@ -283,6 +308,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/02/10/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Pytorch%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99%EF%BC%88%E5%AE%8C%E7%BB%93%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Pytorch学习笔记（十二）——Pytorch常见报错（完结）
+        
+      </div>
+    </a>
   
   
     <a href="/2020/02/09/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Regularization-and-Normalization/" id="article-nav-older" class="article-nav-link-wrap">
