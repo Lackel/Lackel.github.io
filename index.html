@@ -153,23 +153,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="测试时间：2020-5-27"><a href="#测试时间：2020-5-27" class="headerlink" title="测试时间：2020.5.27"></a>测试时间：2020.5.27</h2><h2 id="测试平台：Centos8"><a href="#测试平台：Centos8" class="headerlink" title="测试平台：Centos8"></a>测试平台：Centos8</h2><h2 id="软件版本：MySQL社区版-5-7-28"><a href="#软件版本：MySQL社区版-5-7-28" class="headerlink" title="软件版本：MySQL社区版 5.7.28"></a>软件版本：MySQL社区版 5.7.28</h2><h2 id="安装方式：二进制安装包（https-downloads-mysql-com-archives-get-p-23-file-mysql-5-7-28-linux-glibc2-12-x86-64-tar-gz）"><a href="#安装方式：二进制安装包（https-downloads-mysql-com-archives-get-p-23-file-mysql-5-7-28-linux-glibc2-12-x86-64-tar-gz）" class="headerlink" title="安装方式：二进制安装包（https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz）"></a>安装方式：二进制安装包（<a href="https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz）" target="_blank" rel="noopener">https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz）</a></h2><h3 id="1-检查并删除多余历史环境"><a href="#1-检查并删除多余历史环境" class="headerlink" title="1,检查并删除多余历史环境"></a>1,检查并删除多余历史环境</h3><p>rpm -qa |grep mariadb<br>yum remove mariadb-libs -y</p>
-<h3 id="2-创建用户和组"><a href="#2-创建用户和组" class="headerlink" title="2.创建用户和组"></a>2.创建用户和组</h3><p>useradd mysql -s /sbin/nologin</p>
-<h3 id="3-创建软件，数据，日志目录"><a href="#3-创建软件，数据，日志目录" class="headerlink" title="3.创建软件，数据，日志目录"></a>3.创建软件，数据，日志目录</h3><p>mkdir -p  /app/database/<br>mkdir -p  /data/3306/<br>mkdir -p  /binlog/3306/</p>
-<h3 id="4-设置权限"><a href="#4-设置权限" class="headerlink" title="4.设置权限"></a>4.设置权限</h3><p>chown -R mysql.mysql /app /data /binlog</p>
-<h3 id="5-上传软件"><a href="#5-上传软件" class="headerlink" title="5.上传软件"></a>5.上传软件</h3><p>将安装包放在/app/database中。<br>cd /app/database</p>
-<h3 id="6-解压软件"><a href="#6-解压软件" class="headerlink" title="6.解压软件"></a>6.解压软件</h3><p>tar xf mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz </p>
-<h3 id="7-创建软链接并修改权限"><a href="#7-创建软链接并修改权限" class="headerlink" title="7.创建软链接并修改权限"></a>7.创建软链接并修改权限</h3><p>ln -s mysql-5.7.28-linux-glibc2.12-x86_64 mysql<br>cd mysql<br>chown -R mysql. *</p>
-<h3 id="8-设置环境变量"><a href="#8-设置环境变量" class="headerlink" title="8.设置环境变量"></a>8.设置环境变量</h3><p>vim /etc/profile<br>在unset i<br>unset -f pathmunge<br>后添加一行:<br>export PATH=/app/database/mysql/bin:$PATH<br>保存后刷新生效:<br>source /etc/profile</p>
-<h3 id="9-安装缺少的软件包"><a href="#9-安装缺少的软件包" class="headerlink" title="9.安装缺少的软件包"></a>9.安装缺少的软件包</h3><p>yum install libncurses*</p>
-<h3 id="10-测试"><a href="#10-测试" class="headerlink" title="10.测试"></a>10.测试</h3><p>输入mysql -V,打印出版本信息，说明没有错误。</p>
-<h3 id="11-1-5-7版本或更高mysql初始化数据库"><a href="#11-1-5-7版本或更高mysql初始化数据库" class="headerlink" title="11(1). 5.7版本或更高mysql初始化数据库"></a>11(1). 5.7版本或更高mysql初始化数据库</h3><p>mysqld –initialize-insecure –user=mysql –basedir=/app/database/mysql –datadir=/data/3306<br>warning 可以忽略，如果不加insecure，则会有一个初始密码，必须在使用前修改它。</p>
-<h3 id="11-2-5-6版本mysql初始化数据库"><a href="#11-2-5-6版本mysql初始化数据库" class="headerlink" title="11(2). 5.6版本mysql初始化数据库"></a>11(2). 5.6版本mysql初始化数据库</h3><p>/app/database/mysql/scripts/mysql_install_db –user=mysql –basedir=/app/database/mysql –datadir=/data/3306</p>
-<h3 id="12-设置配置文件"><a href="#12-设置配置文件" class="headerlink" title="12.设置配置文件"></a>12.设置配置文件</h3><p>cat &gt; /etc/my.cnf &lt;&lt;EOF<br>[mysqld]<br>user=mysql<br>basedir=/app/database/mysql<br>datadir=/data/3306<br>server_id=6<br>port=3306<br>socket=/tmp/mysql.sock<br>[mysql]<br>socket=/tmp/mysql.sock<br>EOF</p>
-<h3 id="13-准备mysql的启动脚本"><a href="#13-准备mysql的启动脚本" class="headerlink" title="13.准备mysql的启动脚本"></a>13.准备mysql的启动脚本</h3><p>cd /app/database/mysql/support-files<br>cp mysql.server /etc/init.d/mysqld</p>
-<h3 id="14-启动-停止-重启"><a href="#14-启动-停止-重启" class="headerlink" title="14.启动/停止/重启"></a>14.启动/停止/重启</h3><p>service mysqld start/stop/restart</p>
-<h3 id="15-注意"><a href="#15-注意" class="headerlink" title="15.注意"></a>15.注意</h3><p>远程机如果无法连接，注意关闭防火墙以及检查用户权限。</p>
-
+        <h2 id="测试时间：2020-5-27"><a href="#测试时间：2020-5-27" class="headerlink" title="测试时间：2020.5.27"></a>测试时间：2020.5.27</h2><h2 id="测试平台：Centos8"><a href="#测试平台：Centos8" class="headerlink" title="测试平台：Centos8"></a>测试平台：Centos8</h2><h2 id="软件版本：MySQL社区版-5-7-28"><a href="#软件版本：MySQL社区版-5-7-28" class="headerlink" title="软件版本：MySQL社区版 5.7.28"></a>软件版本：MySQL社区版 5.7.28</h2><h2 id="安装方式：二进制安装包（https-downloads-mysql-com-archives-get-p-23-file-mysql-5-7-28-linux-glibc2-12-x86-64-tar-gz）"><a href="#安装方式：二进制安装包（https-downloads-mysql-com-archives-get-p-23-file-mysql-5-7-28-linux-glibc2-12-x86-64-tar-gz）" class="headerlink" title="安装方式：二进制安装包（https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz）"></a>安装方式：二进制安装包（<a href="https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz）" target="_blank" rel="noopener">https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz）</a></h2>
+        
+          <a class="article-more-a" href="/2020/05/27/CentOS8%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEMySQL5-7-28%E6%95%99%E7%A8%8B/#more">more >></a>
+        
       
 
       
