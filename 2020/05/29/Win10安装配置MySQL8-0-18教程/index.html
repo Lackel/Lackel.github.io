@@ -17,7 +17,7 @@
 <meta property="og:description" content="测试时间：2020.5.29测试平台：windows10 家庭版软件版本：MySQL社区版 8.0.18安装方式：压缩包下载">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;05&#x2F;29&#x2F;Win10%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEMySQL8-0-18%E6%95%99%E7%A8%8B&#x2F;img&#x2F;2017&#x2F;demo.jpg">
-<meta property="og:updated_time" content="2020-05-29T06:58:31.140Z">
+<meta property="og:updated_time" content="2020-06-18T03:53:57.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;github.com&#x2F;Lackel&#x2F;Lackel.github.io.git&#x2F;2020&#x2F;05&#x2F;29&#x2F;Win10%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEMySQL8-0-18%E6%95%99%E7%A8%8B&#x2F;img&#x2F;2017&#x2F;demo.jpg">
   
@@ -169,7 +169,7 @@
 <h3 id="5-初始化MySQL"><a href="#5-初始化MySQL" class="headerlink" title="5.初始化MySQL"></a>5.初始化MySQL</h3><p>在命令行中切换到mysql的bin目录<br>输入mysqld –initialize-insecure –console<br>要注意初始化前data目录下不能有任何东西。<br>再次输入mysqld –install，如果提示安装成功则初始化完成。</p>
 <h3 id="6-启动mysql"><a href="#6-启动mysql" class="headerlink" title="6.启动mysql"></a>6.启动mysql</h3><p>一定要以管理员身份运行cmd，启动停止命令为net start/stop mysql。<br>再次输入mysql -u root -p，直接按Enter键即可进入mysql的命令行环境。</p>
 <h3 id="8-为root用户创建密码"><a href="#8-为root用户创建密码" class="headerlink" title="8.为root用户创建密码"></a>8.为root用户创建密码</h3><p>alter user root@’localhost’ identified by ‘密码’。</p>
-<h3 id="9-为root用户提供最高权限"><a href="#9-为root用户提供最高权限" class="headerlink" title="9.为root用户提供最高权限"></a>9.为root用户提供最高权限</h3><p>grant all on <em>.</em> to root@’localhost’ with grant optopn;<br>注意的是8.0版本授权时 不用加入密码项identified by ‘密码’，否则会报错。</p>
+<h3 id="9-为root用户提供最高权限"><a href="#9-为root用户提供最高权限" class="headerlink" title="9.为root用户提供最高权限"></a>9.为root用户提供最高权限</h3><p>grant all on <em>.</em> to root@’localhost’ with grant option;<br>注意的是8.0版本授权时 不用加入密码项identified by ‘密码’，否则会报错。</p>
 
       
 
